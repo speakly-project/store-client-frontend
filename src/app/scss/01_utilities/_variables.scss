@@ -1,0 +1,25 @@
+$colors: (
+    primary: #0045A6,
+    secondary: #FF6F61,
+    alternative: #2aac25,
+);
+
+$primary-color: (#012228, #094C5D, #156E89, #248DB7, #3DA6D6, #6EB8E2, #9ACDEF, #CCE5FA, #FFFFFF);
+$secondary-color: (#773003, #AB4B03, #DA6601, #FF8B0F, #FFA83D, #FFC670, #FFDB9F, #FEF0D2, #FFFFFF);
+$alternative-color: (#011819, #03282B, #05373D, #073F4B, #094C5D, #0A5770, #0B6284, #096795, #0470AE);
+$warning-color: (#663A00, #994D00, #CC6600, #FF8000, #FF9933, #FFB266, #FFCC99, #FFE5CC, #FFFFFF);
+$danger-color: (#3B0000, #610000, #880000, #AF0000, #D60000, #FF1A1A, #FF4D4D, #FF9999, #FFFFFF);
+
+$font-families: 'Barlow', Roboto, "Helvetica Neue", sans-serif;
+$font-sizes: (10px, 12px, 14px, 16px, 18px, 20px, 24px, 30px, 36px, 48px, 64px);
+$font-weights: (300, 400, 500, 600, 700, 800, 900);
+
+$paddings: (0px, 4px, 6px, 8px, 10px, 12px, 14px, 15px, 16px, 18px, 20px, 24px, 25px, 32px, 40px, 44px, 64px, 80px, 96px, 128px, 160px, 192px, 224px, 256px, 320px, 480px, 640px);
+$margins: (0px, 4px, 6px, 8px, 10px, 12px, 16px, 20px, 24px, 32px, 40px, 48px, 64px, 80px, 96px, 128px, 160px, 192px, 224px, 256px, 320px, 480px, 640px, auto);
+$margin-lefts: (-12px, -8px, -4px, 0px, 4px, 8px, 12px, 15px, 16px, 20px, 24px, 32px, 40px, 48px, 64px, 80px, 96px, 128px, 160px, 192px, 224px, 256px, 320px, 480px, 640px);
+$gaps: (0px, 4px, 8px, 10px, 12px, 16px, 20px, 24px, 32px, 40px, 48px, 64px, 80px, 96px, 128px, 160px, 192px, 224px, 256px, 320px, 480px, 640px);
+
+$border-widths: (1px, 2px, 4px, 8px);
+$border-radius: (0px, 2px, 4px, 6px, 8px, 10px, 12px, 15px, 16px, 18px, 50%);
+
+$widths: (20px, 48px, 50px, 60px, 64px, 100px, 130px, 150px, 200px, 220px, 250px, 300px, 350px, 400px, 450px, 500px, 550px, 600px, 650px, 700px, 750px, 800px, 850px, 900px, 950px, 1000px, 100%, auto);

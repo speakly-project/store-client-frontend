@@ -1,0 +1,21 @@
+@use "sass:list";
+@use "sass:math";
+@use "../01_utilities/index" as utilities;
+
+:root {
+    @for $i from 1 through list.length(utilities.$font-sizes) {
+        $font-size: list.nth(utilities.$font-sizes, $i);
+        $px: math.div($font-size, 1px);
+        $name: if($px < 0, "neg-#{math.abs($px)}", "#{$px}");
+        --mlt-sys-font-size-#{$name}: #{$font-size};
+    }
+}
+
+@for $i from 1 through list.length(utilities.$font-sizes) {
+    $font-size: list.nth(utilities.$font-sizes, $i);
+    $px: math.div($font-size, 1px);
+    $name: if($px < 0, "neg-#{math.abs($px)}", "#{$px}");
+    .g--font-size-#{$name} {
+        font-size: var(--mlt-sys-font-size-#{$name}) !important;
+    }
+}

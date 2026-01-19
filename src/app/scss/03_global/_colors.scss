@@ -1,0 +1,12 @@
+@use "sass:map";
+@use "../01_utilities/index" as utilities;
+
+
+:root {
+	@each $name, $value in utilities.$colors {
+		--mlt-sys-color-#{$name}: #{$value};
+	}
+
+}
+
+

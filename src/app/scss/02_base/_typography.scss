@@ -1,0 +1,29 @@
+@use "../01_utilities/index" as utilities;
+
+@font-face {
+	font-family: 'Barlow';
+	src: url('/assets/Barlow/Barlow-Light.ttf') format('truetype');
+	font-weight: 300;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Barlow';
+	src: url('/assets/Barlow/Barlow-Regular.ttf') format('truetype');
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Barlow';
+	src: url('/assets/Barlow/Barlow-Bold.ttf') format('truetype');
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}
+
+body {
+	font-family: utilities.$font-families;
+}

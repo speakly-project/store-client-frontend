@@ -1,0 +1,66 @@
+.logout-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 80px);
+    padding: 2rem;
+    background-color: #f8f9fa;
+}
+
+.logout-card {
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.5rem;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    text-align: center;
+}
+
+.logout-card-header {
+    background-color: #dc3545;
+    color: #fff;
+    padding: 1.5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.logout-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 0.75rem;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    color: #fff;
+}
+
+.logout-title {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.logout-card-body {
+    padding: 1.5rem;
+}
+
+.logout-subtitle {
+    margin: 0 0 1.5rem 0;
+    font-size: 1rem;
+    color: #6c757d;
+}
+
+.logout-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+
+    button {
+        padding: 0.625rem 1.5rem;
+        font-size: 1rem;
+        min-width: 130px;
+    }
+}

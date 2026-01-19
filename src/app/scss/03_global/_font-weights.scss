@@ -1,0 +1,18 @@
+@use "sass:list";
+@use "../01_utilities/index" as utilities;
+
+:root {
+    @for $i from 1 through list.length(utilities.$font-weights) {
+        $font-weight: list.nth(utilities.$font-weights, $i);
+        $name: "#{$font-weight}";
+        --mlt-sys-font-weight-#{$name}: #{$font-weight};
+    }
+}
+
+@for $i from 1 through list.length(utilities.$font-weights) {
+    $font-weight: list.nth(utilities.$font-weights, $i);
+    $name: "#{$font-weight}";
+    .g--font-weight-#{$name} {
+        font-weight: var(--mlt-sys-font-weight-#{$name}) !important;
+    }
+}

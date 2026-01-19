@@ -1,0 +1,110 @@
+.c-header {
+    --c-header-bg-color: var(--mlt-sys-primary-color-5);
+    --c-header-bg-color-secondary: var(--mlt-sys-secondary-color-4);
+    --c-header-bg-color-alternative: var(--mlt-sys-alternative-color-4);
+    --c-header-padding: var(--mlt-sys-padding-16) var(--mlt-sys-padding-24);
+    --c-header-width: var(--mlt-sys-width-100p);
+    --c-header-margin-left: var(--mlt-sys-margin-left-15);
+    --c-header-letter-color: var(--mlt-sys-primary-color-9);
+    --c-header-font-size: var(--mlt-sys-font-size-24);
+    --c-header-font-weight: var(--mlt-sys-font-weight-600);
+    --c-header-gap: var(--mlt-sys-gap-16);
+    --c-header-margin: var(--mlt-sys-margin-0);
+
+    --c-header-dropdown-bg-color: var(--mlt-sys-primary-color-9);
+    --c-header-dropdown-border-color: var(--mlt-sys-primary-color-7);
+    --c-header-dropdown-radius: var(--mlt-sys-border-radius-8);
+    --c-header-dropdown-padding: var(--mlt-sys-padding-8);
+    --c-header-dropdown-min-width: var(--mlt-sys-width-200);
+
+
+
+    
+    &__nav {
+        background-color: var(--c-header-bg-color);
+        padding: var(--c-header-padding);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+        width: var(--c-header-width);
+    }
+
+    &__container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-left: var(--c-header-margin-left);
+    }
+
+    &__brand {
+        color: var(--c-header-letter-color);
+        font-size: var(--c-header-font-size);
+        font-weight: var(--c-header-font-weight);
+        display: flex;
+        align-items: center;
+        gap: var(--c-header-gap);
+        text-decoration: none;
+        transition: color 0.2s ease-in-out;
+
+        &:hover {
+            color: var(--mlt-sys-alternative-color-5);
+        }
+    }
+
+    &__logo {
+        object-fit: cover;
+    }
+
+
+    &__list {
+        display: flex;
+        gap: var(--c-header-gap);
+        list-style: none;
+        margin: var(--c-header-margin);
+    }
+
+    //arreglar scss-----------------------------------------------------------------------------------
+
+    &__menu {
+        position: relative;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    &__dropdown {
+        position: absolute;
+        right: 0;
+        top: calc(100% + var(--mlt-sys-gap-8));
+        background-color: var(--c-header-dropdown-bg-color);
+        border: var(--mlt-sys-border-width-1) solid var(--c-header-dropdown-border-color);
+        border-radius: var(--c-header-dropdown-radius);
+        padding: var(--c-header-dropdown-padding);
+        display: flex;
+        flex-direction: column;
+        gap: var(--mlt-sys-gap-4);
+        min-width: var(--c-header-dropdown-min-width);
+        z-index: 10;
+    }
+
+    &__divider {
+        width: 100%;
+        border: none;
+        border-top: var(--mlt-sys-border-width-2) solid var(--c-header-dropdown-border-color);
+        margin: var(--mlt-sys-margin-4) 0;
+    }
+
+    &__dropdown .c-boton-underlined {
+        --c-boton-letter-color: var(--mlt-sys-primary-color-2);
+        --c-boton-underline-color: var(--mlt-sys-primary-color-4);
+    }
+
+    &__dropdown .c-boton-underlined--importance-secundaria {
+        --c-boton-letter-color: var(--mlt-sys-primary-color-4);
+        --c-boton-underline-color: var(--mlt-sys-primary-color-4);
+    }
+
+    &__dropdown .c-header__logout {
+        --c-boton-letter-color: var(--mlt-sys-danger-color-5);
+        --c-boton-underline-color: var(--mlt-sys-danger-color-5);
+    }
+
+
+}

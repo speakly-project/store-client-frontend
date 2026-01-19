@@ -1,0 +1,70 @@
+<div class="login-container">
+    <div class="login-card">
+        <div class="login-card-header">
+            <h2 class="login-title">Iniciar Sesión</h2>
+            <p class="login-subtitle">Accede a tu cuenta Bancaria</p>
+        </div>
+        
+        <div class="login-card-body">
+            <form class="login-form">
+                @if (errorMessage) {
+                    <div class="login-error">
+                        <span>{{ errorMessage }}</span>
+                    </div>
+                }
+                
+                <div class="login-field">
+                    <label class="login-label" for="username">Username</label>
+                    <input 
+                        class="login-input" 
+                        type="text" 
+                        id="username"
+                        [(ngModel)]="login" 
+                        name="username">
+                </div>
+                
+                <div class="login-field">
+                    <label class="login-label" for="password">Contraseña</label>
+                    <div class="password-wrapper">
+                        <input 
+                            class="login-input"
+                            [type]="showPassword ? 'text' : 'password'"
+                            id="password"
+                            autocomplete="current-password"
+                            [(ngModel)]="password" 
+                            name="password">
+                        <button 
+                            type="button"
+                            class="password-toggle"
+                            (click)="togglePasswordVisibility()"
+                            [attr.aria-pressed]="showPassword"
+                            aria-label="Mostrar u ocultar contraseña">
+                            @if (showPassword) {
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M12 5c5 0 9.27 3.11 11 7-1.73 3.89-6 7-11 7s-9.27-3.11-11-7c1.73-3.89 6-7 11-7Zm0 2c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5Zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6Z"/>
+                                </svg>
+                            } @else {
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M3.28 2.22 21.78 20.7l-1.06 1.08-2.35-2.36C16.51 20.18 14.33 21 12 21c-5 0-9.27-3.11-11-7 1.05-2.37 3-4.4 5.51-5.7L2.22 3.28 3.28 2.22ZM12 7c.7 0 1.37.12 2 .36l-.7.72A3 3 0 0 0 9.08 12l-1.5 1.54A5 5 0 0 1 12 7Zm0 10a5 5 0 0 1-2-.42l-.76.79C10.03 17.79 10.99 18 12 18c2.76 0 5-2.24 5-5 0-1.01-.22-1.97-.63-2.78l.77-.79c1.7.9 3.11 2.32 3.86 3.79-1.73 3.89-6 7-11 7a11.9 11.9 0 0 1-2.94-.37l1.22-1.27c.38.08.76.12 1.16.12Z"/>
+                                </svg>
+                            }
+                        </button>
+                    </div>
+                </div>
+                
+                <button 
+                    c-boton 
+                    [importancia]="'primaria'" 
+                    class="login-button"
+                    (click)="onLogin()" 
+                    [disabled]="isLoading">
+                    @if (isLoading) {
+                        Cargando...
+                    } @else {
+                        Iniciar sesión
+                    }
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

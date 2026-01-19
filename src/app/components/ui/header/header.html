@@ -1,0 +1,50 @@
+<header class="c-header">
+    <nav class="c-header__nav">
+        <div class="c-header__container">
+            <a class="c-header__brand" routerLink="/">
+                <img src="assets/logo.svg" alt="Logo" width="40" height="40" class="c-header__logo" />
+                Speakly Bank
+            </a>
+            <div class="c-header__links">
+                <ul class="c-header__list">
+                    <li class="c-header__item">
+                        <button c-boton [tipo]="'underlined'" [importancia]="'secundaria'" routerLink="/">
+                            Bank
+                        </button>
+                    </li>
+
+                    <li class="c-header__item">
+                        @if (authService.isAuthenticated()) {
+                        <div class="c-header__menu" #menuRoot>
+                            <button c-boton [tipo]="'underlined'" [importancia]="'primaria'"
+                                aria-haspopup="menu" [attr.aria-expanded]="isMenuOpen" (click)="toggleMenu()">
+                                Cuenta
+                            </button>
+
+                            @if (isMenuOpen) {
+                            <div class="c-header__dropdown" role="menu">
+                                <button c-boton [tipo]="'underlined'" [importancia]="'secundaria'" routerLink="/bank"
+                                    (click)="closeMenu()">
+                                    Accounts
+                                </button>
+                                <button c-boton [tipo]="'underlined'" [importancia]="'secundaria'" routerLink="/bank"
+                                    (click)="closeMenu()">
+                                    Transactions
+                                </button>
+
+                                <hr class="c-header__divider" />
+
+                                <button class="c-header__logout" c-boton [tipo]="'underlined'" [importancia]="'secundaria'" routerLink="/logout"
+                                    (click)="closeMenu()">
+                                    Logout
+                                </button>
+                            </div>
+                            }
+                        </div>
+                        }
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>

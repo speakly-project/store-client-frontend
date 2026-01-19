@@ -1,0 +1,10 @@
+@use "sass:list";
+@use "../01_utilities/index" as utilities;
+
+
+:root {
+    @for $i from 1 through list.length(utilities.$danger-color) {
+        $color: list.nth(utilities.$danger-color, $i);
+        --mlt-sys-danger-color-#{$i}: #{$color};
+    }
+}

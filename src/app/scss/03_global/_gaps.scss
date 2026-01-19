@@ -1,0 +1,21 @@
+@use "sass:list";
+@use "sass:math";
+@use "../01_utilities/index" as utilities;
+
+:root {
+    @for $i from 1 through list.length(utilities.$gaps) {
+        $gap: list.nth(utilities.$gaps, $i);
+        $px: math.div($gap, 1px);
+        $name: if($px < 0, "neg-#{math.abs($px)}", "#{$px}");
+        --mlt-sys-gap-#{$name}: #{$gap};
+    }
+}
+
+@for $i from 1 through list.length(utilities.$gaps) {
+    $gap: list.nth(utilities.$gaps, $i);
+    $px: math.div($gap, 1px);
+    $name: if($px < 0, "neg-#{math.abs($px)}", "#{$px}");
+    .g--gap-#{$name} {
+        gap: var(--mlt-sys-gap-#{$name}) !important;
+    }
+}
