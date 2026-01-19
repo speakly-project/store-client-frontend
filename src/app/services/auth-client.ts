@@ -8,12 +8,16 @@ import { LoginUserInterface } from '../models/LoginUserInterface';
   providedIn: 'root',
 })
 export class AuthClient {
+<<<<<<< HEAD
   //apiUrl = 'http://localhost:8080/api/speakly-bank';
   apiUrl = 'http://localhost:3000/users';
   coursesUrl = 'http://localhost:3000/courses';
   languagesUrl = 'http://localhost:3000/languages';
   levelsUrl = 'http://localhost:3000/levels';
   rolesUrl = 'http://localhost:3000/roles';
+=======
+  apiUrl = 'http://localhost:8080/api/speakly-bank';
+>>>>>>> feature/componente-curso
 
   HttpClient = inject(HttpClient);
 
@@ -28,6 +32,13 @@ export class AuthClient {
   getCurrentUserFromToken(): Observable<LoginUserInterface> {
     return this.HttpClient.get<LoginUserInterface>(`${this.apiUrl}/auth`);
   }
+<<<<<<< HEAD
+=======
+  getUserByUsername(username: string): Observable<LoginUserInterface> {
+    return this.HttpClient.get<LoginUserInterface>(`${this.apiUrl}/users/username/${username}`);
+  }
+
+>>>>>>> feature/componente-curso
   // getUserById(userId: number): Observable<LoginUserInterface> {
   //   return this.HttpClient.get<LoginUserInterface>(`${this.apiUrl}/users/${userId}`);
   // }

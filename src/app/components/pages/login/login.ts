@@ -5,13 +5,13 @@ import { Router } from '@angular/router';
 import { Boton } from '../../ui/c-boton/c-boton';
 
 @Component({
-  selector: 'login',
+  selector: 'p-login',
   imports: [FormsModule, Boton],
   templateUrl: './login.html',
   styleUrl: './login.scss',
 })
 export class Login {
-  login: string = '';
+  username: string = '';
   password: string = '';
   errorMessage: string = '';
   isLoading: boolean = false;
@@ -20,7 +20,7 @@ export class Login {
   constructor(private authService: AuthService, private router: Router) {}
 
   onLogin() {
-    if (!this.login || !this.password) {
+    if (!this.username || !this.password) {
       this.errorMessage = 'El usuario o la contraseña son incorrectos.';
       return;
     }
@@ -28,10 +28,10 @@ export class Login {
     this.isLoading = true;
     this.errorMessage = '';
 
-    this.authService.login(this.login, this.password).subscribe({
+    this.authService.login(this.username, this.password).subscribe({
       next: (response) => {
         this.isLoading = false;
-        this.router.navigate(['/cursos']);
+        this.router.navigate(['/']);
       },
       error: (error) => {
         this.isLoading = false;

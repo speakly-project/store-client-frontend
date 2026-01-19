@@ -1,66 +1,103 @@
-.logout-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: calc(100vh - 80px);
-    padding: 2rem;
-    background-color: #f8f9fa;
+:host {
+    --p-logout-container-padding: var(--mlt-sys-padding-32);
+    --p-logout-container-bg-color: var(--mlt-sys-primary-color-9);
+    --p-logout-card-border-radius: var(--mlt-sys-border-radius-8);
+    --p-logout-card-bg: var(--mlt-sys-primary-color-9);
+    --p-logout-card-width: var(--mlt-sys-width-100p);
+    --p-logout-card-max-width: var(--mlt-sys-width-400);
+    --p-logout-card-header-bg: var(--mlt-sys-danger-color-7);
+    --p-logout-card-header-color: var(--mlt-sys-primary-color-9);
+    --p-logout-card-header-padding: var(--mlt-sys-padding-24);
+    --p-logout-icon-width: var(--mlt-sys-width-64);
+    --p-logout-icon-height: var(--mlt-sys-width-64);
+    --p-logout-icon-border-radius: var(--mlt-sys-border-radius-50p);
+    --p-logout-icon-color: var(--mlt-sys-primary-color-9);
+    --p-logout-title-margin: var(--mlt-sys-margin-0);
+    --p-logout-title-font-size: var(--mlt-sys-font-size-24);
+    --p-logout-title-font-weight: var(--mlt-sys-font-weight-600);
+    --p-logout-card-body-padding: var(--mlt-sys-padding-24);
+    --p-logout-subtitle-margin: var(--mlt-sys-margin-0) var(--mlt-sys-margin-0) var(--mlt-sys-margin-24) var(--mlt-sys-margin-0);
+    --p-logout-subtitle-font-size: var(--mlt-sys-font-size-16);
+    --p-logout-actions-gap: var(--mlt-sys-gap-16);
+    --p-logout-button-padding: var(--mlt-sys-padding-10) var(--mlt-sys-padding-24);
+    --p-logout-button-font-size: var(--mlt-sys-font-size-16);
+    --p-logout-button-min-width: var(--mlt-sys-width-130);
 }
 
-.logout-card {
-    background: #fff;
-    border: 1px solid rgba(0, 0, 0, 0.125);
-    border-radius: 0.5rem;
-    width: 100%;
-    max-width: 400px;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-    overflow: hidden;
-    text-align: center;
-}
+.p-logout {
+    &__container {
 
-.logout-card-header {
-    background-color: #dc3545;
-    color: #fff;
-    padding: 1.5rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
-}
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: calc(100vh - 80px);
+        padding: var(--p-logout-container-padding);
+        background-color: var(--p-logout-container-bg-color);
+    }
 
-.logout-icon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 64px;
-    height: 64px;
-    margin: 0 auto 0.75rem;
-    background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-    color: #fff;
-}
+    &__card {
 
-.logout-title {
-    margin: 0;
-    font-size: 1.5rem;
-    font-weight: 600;
-}
+        background: var(--p-logout-card-bg);
+        border: 1px solid rgba(0, 0, 0, 0.125);
+        border-radius: var(--p-logout-card-border-radius);
+        width: var(--p-logout-card-width);
+        max-width: var(--p-logout-card-max-width);
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        overflow: hidden;
+        text-align: center;
+    }
 
-.logout-card-body {
-    padding: 1.5rem;
-}
+    &__card-header {
 
-.logout-subtitle {
-    margin: 0 0 1.5rem 0;
-    font-size: 1rem;
-    color: #6c757d;
-}
+        background-color: var(--p-logout-card-header-bg);
+        color: var(--p-logout-card-header-color);
+        padding: var(--p-logout-card-header-padding);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    }
 
-.logout-actions {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
+    &__icon {
 
-    button {
-        padding: 0.625rem 1.5rem;
-        font-size: 1rem;
-        min-width: 130px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: var(--p-logout-icon-width);
+        height: var(--p-logout-icon-height);
+        margin: 0 auto 0.75rem;
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: var(--p-logout-icon-border-radius);
+        color: var(--p-logout-icon-color);
+    }
+
+    &__title {
+
+        margin: var(--p-logout-title-margin);
+        font-size: var(--p-logout-title-font-size);
+        font-weight: var(--p-logout-title-font-weight);
+    }
+
+    &__card-body {
+
+        padding: var(--p-logout-card-body-padding);
+    }
+
+    &__subtitle {
+
+        margin: var(--p-logout-subtitle-margin);
+        font-size: var(--p-logout-subtitle-font-size);
+        color: #6c757d;
+    }
+
+    &__actions {
+
+        display: flex;
+        justify-content: center;
+        gap: var(--p-logout-actions-gap);
+
+        button {
+
+            padding: var(--p-logout-button-padding);
+            font-size: var(--p-logout-button-font-size);
+            min-width: var(--p-logout-button-min-width);
+        }
     }
 }

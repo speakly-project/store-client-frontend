@@ -4,7 +4,7 @@ import { Router, RouterModule } from '@angular/router';
 import { Boton } from '../../ui/c-boton/c-boton';
 
 @Component({
-  selector: 'logout',
+  selector: 'p-logout',
   imports: [Boton, RouterModule],
   templateUrl: './logout.html',
   styleUrl: './logout.scss',
