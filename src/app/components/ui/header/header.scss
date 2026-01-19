@@ -106,9 +106,14 @@
         --c-boton-underline-color: var(--mlt-sys-primary-color-4);
     }
 
-    &__dropdown .c-header__logout {
+    &__dropdown &__logout {
         --c-boton-letter-color: var(--mlt-sys-danger-color-5);
         --c-boton-underline-color: var(--mlt-sys-danger-color-5);
+    }
+
+    &__dropdown &__sign-in {
+        --c-boton-letter-color: var(--mlt-sys-color-alternative);
+        --c-boton-underline-color: var(--mlt-sys-color-alternative);
     }
 
 
