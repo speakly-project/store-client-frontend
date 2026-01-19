@@ -4,11 +4,7 @@
       "id": "1",
       "username": "cr7",
       "email": "cr7@email.com",
-<<<<<<< HEAD
-      "encryptedPassword": "cr7",
-=======
       "password": "cr7",
->>>>>>> feature/componente-curso
       "roles": [
         "USER"
       ],
@@ -18,11 +14,7 @@
       "id": "2",
       "username": "juan_perez",
       "email": "juan@email.com",
-<<<<<<< HEAD
-      "encryptedPassword": "$2a$10$hashedpassword123",
-=======
       "password": "$2a$10$hashedpassword123",
->>>>>>> feature/componente-curso
       "roles": [
         "USER"
       ],
@@ -32,11 +24,7 @@
       "id": "3",
       "username": "maria_garcia",
       "email": "maria@email.com",
-<<<<<<< HEAD
-      "encryptedPassword": "$2a$10$hashedpassword456",
-=======
       "password": "$2a$10$hashedpassword456",
->>>>>>> feature/componente-curso
       "roles": [
         "USER"
       ],
@@ -46,11 +34,7 @@
       "id": "4",
       "username": "profesor_ingles",
       "email": "teacher@english.com",
-<<<<<<< HEAD
-      "encryptedPassword": "$2a$10$hashedpassword789",
-=======
       "password": "$2a$10$hashedpassword789",
->>>>>>> feature/componente-curso
       "roles": [
         "USER"
       ],
@@ -60,17 +44,11 @@
       "id": "5",
       "username": "admin_user",
       "email": "admin@email.com",
-<<<<<<< HEAD
-      "encryptedPassword": "$2a$10$hashedpassword000",
-=======
       "password": "$2a$10$hashedpassword000",
->>>>>>> feature/componente-curso
       "roles": [
         "ADMIN"
       ],
       "createdAt": "2024-03-01T12:00:00Z"
-<<<<<<< HEAD
-=======
     },
     {
       "id": "b5f4",
@@ -146,7 +124,6 @@
       "id": "259f",
       "username": "cr7",
       "password": "adwada"
->>>>>>> feature/componente-curso
     }
   ],
   "courses": [

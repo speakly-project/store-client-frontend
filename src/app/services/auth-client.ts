@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { LoginUserInterface } from '../models/LoginUserInterface';
@@ -8,16 +8,7 @@ import { LoginUserInterface } from '../models/LoginUserInterface';
   providedIn: 'root',
 })
 export class AuthClient {
-<<<<<<< HEAD
-  //apiUrl = 'http://localhost:8080/api/speakly-bank';
-  apiUrl = 'http://localhost:3000/users';
-  coursesUrl = 'http://localhost:3000/courses';
-  languagesUrl = 'http://localhost:3000/languages';
-  levelsUrl = 'http://localhost:3000/levels';
-  rolesUrl = 'http://localhost:3000/roles';
-=======
-  apiUrl = 'http://localhost:8080/api/speakly-bank';
->>>>>>> feature/componente-curso
+  apiUrl = 'http://localhost:8080/api/speakly';
 
   HttpClient = inject(HttpClient);
 
@@ -32,13 +23,11 @@ export class AuthClient {
   getCurrentUserFromToken(): Observable<LoginUserInterface> {
     return this.HttpClient.get<LoginUserInterface>(`${this.apiUrl}/auth`);
   }
-<<<<<<< HEAD
-=======
   getUserByUsername(username: string): Observable<LoginUserInterface> {
-    return this.HttpClient.get<LoginUserInterface>(`${this.apiUrl}/users/username/${username}`);
+    const params = new HttpParams().set('username', username);
+    return this.HttpClient.get<LoginUserInterface>(`${this.apiUrl}/users/username`, { params });
   }
 
->>>>>>> feature/componente-curso
   // getUserById(userId: number): Observable<LoginUserInterface> {
   //   return this.HttpClient.get<LoginUserInterface>(`${this.apiUrl}/users/${userId}`);
   // }
