@@ -1,4 +1,3 @@
-
 // Include theming for Angular Material with `mat.theme()`.
 // This Sass mixin will define CSS variables that are used for styling Angular Material
 // components according to the Material 3 design spec.
@@ -7,15 +6,27 @@
 @use './app/scss/main.scss' as *;
 @use '@angular/material' as mat;
 
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Barlow', Roboto, "Helvetica Neue", sans-serif;
+}
+
+
 html {
-  @include mat.theme((
-    color: (
-      primary: mat.$azure-palette,
-      tertiary: mat.$blue-palette,
-    ),
-    typography: Roboto,
-    density: 0,
-  ));
+  @include mat.theme((color: (primary: mat.$azure-palette,
+        tertiary: mat.$blue-palette,
+      ),
+      typography: Barlow,
+      density: 0,
+    ));
+  @include mat.dialog-overrides((container-shape: 16px,
+      container-color: var(--mlt-sys-alternative-color-1),
+      actions-alignment: space-between));
 }
 
 body {
@@ -34,5 +45,3 @@ body {
   // Reset the user agent margin.
   margin: 0;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

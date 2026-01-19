@@ -10,15 +10,21 @@
     --c-header-font-weight: var(--mlt-sys-font-weight-600);
     --c-header-gap: var(--mlt-sys-gap-16);
     --c-header-margin: var(--mlt-sys-margin-0);
-
     --c-header-dropdown-bg-color: var(--mlt-sys-primary-color-9);
     --c-header-dropdown-border-color: var(--mlt-sys-primary-color-7);
     --c-header-dropdown-radius: var(--mlt-sys-border-radius-8);
     --c-header-dropdown-padding: var(--mlt-sys-padding-8);
     --c-header-dropdown-min-width: var(--mlt-sys-width-200);
-
-
-
+    --c-header-brand-hover-color: var(--mlt-sys-alternative-color-5);
+    --c-header-dropdown-gap-top: var(--mlt-sys-gap-8);
+    --c-header-dropdown-border-width: var(--mlt-sys-border-width-1);
+    --c-header-dropdown-gap: var(--mlt-sys-gap-4);
+    --c-header-divider-width: var(--mlt-sys-width-100p);
+    --c-header-divider-margin: var(--mlt-sys-margin-4) var(--mlt-sys-margin-0);
+    --c-header-divider-border-width: var(--mlt-sys-border-width-2);
+    
+    
+    
     
     &__nav {
         background-color: var(--c-header-bg-color);
@@ -45,7 +51,7 @@
         transition: color 0.2s ease-in-out;
 
         &:hover {
-            color: var(--mlt-sys-alternative-color-5);
+            color: var(--c-header-brand-hover-color);
         }
     }
 
@@ -61,7 +67,6 @@
         margin: var(--c-header-margin);
     }
 
-    //arreglar scss-----------------------------------------------------------------------------------
 
     &__menu {
         position: relative;
@@ -72,23 +77,23 @@
     &__dropdown {
         position: absolute;
         right: 0;
-        top: calc(100% + var(--mlt-sys-gap-8));
+        top: calc(100% + var(--c-header-dropdown-gap-top));
         background-color: var(--c-header-dropdown-bg-color);
-        border: var(--mlt-sys-border-width-1) solid var(--c-header-dropdown-border-color);
+        border: var(--c-header-dropdown-border-width) solid var(--c-header-dropdown-border-color);
         border-radius: var(--c-header-dropdown-radius);
         padding: var(--c-header-dropdown-padding);
         display: flex;
         flex-direction: column;
-        gap: var(--mlt-sys-gap-4);
+        gap: var(--c-header-dropdown-gap);
         min-width: var(--c-header-dropdown-min-width);
         z-index: 10;
     }
 
     &__divider {
-        width: 100%;
+        width: var(--c-header-divider-width);
         border: none;
-        border-top: var(--mlt-sys-border-width-2) solid var(--c-header-dropdown-border-color);
-        margin: var(--mlt-sys-margin-4) 0;
+        border-top: var(--c-header-divider-border-width) solid var(--c-header-dropdown-border-color);
+        margin: var(--c-header-divider-margin);
     }
 
     &__dropdown .c-boton-underlined {

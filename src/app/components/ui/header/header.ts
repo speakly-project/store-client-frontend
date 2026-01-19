@@ -4,7 +4,7 @@ import { Boton } from "../c-boton/c-boton";
 import { AuthService } from '../../../services/auth-service';
 
 @Component({
-  selector: 'app-header',
+  selector: 'c-header',
   imports: [RouterLink, Boton],
   templateUrl: './header.html',
   styleUrl: './header.scss',

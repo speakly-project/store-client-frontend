@@ -1,0 +1,570 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "cr7",
+      "email": "cr7@email.com",
+      "encryptedPassword": "cr7",
+      "roles": [
+        "USER"
+      ],
+      "createdAt": "2024-01-16T10:30:00Z"
+    },
+    {
+      "id": "2",
+      "username": "juan_perez",
+      "email": "juan@email.com",
+      "encryptedPassword": "$2a$10$hashedpassword123",
+      "roles": [
+        "USER"
+      ],
+      "createdAt": "2024-01-15T10:30:00Z"
+    },
+    {
+      "id": "3",
+      "username": "maria_garcia",
+      "email": "maria@email.com",
+      "encryptedPassword": "$2a$10$hashedpassword456",
+      "roles": [
+        "USER"
+      ],
+      "createdAt": "2024-02-20T14:45:00Z"
+    },
+    {
+      "id": "4",
+      "username": "profesor_ingles",
+      "email": "teacher@english.com",
+      "encryptedPassword": "$2a$10$hashedpassword789",
+      "roles": [
+        "USER"
+      ],
+      "createdAt": "2023-11-10T09:15:00Z"
+    },
+    {
+      "id": "5",
+      "username": "admin_user",
+      "email": "admin@email.com",
+      "encryptedPassword": "$2a$10$hashedpassword000",
+      "roles": [
+        "ADMIN"
+      ],
+      "createdAt": "2024-03-01T12:00:00Z"
+    }
+  ],
+  "courses": [
+    {
+      "id": "6",
+      "title": "Inglés Conversacional",
+      "description": "Práctica intensiva de conversación para ganar confianza",
+      "price": 39.99,
+      "language": "english",
+      "level": "INTERMEDIO",
+      "teacher": "profesor",
+      "durationHours": "8",
+      "createdAt": "2024-03-15T09:00:00Z"
+    },
+    {
+      "id": "7",
+      "title": "Introducción al Italiano",
+      "description": "Fundamentos del italiano: pronunciación y vocabulario básico",
+      "price": 45,
+      "language": "italian",
+      "level": "BÁSICO",
+      "teacher": "profesor",
+      "durationHours": "20",
+      "createdAt": "2024-04-02T10:10:00Z"
+    },
+    {
+      "id": "8",
+      "title": "Inglés Técnico para IT",
+      "description": "Vocabulario y expresiones para desarrolladores y equipos técnicos",
+      "price": 129.99,
+      "language": "english",
+      "level": "AVANZADO",
+      "teacher": "profesor",
+      "durationHours": "25",
+      "createdAt": "2024-04-20T16:00:00Z"
+    },
+    {
+      "id": "9",
+      "title": "Francés para Viajeros",
+      "description": "Expresiones y situaciones prácticas para viajar por países francófonos",
+      "price": 29.99,
+      "language": "french",
+      "level": "A2",
+      "teacher": "profesor",
+      "durationHours": "6",
+      "createdAt": "2024-05-01T12:30:00Z"
+    },
+    {
+      "id": "10",
+      "title": "Preparación TOEFL",
+      "description": "Estrategias y práctica para aprobar el examen TOEFL",
+      "price": 159.99,
+      "language": "english",
+      "level": "C1",
+      "teacher": "profesor",
+      "durationHours": "40",
+      "createdAt": "2024-05-10T08:45:00Z"
+    },
+    {
+      "id": "11",
+      "title": "Alemán para Negocios",
+      "description": "Vocabulario empresarial y comunicación corporativa en alemán",
+      "price": 119.99,
+      "language": "german",
+      "level": "B2",
+      "teacher": "profesor",
+      "durationHours": "35",
+      "createdAt": "2024-05-15T11:00:00Z"
+    },
+    {
+      "id": "12",
+      "title": "Español Intensivo",
+      "description": "Curso completo para dominar el español en poco tiempo",
+      "price": 89.99,
+      "language": "spanish",
+      "level": "B1",
+      "teacher": "profesor",
+      "durationHours": "45",
+      "createdAt": "2024-05-20T09:30:00Z"
+    },
+    {
+      "id": "13",
+      "title": "Portugués Brasileño",
+      "description": "Aprende el portugués de Brasil desde nivel básico",
+      "price": 54.99,
+      "language": "portuguese",
+      "level": "A1",
+      "teacher": "profesor",
+      "durationHours": "28",
+      "createdAt": "2024-06-01T10:00:00Z"
+    },
+    {
+      "id": "14",
+      "title": "Francés Avanzado",
+      "description": "Literatura, cultura y perfeccionamiento del francés",
+      "price": 139.99,
+      "language": "french",
+      "level": "C2",
+      "teacher": "profesor",
+      "durationHours": "50",
+      "createdAt": "2024-06-10T14:15:00Z"
+    },
+    {
+      "id": "15",
+      "title": "Italiano para la Vida Cotidiana",
+      "description": "Conversaciones prácticas para el día a día en Italia",
+      "price": 65.99,
+      "language": "italian",
+      "level": "A2",
+      "teacher": "profesor",
+      "durationHours": "22",
+      "createdAt": "2024-06-15T08:20:00Z"
+    },
+    {
+      "id": "16",
+      "title": "Japonés Básico",
+      "description": "Introducción al japonés: hiragana, katakana y expresiones básicas",
+      "price": 79.99,
+      "language": "japanese",
+      "level": "A1",
+      "teacher": "profesor",
+      "durationHours": "32",
+      "createdAt": "2024-06-20T13:45:00Z"
+    },
+    {
+      "id": "17",
+      "title": "Chino Mandarín para Principiantes",
+      "description": "Aprende mandarín desde cero con enfoque en tonos y caracteres",
+      "price": 99.99,
+      "language": "chinese",
+      "level": "BÁSICO",
+      "teacher": "profesor",
+      "durationHours": "40",
+      "createdAt": "2024-07-01T09:00:00Z"
+    },
+    {
+      "id": "18",
+      "title": "Inglés para Medicina",
+      "description": "Terminología médica y comunicación con pacientes en inglés",
+      "price": 149.99,
+      "language": "english",
+      "level": "B2",
+      "teacher": "profesor",
+      "durationHours": "38",
+      "createdAt": "2024-07-10T11:30:00Z"
+    },
+    {
+      "id": "19",
+      "title": "Ruso Inicial",
+      "description": "Alfabeto cirílico y fundamentos del idioma ruso",
+      "price": 74.99,
+      "language": "russian",
+      "level": "A1",
+      "teacher": "profesor",
+      "durationHours": "30",
+      "createdAt": "2024-07-15T15:00:00Z"
+    },
+    {
+      "id": "20",
+      "title": "Coreano Conversacional",
+      "description": "Práctica de conversación en coreano para situaciones cotidianas",
+      "price": 69.99,
+      "language": "korean",
+      "level": "A2",
+      "teacher": "profesor",
+      "durationHours": "25",
+      "createdAt": "2024-07-20T10:45:00Z"
+    },
+    {
+      "id": "21",
+      "title": "Árabe Moderno Estándar",
+      "description": "Introducción al árabe clásico usado en medios y literatura",
+      "price": 84.99,
+      "language": "arabic",
+      "level": "BÁSICO",
+      "teacher": "profesor",
+      "durationHours": "35",
+      "createdAt": "2024-08-01T09:15:00Z"
+    },
+    {
+      "id": "22",
+      "title": "Holandés para Expatriados",
+      "description": "Curso práctico para vivir y trabajar en los Países Bajos",
+      "price": 79.99,
+      "language": "dutch",
+      "level": "B1",
+      "teacher": "profesor",
+      "durationHours": "28",
+      "createdAt": "2024-08-10T12:00:00Z"
+    },
+    {
+      "id": "24",
+      "title": "Preparación Cambridge B2 First",
+      "description": "Curso completo para aprobar el examen B2 First de Cambridge",
+      "price": 169.99,
+      "language": "english",
+      "level": "B2",
+      "teacher": "profesor",
+      "durationHours": "48",
+      "createdAt": "2024-08-25T08:30:00Z"
+    },
+    {
+      "id": "25",
+      "title": "Sueco para Principiantes",
+      "description": "Aprende sueco desde cero con enfoque en pronunciación nórdica",
+      "price": 64.99,
+      "language": "swedish",
+      "level": "A1",
+      "teacher": "profesor",
+      "durationHours": "26",
+      "createdAt": "2024-09-01T10:20:00Z"
+    },
+    {
+      "id": "26",
+      "title": "Griego Moderno Inicial",
+      "description": "Introducción al griego actual con énfasis en conversación",
+      "price": 72.99,
+      "language": "greek",
+      "level": "A1",
+      "teacher": "profesor",
+      "durationHours": "30",
+      "createdAt": "2024-09-10T14:00:00Z"
+    },
+    {
+      "id": "27",
+      "title": "Inglés de Negocios Avanzado",
+      "description": "Negociación, presentaciones y comunicación ejecutiva en inglés",
+      "price": 189.99,
+      "language": "english",
+      "level": "C1",
+      "teacher": "profesor",
+      "durationHours": "42",
+      "createdAt": "2024-09-15T09:45:00Z"
+    },
+    {
+      "id": "1",
+      "title": "Inglés para Principiantes",
+      "description": "Aprende inglés desde cero con lecciones interactivas",
+      "price": 49.99,
+      "language": "english",
+      "level": "BÁSICO",
+      "teacher": "profesor",
+      "durationHours": "30",
+      "createdAt": "2024-01-10T08:00:00Z"
+    },
+    {
+      "id": "28",
+      "title": "Polaco Intermedio",
+      "description": "Mejora tu polaco con gramática avanzada y conversación",
+      "price": 59.99,
+      "language": "polish",
+      "level": "B1",
+      "teacher": "profesor",
+      "durationHours": "24",
+      "createdAt": "2024-09-20T11:15:00Z"
+    },
+    {
+      "id": "29",
+      "title": "Noruego Básico",
+      "description": "Fundamentos del noruego con pronunciación y vocabulario esencial",
+      "price": 68.99,
+      "language": "norwegian",
+      "level": "A1",
+      "teacher": "profesor",
+      "durationHours": "28",
+      "createdAt": "2024-09-25T10:00:00Z"
+    },
+    {
+      "id": "30",
+      "title": "Turco para Viajeros",
+      "description": "Expresiones útiles y cultura turca para viajeros",
+      "price": 55.99,
+      "language": "turkish",
+      "level": "A2",
+      "teacher": "profesor",
+      "durationHours": "20",
+      "createdAt": "2024-10-01T09:30:00Z"
+    },
+    {
+      "id": "31",
+      "title": "Preparación DELE B1",
+      "description": "Curso completo para aprobar el examen DELE nivel B1",
+      "price": 145.99,
+      "language": "spanish",
+      "level": "B1",
+      "teacher": "profesor",
+      "durationHours": "44",
+      "createdAt": "2024-10-05T14:15:00Z"
+    },
+    {
+      "id": "32",
+      "title": "Danés Intermedio",
+      "description": "Mejora tu danés con gramática y conversación avanzada",
+      "price": 73.99,
+      "language": "danish",
+      "level": "B1",
+      "teacher": "profesor",
+      "durationHours": "30",
+      "createdAt": "2024-10-10T11:00:00Z"
+    },
+    {
+      "id": "33",
+      "title": "Hindi Básico",
+      "description": "Introducción al hindi con escritura devanagari y expresiones básicas",
+      "price": 82.99,
+      "language": "hindi",
+      "level": "A1",
+      "teacher": "profesor",
+      "durationHours": "34",
+      "createdAt": "2024-10-15T08:45:00Z"
+    },
+    {
+      "id": "34",
+      "title": "Catalán para Principiantes",
+      "description": "Aprende catalán desde cero con enfoque práctico",
+      "price": 52.99,
+      "language": "catalan",
+      "level": "BÁSICO",
+      "teacher": "profesor",
+      "durationHours": "26",
+      "createdAt": "2024-10-20T13:20:00Z"
+    },
+    {
+      "id": "35",
+      "title": "Finlandés Inicial",
+      "description": "Fundamentos del finlandés y su sistema de casos",
+      "price": 76.99,
+      "language": "finnish",
+      "level": "A1",
+      "teacher": "profesor",
+      "durationHours": "32",
+      "createdAt": "2024-10-25T10:30:00Z"
+    },
+    {
+      "id": "36",
+      "title": "Inglés para Aviación",
+      "description": "Vocabulario técnico y comunicación para pilotos y tripulación",
+      "price": 199.99,
+      "language": "english",
+      "level": "C1",
+      "teacher": "profesor",
+      "durationHours": "50",
+      "createdAt": "2024-11-01T09:00:00Z"
+    },
+    {
+      "id": "37",
+      "title": "Vietnamita Conversacional",
+      "description": "Práctica de conversación en vietnamita para situaciones diarias",
+      "price": 67.99,
+      "language": "vietnamese",
+      "level": "A2",
+      "teacher": "profesor",
+      "durationHours": "24",
+      "createdAt": "2024-11-05T15:10:00Z"
+    },
+    {
+      "id": "38",
+      "title": "Checo Básico",
+      "description": "Introducción al checo con pronunciación y gramática básica",
+      "price": 61.99,
+      "language": "czech",
+      "level": "A1",
+      "teacher": "profesor",
+      "durationHours": "28",
+      "createdAt": "2024-11-10T12:00:00Z"
+    },
+    {
+      "id": "39",
+      "title": "Alemán para Ciencias",
+      "description": "Vocabulario científico y académico en alemán",
+      "price": 134.99,
+      "language": "german",
+      "level": "B2",
+      "teacher": "profesor",
+      "durationHours": "38",
+      "createdAt": "2024-11-15T10:45:00Z"
+    },
+    {
+      "id": "40",
+      "title": "Tailandés para Principiantes",
+      "description": "Aprende tailandés con tonos y escritura básica",
+      "price": 71.99,
+      "language": "thai",
+      "level": "BÁSICO",
+      "teacher": "profesor",
+      "durationHours": "30",
+      "createdAt": "2024-11-20T08:30:00Z"
+    }
+  ],
+  "shoppingCarts": [],
+  "cartItems": [],
+  "orders": [],
+  "orderItems": [],
+  "roles": [
+    {
+      "id": 1,
+      "name": "USER"
+    },
+    {
+      "id": 2,
+      "name": "ADMIN"
+    }
+  ],
+  "languages": [
+    {
+      "id": 1,
+      "name": "english",
+      "code": "en"
+    },
+    {
+      "id": 2,
+      "name": "french",
+      "code": "fr"
+    },
+    {
+      "id": 3,
+      "name": "german",
+      "code": "de"
+    },
+    {
+      "id": 4,
+      "name": "spanish",
+      "code": "es"
+    },
+    {
+      "id": 5,
+      "name": "italian",
+      "code": "it"
+    },
+    {
+      "id": 6,
+      "name": "portuguese",
+      "code": "pt"
+    },
+    {
+      "id": 7,
+      "name": "japanese",
+      "code": "ja"
+    },
+    {
+      "id": 8,
+      "name": "chinese",
+      "code": "zh"
+    },
+    {
+      "id": 9,
+      "name": "russian",
+      "code": "ru"
+    },
+    {
+      "id": 10,
+      "name": "korean",
+      "code": "ko"
+    },
+    {
+      "id": 11,
+      "name": "arabic",
+      "code": "ar"
+    },
+    {
+      "id": 12,
+      "name": "dutch",
+      "code": "nl"
+    },
+    {
+      "id": 13,
+      "name": "swedish",
+      "code": "sv"
+    },
+    {
+      "id": 14,
+      "name": "greek",
+      "code": "el"
+    },
+    {
+      "id": 15,
+      "name": "polish",
+      "code": "pl"
+    }
+  ],
+  "levels": [
+    {
+      "id": 1,
+      "name": "A1"
+    },
+    {
+      "id": 2,
+      "name": "A2"
+    },
+    {
+      "id": 3,
+      "name": "B1"
+    },
+    {
+      "id": 4,
+      "name": "B2"
+    },
+    {
+      "id": 5,
+      "name": "C1"
+    },
+    {
+      "id": 6,
+      "name": "C2"
+    },
+    {
+      "id": 7,
+      "name": "BÁSICO"
+    },
+    {
+      "id": 8,
+      "name": "INTERMEDIO"
+    },
+    {
+      "id": 9,
+      "name": "AVANZADO"
+    }
+  ]
+}
