@@ -1,0 +1,21 @@
+<div class="curso-card">
+    <div class="curso-card__media">
+        <img [src]="course.image || 'assets/default-course.jpg'" alt="{{course.title}}">
+    </div>
+    <div class="curso-card__body">
+        <div class="curso-card__teacher">{{course.teacher}}</div>
+        <h3 class="curso-card__title">{{course.title}}</h3>
+        <div class="curso-card__desc">{{ truncate(course.description, 100) }}</div>
+        <div class="curso-card__meta">
+            <span class="stars">⭐ {{course.rating || '4.9'}}</span>
+        </div>
+        <div class="curso-card__info">
+            <span c-tag="precio">{{ course.language }}</span>
+            <span c-tag="nivel">{{ course.level }}</span>
+        </div>
+        <div class="curso-card__info">
+            <div class="curso-card__price"><strong>Price {{course.price || 25}}€</strong></div>
+            <div class="curso-card__duration"><strong>Duration {{course.duration || 1}} hrs</strong></div>
+        </div>
+    </div>
+</div>

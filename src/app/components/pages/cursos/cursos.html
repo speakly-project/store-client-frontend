@@ -1,0 +1,58 @@
+<section class="p-cursos">
+    <div class="p-cursos__header">
+        <div class="header-top">
+            <h1>Explore Language Courses</h1>
+        </div>
+    </div>
+
+    <div class="filters-row">
+        <div class="filters">
+            <select>
+                <option>Language</option>
+                <option>English</option>
+            </select>
+            <select>
+                <option>Level</option>
+                <option>A1</option>
+                <option>A2</option>
+                <option>B1</option>
+                
+            </select>
+            <select>
+                <option>Price Range</option>
+            </select>
+            <select>
+                <option>Rating</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="results-row">
+        <div class="results-count">1,248 courses found</div>
+
+        <div class="sort-by">
+            Sort by:
+            <select>
+                <option>Best Selling</option>
+                <option>Ascending price</option>
+                <option>Descending price</option>
+            </select>
+        </div>
+    </div>
+
+
+
+    <div class="cursos-grid">
+        @for (c of courses; track $index) {
+        <c-curso [course]="c"></c-curso>
+        }
+    </div>
+
+    <div class="pagination">
+        <button>&lt;</button>
+        <button class="active">1</button>
+        <button>2</button>
+        <button>3</button>
+        <button>&gt;</button>
+    </div>
+</section>

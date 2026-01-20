@@ -1,0 +1,67 @@
+.curso-card {
+    --c-curso-bg: var(--mlt-sys-primary-color-9);
+    --c-curso-radius: var(--mlt-sys-border-radius-8);
+    --c-curso-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    --c-curso-padding: var(--mlt-sys-padding-12);
+    --c-curso-title-size: var(--mlt-sys-font-size-15);
+    background: var(--c-curso-bg, #fff);
+    border-radius: var(--c-curso-radius);
+    box-shadow: var(--c-curso-shadow);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.curso-card__media {
+    height: 140px;
+    position: relative;
+}
+
+.curso-card__media img {
+    display: block;
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+}
+
+.curso-card__body {
+    padding: var(--c-curso-padding, 12px);
+}
+
+.curso-card__teacher {
+    color: #666;
+    font-size: 12px;
+    margin-bottom: 6px;
+}
+
+.curso-card__title {
+    font-size: var(--c-curso-title-size, 15px);
+    margin: 0 0 8px;
+}
+
+.curso-card__desc {
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    font-size: 13px;
+    margin-bottom: 8px;
+    min-height: 36px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #555;
+}
+
+.curso-card__meta {
+    color: #f39c12;
+    display: flex;
+    font-size: 13px;
+    gap: 6px;
+    margin-bottom: 8px;
+}
+.curso-card__info {
+    align-items: center;
+    display: flex;
+    font-size: 12px;
+    gap: 12px;
+    padding-top: 8px;
+}
