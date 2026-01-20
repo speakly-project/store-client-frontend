@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { AfterViewInit, Component, Inject } from '@angular/core';
 import { CCurso } from '../../ui/c-curso/c-curso';
-import { AnimationDurations } from '@angular/material/core';
-import { hasTopLevelIdentifier } from '@angular/cdk/schematics';
+
 
 @Component({
   selector: 'page-cursos',
@@ -11,6 +11,10 @@ import { hasTopLevelIdentifier } from '@angular/cdk/schematics';
   styleUrl: './cursos.scss'
 })
 export class Cursos {
+  private landbotLoaded = false;
+
+  constructor(@Inject(DOCUMENT) private readonly document: Document) {}
+
   courses = Array.from({length:8}).map((_, i) => ({
     title: ['Master Conversational Italian','Advanced Russian Business','Speak Japanese Like a Local','French for Beginners','Complete Spanish Immersion','IELTS & TOEFL Prep','Essential German Grammar','JLPT N5 Fast Pass'][i%8],
     teacher: ['Marco Rossi','Elena Sokolov','Kenji Tanaka','Chloe Dubois','Javier Mendez','Sarah Wilson','Hans Mueller','Yumi Sato'][i%8],
@@ -31,4 +35,28 @@ export class Cursos {
     ][i%8],
     duration:[10,15,12,8,20,18,14,9][i%8]
   }));
+
+  ngAfterViewInit(): void {
+    this.loadLandbot();
+  }
+
+  private loadLandbot(): void {
+    if (this.landbotLoaded) return;
+    this.landbotLoaded = true;
+
+
+    const existing = this.document.querySelector(`script[src="/assets/landbot-cursos.js"]`);
+    if (existing) {
+      this.document.defaultView?.initLandbot?.();
+      return;
+    }
+
+    const script = this.document.createElement('script');
+    script.async = true;
+    script.src = '/assets/landbot-cursos.js';
+    script.onload = () => {
+      this.document.defaultView?.initLandbot?.();
+    };
+    this.document.body.appendChild(script);
+  }
 }
