@@ -1,0 +1,89 @@
+<div class="p-register">
+	<div class="p-register__card">
+		<div class="p-register__card-header">
+			<h2 class="p-register__title">Registrarse</h2>
+			<p class="p-register__subtitle">Crea tu cuenta</p>
+		</div>
+
+		<div class="p-register__card-body">
+			<form class="c-user-form" [formGroup]="formulario" (ngSubmit)="onSubmit()">
+			<div class="c-user-form__group">
+				<label class="c-user-form__label" for="username">
+					Username <span class="c-user-form__label--asterisk">*</span>
+				</label>
+				<input id="username" class="c-user-form__input" type="text" formControlName="username" />
+
+				@if (formulario.get('username')?.touched && formulario.get('username')?.invalid) {
+					<small class="c-user-form__error">
+						@if (formulario.get('username')?.errors?.['required']) { El username es obligatorio }
+						@if (formulario.get('username')?.errors?.['minlength']) { Mínimo 3 caracteres }
+						@if (formulario.get('username')?.errors?.['notUnique']) { Este username ya existe }
+					</small>
+				}
+			</div>
+
+			<div class="c-user-form__group">
+				<label class="c-user-form__label" for="email">
+					Email <span class="c-user-form__label--asterisk">*</span>
+				</label>
+				<input id="email" class="c-user-form__input" type="email" formControlName="email" />
+
+				@if (formulario.get('email')?.touched && formulario.get('email')?.invalid) {
+					<small class="c-user-form__error">
+						@if (formulario.get('email')?.errors?.['required']) { El email es obligatorio }
+						@if (formulario.get('email')?.errors?.['email']) { Formato de email no válido }
+						@if (formulario.get('email')?.errors?.['notUnique']) { Este email ya existe }
+					</small>
+				}
+			</div>
+
+			<div class="c-user-form__group">
+				<label class="c-user-form__label" for="password">
+					Password <span class="c-user-form__label--asterisk">*</span>
+				</label>
+				<input id="password" class="c-user-form__input" type="password" formControlName="password" />
+
+				@if (formulario.get('password')?.touched && formulario.get('password')?.invalid) {
+					<small class="c-user-form__error">
+						@if (formulario.get('password')?.errors?.['required']) { La contraseña es obligatoria }
+						@if (formulario.get('password')?.errors?.['minlength']) { Mínimo 6 caracteres }
+					</small>
+				}
+			</div>
+
+			<div class="c-user-form__group">
+				<label class="c-user-form__label" for="confirmPassword">
+					Repite la password <span class="c-user-form__label--asterisk">*</span>
+				</label>
+				<input id="confirmPassword" class="c-user-form__input" type="password" formControlName="confirmPassword" />
+
+				@if (formulario.get('confirmPassword')?.touched && formulario.get('confirmPassword')?.hasError('required')) {
+					<small class="c-user-form__error">Repite la contraseña</small>
+				}
+				@if (formulario.hasError('passwordMismatch') && (formulario.get('confirmPassword')?.touched || formulario.get('password')?.touched)) {
+					<small class="c-user-form__error">Las contraseñas no coinciden</small>
+				}
+			</div>
+
+			@if (submitError) {
+				<p class="c-user-form__error-general">{{ submitError }}</p>
+			}
+
+			<div class="c-user-form__actions">
+				<button c-boton class="p-register__button" type="submit" importancia="secundaria" [disabled]="formulario.invalid || submitting">
+					Registrarse
+				</button>
+
+				<button c-boton class="p-register__button" type="button" importancia="primaria" (click)="onCancelar()" [disabled]="submitting">
+					Volver  Inicio
+				</button>
+			</div>
+			</form>
+
+			<p class="p-register__login">
+				¿Ya tienes cuenta?
+				<a class="p-register__login-link" routerLink="/login">Ir a login</a>
+			</p>
+		</div>
+	</div>
+</div>

@@ -4,10 +4,14 @@ import { Login } from './components/pages/login/login';
 import { loginGuard } from './guards/login-guard';
 import { Home } from './components/pages/home/home';
 import { Cursos } from './components/pages/cursos/cursos';
+import { Register } from './components/pages/register/register';
+import { Profile } from './components/pages/profile/profile';
 
 export const routes: Routes = [
     { path: '', component: Cursos },
+    { path: 'register', component: Register},
     { path: 'login', component: Login},
+    { path: 'profile', component: Profile},
     { path: 'logout', component: Logout },
     { path: '**', redirectTo: '' },
 ];

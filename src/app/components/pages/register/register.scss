@@ -1,0 +1,162 @@
+:host {
+	display: block;
+}
+
+.p-register {
+	--p-register-padding: var(--mlt-sys-padding-32);
+	--p-register-bg-color: var(--mlt-sys-primary-color-9);
+	--p-register-card-bg: var(--mlt-sys-primary-color-9);
+	--p-register-card-border-radius: var(--mlt-sys-border-radius-8);
+	--p-register-card-width: var(--mlt-sys-width-100p);
+	--p-register-card-max-width: var(--mlt-sys-width-400);
+	--p-register-card-header-bg: var(--mlt-sys-primary-color-5);
+	--p-register-card-header-color: var(--mlt-sys-primary-color-9);
+	--p-register-card-header-padding: var(--mlt-sys-padding-24);
+	--p-register-title-margin: var(--mlt-sys-margin-0);
+	--p-register-title-font-size: var(--mlt-sys-font-size-24);
+	--p-register-title-font-weight: var(--mlt-sys-font-weight-600);
+	--p-register-subtitle-margin: var(--mlt-sys-margin-8) var(--mlt-sys-margin-0) var(--mlt-sys-margin-0) var(--mlt-sys-margin-0);
+	--p-register-subtitle-font-size: var(--mlt-sys-font-size-14);
+	--p-register-form-gap: var(--mlt-sys-gap-16);
+	--p-register-field-gap: var(--mlt-sys-gap-6);
+	--p-register-label-font-size: var(--mlt-sys-font-size-14);
+	--p-register-label-font-weight: var(--mlt-sys-font-weight-500);
+	--p-register-input-padding: var(--mlt-sys-padding-10) var(--mlt-sys-padding-14);
+	--p-register-input-font-size: var(--mlt-sys-font-size-16);
+	--p-register-input-border-radius: var(--mlt-sys-border-radius-6);
+	--p-register-input-focus-border-color: var(--mlt-sys-primary-color-5);
+	--p-register-button-margin-top: var(--mlt-sys-margin-8);
+	--p-register-button-width: var(--mlt-sys-width-100p);
+	--p-register-button-padding: var(--mlt-sys-padding-10) var(--mlt-sys-padding-16);
+	--p-register-button-font-size: var(--mlt-sys-font-size-16);
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: calc(100vh - 80px);
+	padding: var(--p-register-padding);
+	background-color: var(--p-register-bg-color);
+}
+
+.p-register__card {
+	background: var(--p-register-card-bg);
+	border: 1px solid rgba(0, 0, 0, 0.125);
+	border-radius: var(--p-register-card-border-radius);
+	width: var(--p-register-card-width);
+	max-width: var(--p-register-card-max-width);
+	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+	overflow: hidden;
+}
+
+.p-register__card-header {
+	background-color: var(--p-register-card-header-bg);
+	color: var(--p-register-card-header-color);
+	padding: var(--p-register-card-header-padding);
+	text-align: center;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.p-register__card-body {
+	padding: var(--mlt-sys-padding-24);
+}
+
+.p-register__title {
+	margin: var(--p-register-title-margin);
+	font-size: var(--p-register-title-font-size);
+	font-weight: var(--p-register-title-font-weight);
+}
+
+.p-register__subtitle {
+	margin: var(--p-register-subtitle-margin);
+	font-size: var(--p-register-subtitle-font-size);
+	opacity: 0.9;
+}
+
+.p-register__login {
+	margin-top: var(--mlt-sys-margin-16);
+	font-size: var(--mlt-sys-font-size-14);
+	text-align: center;
+}
+
+.c-user-form {
+	display: flex;
+	flex-direction: column;
+	gap: var(--p-register-form-gap);
+}
+
+.c-user-form__group {
+	display: flex;
+	flex-direction: column;
+	gap: var(--p-register-field-gap);
+}
+
+.c-user-form__label {
+	font-size: var(--p-register-label-font-size);
+	font-weight: var(--p-register-label-font-weight);
+	color: #212529;
+	margin-bottom: 0;
+}
+
+.c-user-form__label--asterisk {
+	color: var(--mlt-sys-danger-color-5, #dc2626);
+}
+
+.c-user-form__input {
+	padding: var(--p-register-input-padding);
+	font-size: var(--p-register-input-font-size);
+	border: 1px solid #ced4da;
+	border-radius: var(--p-register-input-border-radius);
+	font-family: inherit;
+	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+	outline: none;
+}
+
+.c-user-form__input:focus {
+	border-color: var(--p-register-input-focus-border-color);
+	box-shadow: 0 0 0 0.25rem rgba(var(--mlt-sys-primary-color-5-rgb, 13, 110, 253), 0.25);
+}
+
+.c-user-form__input.ng-invalid.ng-touched {
+	border-color: var(--mlt-sys-danger-color-5, #dc2626);
+}
+
+.c-user-form__error {
+	margin-top: 6px;
+	color: var(--mlt-sys-danger-color-5, #dc2626);
+	font-size: 12px;
+	font-weight: 500;
+}
+
+.c-user-form__error-general {
+	margin: 0;
+	color: var(--mlt-sys-danger-color-5, #dc2626);
+	font-weight: 600;
+}
+
+.c-user-form__actions {
+	display: flex;
+	flex-direction: row;
+	gap: var(--mlt-sys-gap-12);
+	margin-top: var(--p-register-button-margin-top);
+}
+
+.p-register__button {
+	width: var(--p-register-button-width);
+	padding: var(--p-register-button-padding);
+	font-size: var(--p-register-button-font-size);
+}
+
+.p-register__button:disabled {
+	opacity: 0.65;
+	cursor: not-allowed;
+}
+
+.p-register__login-link {
+    color: var(--mlt-sys-secondary-color-4);
+    font-weight: 500;
+    transition: color 0.2s ease-in-out;
+
+    &:hover {
+        color: var(--mlt-sys-secondary-color-5);
+    }
+}

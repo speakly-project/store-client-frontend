@@ -70,4 +70,11 @@ export class CoursesHttpClient {
         );
     }
 
+    createUser(user: UserInterface) {
+        return this.Mihttp.post(this.urlUsers, user);
+    }
+    updateUser(id: number, user: UserInterface) {
+        return this.Mihttp.put(`${this.urlUsers}/${id}`, user);
+    }
+
 }

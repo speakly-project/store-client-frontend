@@ -4,7 +4,7 @@ export interface UserInterface {
   email: string;
   profilePictureUrl: string | null;
   password?: string;
-  createdAt: string;
+  createdAt: string | null;
   coursesTaken: any[];
   role: 'ADMIN' | 'USER';
 }
