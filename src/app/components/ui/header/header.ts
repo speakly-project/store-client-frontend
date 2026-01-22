@@ -17,6 +17,17 @@ export class Header {
 
   constructor(public authService: AuthService) {}
 
+  ngOnInit(): void {
+    if (this.authService.isAuthenticated()) {
+      this.authService.refreshCurrentUser().subscribe();
+    }
+  }
+
+  get userInitial(): string {
+    const username = this.authService.getCurrentUser()?.username?.trim();
+    return username ? username[0].toUpperCase() : 'U';
+  }
+
   toggleMenu(): void {
     this.isMenuOpen = !this.isMenuOpen;
   }

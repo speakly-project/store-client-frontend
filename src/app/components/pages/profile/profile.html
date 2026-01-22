@@ -1,1 +1,127 @@
-<p>profile works!</p>
+<div class="p-profile">
+	<div class="p-profile__card">
+		<div class="p-profile__card-header">
+			<h2 class="p-profile__title">Profile</h2>
+			<p class="p-profile__subtitle">Update your account details</p>
+		</div>
+
+		<div class="p-profile__card-body">
+			@if (loadError) {
+				<div class="p-profile__error">{{ loadError }}</div>
+			}
+
+			<form class="p-profile__form" [formGroup]="form" (ngSubmit)="onSave()">
+				<div class="p-profile__field">
+					<label class="p-profile__label" for="username">Username <span class="p-profile__asterisk">*</span></label>
+					<input id="username" class="p-profile__input" type="text" formControlName="username" />
+					@if (form.get('username')?.touched && form.get('username')?.invalid) {
+						<small class="p-profile__field-error">
+							@if (form.get('username')?.errors?.['required']) { Username is required }
+							@if (form.get('username')?.errors?.['minlength']) { Minimum 3 characters }
+							@if (form.get('username')?.errors?.['taken']) { Ese username ya existe }
+						</small>
+					}
+				</div>
+
+				<div class="p-profile__field">
+					<label class="p-profile__label" for="email">Email <span class="p-profile__asterisk">*</span></label>
+					<input id="email" class="p-profile__input" type="email" formControlName="email" />
+					@if (form.get('email')?.touched && form.get('email')?.invalid) {
+						<small class="p-profile__field-error">
+							@if (form.get('email')?.errors?.['required']) { Email is required }
+							@if (form.get('email')?.errors?.['email']) { Invalid email format }
+							@if (form.get('email')?.errors?.['taken']) { Ese correo ya está en uso }
+						</small>
+					}
+				</div>
+
+				<div class="p-profile__field">
+					<label class="p-profile__label" for="profilePictureUrl">Profile picture URL</label>
+					<input id="profilePictureUrl" class="p-profile__input" type="text" formControlName="profilePictureUrl" placeholder="https://..." />
+				</div>
+
+				<div class="p-profile__field">
+					<label class="p-profile__label" for="profilePictureFile">Subir foto desde tu PC</label>
+					<input id="profilePictureFile" class="p-profile__input" type="file" accept="image/*" (change)="onPhotoSelected($event)" />
+
+					@if (photoPreviewUrl) {
+						<div class="p-profile__photo-preview">
+							<button class="p-profile__photo-button" type="button" (click)="openPhotoModal(photoPreviewUrl!)" aria-label="Ver foto más grande">
+								<img class="p-profile__photo" [src]="photoPreviewUrl" alt="Vista previa de la foto" />
+							</button>
+						</div>
+					} @else if (form.get('profilePictureUrl')?.value) {
+						<div class="p-profile__photo-preview">
+							<button class="p-profile__photo-button" type="button" (click)="openPhotoModal(form.get('profilePictureUrl')?.value)" aria-label="Ver foto más grande">
+								<img class="p-profile__photo" [src]="form.get('profilePictureUrl')?.value" alt="Foto de perfil actual" />
+							</button>
+						</div>
+					}
+
+					<div class="p-profile__upload-actions">
+						<button c-boton type="button" importancia="secundaria" [disabled]="!selectedPhotoFile || uploadingPhoto" (click)="uploadPhoto()">
+							@if (uploadingPhoto) { Subiendo... } @else { Subir foto }
+						</button>
+					</div>
+
+					@if (photoUploadError) {
+						<div class="p-profile__error" role="alert" aria-live="polite">
+							<span>{{ photoUploadError }}</span>
+							<button class="p-profile__dismiss p-profile__dismiss--danger" type="button" (click)="dismissPhotoUploadError()" aria-label="Cerrar error">
+								×
+							</button>
+						</div>
+					}
+					@if (photoUploadSuccess) {
+						<div class="p-profile__success" role="status" aria-live="polite">
+							<span>Foto subida. Pulsa Save changes para guardarla.</span>
+							<button class="p-profile__dismiss" type="button" (click)="dismissPhotoUploadSuccess()" aria-label="Cerrar aviso">
+								×
+							</button>
+						</div>
+					}
+				</div>
+
+				
+				@if (saveError) {
+					<div class="p-profile__error" role="alert" aria-live="polite">
+						<span>{{ saveError }}</span>
+						<button class="p-profile__dismiss p-profile__dismiss--danger" type="button" (click)="dismissSaveError()" aria-label="Cerrar error">
+							×
+						</button>
+					</div>
+				}
+				@if (saveSuccess) {
+					<div class="p-profile__success" role="status" aria-live="polite">
+						<span>Changes saved</span>
+						<button class="p-profile__dismiss" type="button" (click)="dismissSaveSuccess()" aria-label="Cerrar aviso">
+							×
+						</button>
+					</div>
+				}
+
+				<div class="p-profile__actions">
+					<button c-boton class="p-profile__button" type="submit" importancia="primaria" [disabled]="form.invalid || saving || loading">
+						@if (saving) { Saving... } @else { Save changes }
+					</button>
+
+					<button c-boton class="p-profile__button" type="button" importancia="secundaria" (click)="onCancel()" [disabled]="saving">
+						Cancel
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+@if (isPhotoModalOpen && modalPhotoUrl) {
+	<div class="p-profile__modal" role="dialog" aria-modal="true" aria-label="Foto de perfil">
+		<button class="p-profile__modal-backdrop" type="button" (click)="closePhotoModal()" aria-label="Cerrar"></button>
+		<div class="p-profile__modal-content">
+			<img class="p-profile__modal-img" [src]="modalPhotoUrl" alt="Foto de perfil ampliada" />
+			<button class="p-profile__modal-close" type="button" (click)="closePhotoModal()" aria-label="Cerrar">
+				×
+			</button>
+		</div>
+	</div>
+}

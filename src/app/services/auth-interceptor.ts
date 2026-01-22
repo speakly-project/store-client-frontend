@@ -14,7 +14,10 @@ export class AuthInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = this.authService.getToken();
 
-    const authReq = token
+    const isCloudinaryRequest = req.url.includes('api.cloudinary.com');
+    const isBackendRequest = req.url.includes('localhost:8080/api/speakly');
+
+    const authReq = token && !isCloudinaryRequest
       ? req.clone({
           headers: req.headers.set('Authorization', `Bearer ${token}`),
         })
@@ -22,7 +25,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
     return next.handle(authReq).pipe(
       catchError((error) => {
-        if (error.status === 401 || error.status === 403) {
+        if (isBackendRequest && (error.status === 401 || error.status === 403)) {
           this.router.navigate(['/login']);
         }
         return throwError(() => error);

@@ -1,0 +1,246 @@
+:host {
+	display: block;
+}
+
+.p-profile {
+	min-height: calc(100vh - 80px);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 32px 16px;
+}
+
+.p-profile__card {
+	width: 100%;
+	max-width: 520px;
+	border-radius: 14px;
+	border: 1px solid rgba(0, 0, 0, 0.08);
+	background: #ffffff;
+	overflow: hidden;
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+.p-profile__card-header {
+	background: var(--mlt-sys-primary-color-5);
+	padding: 18px 20px;
+	color: #ffffff;
+}
+
+.p-profile__title {
+	margin: 0;
+	font-size: 20px;
+	font-weight: 700;
+}
+
+.p-profile__subtitle {
+	margin: 4px 0 0;
+	font-size: 13px;
+	opacity: 0.92;
+}
+
+.p-profile__card-body {
+	padding: 30px;
+}
+
+.p-profile__form {
+	display: grid;
+	gap: 14px;
+}
+
+.p-profile__field {
+	display: grid;
+	gap: 6px;
+}
+
+.p-profile__label {
+	font-size: 13px;
+	font-weight: 600;
+	color: #172b4d;
+}
+
+.p-profile__asterisk {
+	color: #d1242f;
+}
+
+.p-profile__input {
+	padding: 10px 12px;
+	border-radius: 10px;
+	border: 1px solid rgba(0, 0, 0, 0.18);
+	outline: none;
+	font-size: 14px;
+	transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+
+.p-profile__input:focus {
+	border-color: rgba(31, 111, 235, 0.8);
+	box-shadow: 0 0 0 3px rgba(31, 111, 235, 0.15);
+}
+
+.p-profile__photo-preview {
+	margin-top: 8px;
+	border-radius: 12px;
+	border: 1px solid rgba(0, 0, 0, 0.08);
+	background: rgba(0, 0, 0, 0.02);
+	overflow: hidden;
+}
+
+.p-profile__photo-button {
+	border: 0;
+	background: transparent;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	display: block;
+	cursor: zoom-in;
+}
+
+.p-profile__photo-button:focus-visible {
+	outline: 3px solid rgba(31, 111, 235, 0.35);
+	outline-offset: 3px;
+	border-radius: 12px;
+}
+
+.p-profile__photo {
+	width: 100%;
+	max-height: 220px;
+	object-fit: cover;
+	display: block;
+}
+
+.p-profile__modal {
+	position: fixed;
+	inset: 0;
+	z-index: 9999;
+	display: grid;
+	place-items: center;
+	padding: 24px;
+}
+
+.p-profile__modal-backdrop {
+	position: absolute;
+	inset: 0;
+	border: 0;
+	background: rgba(0, 0, 0, 0.65);
+	cursor: zoom-out;
+}
+
+.p-profile__modal-content {
+	position: relative;
+	max-width: min(92vw, 900px);
+	max-height: 86vh;
+	border-radius: 16px;
+	overflow: hidden;
+	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+	background: #000;
+}
+
+.p-profile__modal-img {
+	display: block;
+	max-width: 100%;
+	max-height: 86vh;
+	object-fit: contain;
+}
+
+.p-profile__modal-close {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	width: 38px;
+	height: 38px;
+	border-radius: 999px;
+	border: 0;
+	background: rgba(255, 255, 255, 0.12);
+	color: #fff;
+	font-size: 22px;
+	line-height: 1;
+	cursor: pointer;
+}
+
+.p-profile__modal-close:hover {
+	background: rgba(255, 255, 255, 0.2);
+}
+
+.p-profile__modal-close:focus-visible {
+	outline: 2px solid rgba(255, 255, 255, 0.7);
+	outline-offset: 2px;
+}
+
+.p-profile__upload-actions {
+	margin-top: 8px;
+}
+
+
+.p-profile__field-error {
+	color: #d1242f;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.p-profile__error {
+	border: 1px solid rgba(209, 36, 47, 0.25);
+	background: rgba(209, 36, 47, 0.08);
+	color: #b10f1a;
+	padding: 10px 12px;
+	border-radius: 10px;
+	font-size: 13px;
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 12px;
+}
+
+.p-profile__success {
+	border: 1px solid rgba(20, 161, 90, 0.25);
+	background: rgba(20, 161, 90, 0.08);
+	color: #0b7a41;
+	padding: 10px 12px;
+	border-radius: 10px;
+	font-size: 13px;
+	font-weight: 600;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+}
+
+.p-profile__dismiss {
+	border: 0;
+	background: transparent;
+	color: inherit;
+	font-size: 18px;
+	line-height: 1;
+	padding: 0 4px;
+	cursor: pointer;
+	opacity: 0.9;
+}
+
+.p-profile__dismiss:hover {
+	opacity: 1;
+}
+
+.p-profile__dismiss:focus-visible {
+	outline: 2px solid rgba(11, 122, 65, 0.5);
+	outline-offset: 2px;
+	border-radius: 6px;
+}
+
+.p-profile__dismiss--danger:focus-visible {
+	outline-color: rgba(177, 15, 26, 0.55);
+}
+
+.p-profile__actions {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 10px;
+	margin-top: 6px;
+}
+
+.p-profile__button {
+	width: 100%;
+}
+
+@media (min-width: 520px) {
+	.p-profile__actions {
+		grid-template-columns: 1fr 1fr;
+	}
+}

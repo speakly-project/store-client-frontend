@@ -65,6 +65,7 @@
         gap: var(--c-header-gap);
         list-style: none;
         margin: var(--c-header-margin);
+        align-items: center;
     }
 
 
@@ -72,6 +73,40 @@
         position: relative;
         display: flex;
         justify-content: flex-end;
+    }
+
+    &__user-trigger {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    &__avatar {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        overflow: hidden;
+        object-fit: cover;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.18);
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        color: var(--mlt-sys-primary-color-9);
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 1;
+    }
+
+    &__avatar--fallback {
+        text-transform: uppercase;
+    }
+
+    &__username {
+        max-width: 160px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 
     &__dropdown {
