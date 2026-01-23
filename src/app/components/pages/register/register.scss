@@ -1,8 +1,5 @@
-:host {
-	display: block;
-}
-
 .p-register {
+	display: block;
 	--p-register-padding: var(--mlt-sys-padding-32);
 	--p-register-bg-color: var(--mlt-sys-primary-color-9);
 	--p-register-card-bg: var(--mlt-sys-primary-color-9);
@@ -29,6 +26,19 @@
 	--p-register-button-width: var(--mlt-sys-width-100p);
 	--p-register-button-padding: var(--mlt-sys-padding-10) var(--mlt-sys-padding-16);
 	--p-register-button-font-size: var(--mlt-sys-font-size-16);
+	--p-register-form-label-margin: var(--mlt-sys-margin-0);
+	--p-register-form-label-asterisk-color: var(--mlt-sys-danger-color-5);
+	--p-register-form-input-invalid-border-color: var(--mlt-sys-danger-color-5);
+	--p-register-form-error-margin-top: var(--mlt-sys-margin-6);
+	--p-register-form-error-color: var(--mlt-sys-danger-color-5);
+	--p-register-form-error-font-size: var(--mlt-sys-font-size-12);
+	--p-register-form-error-font-weight: var(--mlt-sys-font-weight-500);
+	--p-register-form-error-general-margin: var(--mlt-sys-margin-0);
+	--p-register-form-error-general-font-weight: var(--mlt-sys-font-weight-600);
+	--p-register-form-actions-gap: var(--mlt-sys-gap-12);
+	--p-register-login-link-color: var(--mlt-sys-secondary-color-4);
+	--p-register-login-link-font-weight: var(--mlt-sys-font-weight-500);
+	--p-register-login-link-hover-color: var(--mlt-sys-secondary-color-5);
 
 	display: flex;
 	justify-content: center;
@@ -36,127 +46,128 @@
 	min-height: calc(100vh - 80px);
 	padding: var(--p-register-padding);
 	background-color: var(--p-register-bg-color);
-}
 
-.p-register__card {
-	background: var(--p-register-card-bg);
-	border: 1px solid rgba(0, 0, 0, 0.125);
-	border-radius: var(--p-register-card-border-radius);
-	width: var(--p-register-card-width);
-	max-width: var(--p-register-card-max-width);
-	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-	overflow: hidden;
-}
+	&__card {
+		background: var(--p-register-card-bg);
+		border: 1px solid rgba(0, 0, 0, 0.125);
+		border-radius: var(--p-register-card-border-radius);
+		width: var(--p-register-card-width);
+		max-width: var(--p-register-card-max-width);
+		box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+		overflow: hidden;
+	}
 
-.p-register__card-header {
-	background-color: var(--p-register-card-header-bg);
-	color: var(--p-register-card-header-color);
-	padding: var(--p-register-card-header-padding);
-	text-align: center;
-	border-bottom: 1px solid rgba(0, 0, 0, 0.125);
-}
+	&__card-header {
+		background-color: var(--p-register-card-header-bg);
+		color: var(--p-register-card-header-color);
+		padding: var(--p-register-card-header-padding);
+		text-align: center;
+		border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+	}
 
-.p-register__card-body {
-	padding: var(--mlt-sys-padding-24);
-}
+	&__card-body {
+		padding: var(--mlt-sys-padding-24);
+	}
 
-.p-register__title {
-	margin: var(--p-register-title-margin);
-	font-size: var(--p-register-title-font-size);
-	font-weight: var(--p-register-title-font-weight);
-}
+	&__title {
+		margin: var(--p-register-title-margin);
+		font-size: var(--p-register-title-font-size);
+		font-weight: var(--p-register-title-font-weight);
+	}
 
-.p-register__subtitle {
-	margin: var(--p-register-subtitle-margin);
-	font-size: var(--p-register-subtitle-font-size);
-	opacity: 0.9;
-}
+	&__subtitle {
+		margin: var(--p-register-subtitle-margin);
+		font-size: var(--p-register-subtitle-font-size);
+		opacity: 0.9;
+	}
 
-.p-register__login {
-	margin-top: var(--mlt-sys-margin-16);
-	font-size: var(--mlt-sys-font-size-14);
-	text-align: center;
-}
+	&__login {
+		margin-top: var(--mlt-sys-margin-16);
+		font-size: var(--mlt-sys-font-size-14);
+		text-align: center;
+	}
 
-.c-user-form {
-	display: flex;
-	flex-direction: column;
-	gap: var(--p-register-form-gap);
-}
+	&__form {
+		display: flex;
+		flex-direction: column;
+		gap: var(--p-register-form-gap);
+	}
 
-.c-user-form__group {
-	display: flex;
-	flex-direction: column;
-	gap: var(--p-register-field-gap);
-}
+	&__form-group {
+		display: flex;
+		flex-direction: column;
+		gap: var(--p-register-field-gap);
+	}
 
-.c-user-form__label {
-	font-size: var(--p-register-label-font-size);
-	font-weight: var(--p-register-label-font-weight);
-	color: #212529;
-	margin-bottom: 0;
-}
+	&__form-label {
+		font-size: var(--p-register-label-font-size);
+		font-weight: var(--p-register-label-font-weight);
+		color: #212529;
+		margin-bottom: var(--p-register-form-label-margin);
+	}
 
-.c-user-form__label--asterisk {
-	color: var(--mlt-sys-danger-color-5, #dc2626);
-}
+	&__form-label--asterisk {
+		color: var(--p-register-form-label-asterisk-color);
+	}
 
-.c-user-form__input {
-	padding: var(--p-register-input-padding);
-	font-size: var(--p-register-input-font-size);
-	border: 1px solid #ced4da;
-	border-radius: var(--p-register-input-border-radius);
-	font-family: inherit;
-	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-	outline: none;
-}
+	&__form-input {
+		padding: var(--p-register-input-padding);
+		font-size: var(--p-register-input-font-size);
+		border: 1px solid #ced4da;
+		border-radius: var(--p-register-input-border-radius);
+		font-family: inherit;
+		transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+		outline: none;
+	}
 
-.c-user-form__input:focus {
-	border-color: var(--p-register-input-focus-border-color);
-	box-shadow: 0 0 0 0.25rem rgba(var(--mlt-sys-primary-color-5-rgb, 13, 110, 253), 0.25);
-}
+	&__form-input:focus {
+		border-color: var(--p-register-input-focus-border-color);
+		box-shadow: 0 0 0 0.25rem rgba(var(--mlt-sys-primary-color-5-rgb, 13, 110, 253), 0.25);
+	}
 
-.c-user-form__input.ng-invalid.ng-touched {
-	border-color: var(--mlt-sys-danger-color-5, #dc2626);
-}
+	&__form-input.ng-invalid.ng-touched {
+		border-color: var(--p-register-form-input-invalid-border-color);
+	}
 
-.c-user-form__error {
-	margin-top: 6px;
-	color: var(--mlt-sys-danger-color-5, #dc2626);
-	font-size: 12px;
-	font-weight: 500;
-}
+	&__form-error {
+		margin-top: var(--p-register-form-error-margin-top);
+		color: var(--p-register-form-error-color);
+		font-size: var(--p-register-form-error-font-size);
+		font-weight: var(--p-register-form-error-font-weight);
+	}
 
-.c-user-form__error-general {
-	margin: 0;
-	color: var(--mlt-sys-danger-color-5, #dc2626);
-	font-weight: 600;
-}
+	&__form-error-general {
+		margin: var(--p-register-form-error-general-margin);
+		color: var(--p-register-form-error-color);
+		font-weight: var(--p-register-form-error-general-font-weight);
+	}
 
-.c-user-form__actions {
-	display: flex;
-	flex-direction: row;
-	gap: var(--mlt-sys-gap-12);
-	margin-top: var(--p-register-button-margin-top);
-}
+	&__form-actions {
+		display: flex;
+		flex-direction: row;
+		gap: var(--p-register-form-actions-gap);
+		margin-top: var(--p-register-button-margin-top);
+	}
 
-.p-register__button {
-	width: var(--p-register-button-width);
-	padding: var(--p-register-button-padding);
-	font-size: var(--p-register-button-font-size);
-}
+	&__button {
+		width: var(--p-register-button-width);
+		padding: var(--p-register-button-padding);
+		font-size: var(--p-register-button-font-size);
+	}
 
-.p-register__button:disabled {
-	opacity: 0.65;
-	cursor: not-allowed;
-}
+	&__button:disabled {
+		opacity: 0.65;
+		cursor: not-allowed;
+	}
 
-.p-register__login-link {
-    color: var(--mlt-sys-secondary-color-4);
-    font-weight: 500;
-    transition: color 0.2s ease-in-out;
+	&__login-link {
+		color: var(--p-register-login-link-color);
+		font-weight: var(--p-register-login-link-font-weight);
+		transition: color 0.2s ease-in-out;
 
-    &:hover {
-        color: var(--mlt-sys-secondary-color-5);
-    }
+		&:hover {
+			color: var(--p-register-login-link-hover-color);
+		}
+	}
+
 }

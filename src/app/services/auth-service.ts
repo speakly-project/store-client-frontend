@@ -31,7 +31,6 @@ export class AuthService {
             next: (token: string) => {
               localStorage.setItem(this.TOKEN_KEY, token);
 
-              // Precargamos el usuario completo (incluye profilePictureUrl) para el Header
               this.refreshCurrentUser().subscribe();
 
               observer.next(token);

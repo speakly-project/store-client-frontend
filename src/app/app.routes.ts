@@ -2,7 +2,6 @@ import { Routes } from '@angular/router';
 import { Logout } from './components/pages/logout/logout';
 import { Login } from './components/pages/login/login';
 import { loginGuard } from './guards/login-guard';
-import { Home } from './components/pages/home/home';
 import { Cursos } from './components/pages/cursos/cursos';
 import { Register } from './components/pages/register/register';
 import { Profile } from './components/pages/profile/profile';

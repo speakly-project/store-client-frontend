@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, throwError } from 'rxjs';
+import { map, Observable, throwError } from 'rxjs';
 import { CourseInterface } from '../models/CourseInterface';
 import { LanguageInterface } from '../models/LanguageInterface';
 import { LevelInterface } from '../models/LevelInterface';
@@ -80,17 +80,13 @@ export class CoursesHttpClient {
     createUser(user: UserInterface) {
         return this.Mihttp.post(this.urlUsers, user);
     }
-    updateUser(user: UserInterface) {
+    updateUser(user: UserInterface): Observable<UserInterface> {
         return this.Mihttp.put<UserInterface>(`${this.urlUsers}/me`, user);
     }
 
-    uploadProfilePicture(file: File) {
+    uploadProfilePicture(file: File): Observable<string> {
         if (PROFILE_PICTURE_UPLOAD_MODE !== 'cloudinary') {
             return throwError(() => new Error('Modo de subida no soportado.'));
-        }
-
-        if (!CLOUDINARY_CLOUD_NAME || !CLOUDINARY_UPLOAD_PRESET) {
-            return throwError(() => new Error('Falta configurar CLOUDINARY_CLOUD_NAME y CLOUDINARY_UPLOAD_PRESET.'));
         }
 
         const formData = new FormData();

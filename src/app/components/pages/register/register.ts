@@ -31,7 +31,7 @@ export class Register {
     private fb: FormBuilder,
     private coursesHttpClient: CoursesHttpClient,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.formulario = this.fb.group(
@@ -98,7 +98,6 @@ export class Register {
 
     if (this.formulario.pending) {
       this.formulario.markAllAsTouched();
-      this.submitError = 'Comprobando disponibilidad...';
       return;
     }
 
