@@ -7,37 +7,31 @@
 
     <div class="filters-row">
         <div class="filters">
-            <select>
-                <option>Language</option>
-                <option>English</option>
+            <select #language (change)="fetchCourses(language.value, level.value, minPrice.value, maxPrice.value, sortBy.value)">
+                <option value="">Language</option>
+                @for (lang of (languages$ | async); track lang.code) {
+                <option [value]="lang.name">{{ lang.name }}</option>
+                }
             </select>
-            <select>
-                <option>Level</option>
-                <option>A1</option>
-                <option>A2</option>
-                <option>B1</option>
-                
+            <select #level (change)="fetchCourses(language.value, level.value, minPrice.value, maxPrice.value, sortBy.value)">
+                <option value="">Level</option>
+                @for (lvl of (levels$ | async); track lvl.name) {
+                <option [value]="lvl.name">{{ lvl.name }}</option>
+                }
             </select>
-            <select>
-                <option>Price Range</option>
+            <input #minPrice type="number" placeholder="Min price" />
+            <input #maxPrice type="number" placeholder="Max price" />
+            <select #sortBy (change)="fetchCourses(language.value, level.value, minPrice.value, maxPrice.value, sortBy.value)">
+                <option value="">Order by</option>
+                <option value="ascPrice">Ascending price</option>
+                <option value="descPrice">Descending price</option>
             </select>
-            <select>
-                <option>Rating</option>
-            </select>
+            <button (click)="fetchCourses(language.value, level.value, minPrice.value, maxPrice.value, sortBy.value)">Search</button>
         </div>
     </div>
 
     <div class="results-row">
-        <div class="results-count">1,248 courses found</div>
-
-        <div class="sort-by">
-            Sort by:
-            <select>
-                <option>Best Selling</option>
-                <option>Ascending price</option>
-                <option>Descending price</option>
-            </select>
-        </div>
+        <div class="results-count">{{ totalElements || courses.length }} courses found</div>
     </div>
 
 
@@ -48,11 +42,13 @@
         }
     </div>
 
+    @if (totalPages > 1) {
     <div class="pagination">
-        <button>&lt;</button>
-        <button class="active">1</button>
-        <button>2</button>
-        <button>3</button>
-        <button>&gt;</button>
+        <button (click)="prevPage(language.value, level.value, minPrice.value, maxPrice.value, sortBy.value)" [disabled]="currentPage === 1">&lt;</button>
+        @for (p of pages; track p) {
+        <button (click)="goToPage(p, language.value, level.value, minPrice.value, maxPrice.value, sortBy.value)" [class.active]="currentPage === p">{{ p }}</button>
+        }
+        <button (click)="nextPage(language.value, level.value, minPrice.value, maxPrice.value, sortBy.value)" [disabled]="currentPage === totalPages">&gt;</button>
     </div>
+    }
 </section>
