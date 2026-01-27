@@ -1,18 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable, throwError } from 'rxjs';
+import { map, Observable, switchMap, throwError } from 'rxjs';
 import { CourseInterface } from '../models/CourseInterface';
 import { LanguageInterface } from '../models/LanguageInterface';
 import { LevelInterface } from '../models/LevelInterface';
 import { UserInterface } from '../models/UserInterface';
 import { TeacherInterface } from '../models/TeacherInterface';
 
-type ProfilePictureUploadMode = 'cloudinary';
-
-const PROFILE_PICTURE_UPLOAD_MODE: ProfilePictureUploadMode = 'cloudinary';
-
-const CLOUDINARY_CLOUD_NAME = 'dnywbqedv';
-const CLOUDINARY_UPLOAD_PRESET = 'Speakly';
 
 @Injectable({
     providedIn: 'root'
@@ -84,28 +78,31 @@ export class CoursesHttpClient {
         return this.Mihttp.put<UserInterface>(`${this.urlUsers}/me`, user);
     }
 
+    getUploadSignature() {
+        return this.Mihttp.get<any>('http://localhost:8080/speakly/upload/signature');
+    }
+
     uploadProfilePicture(file: File): Observable<string> {
-        if (PROFILE_PICTURE_UPLOAD_MODE !== 'cloudinary') {
-            return throwError(() => new Error('Modo de subida no soportado.'));
-        }
 
-        const formData = new FormData();
-        formData.append('file', file);
-        formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+        return this.getUploadSignature().pipe(
+            switchMap(sig => {
 
-        const cloudName = CLOUDINARY_CLOUD_NAME.trim().toLowerCase();
-        const url = `https://api.cloudinary.com/v1_1/${encodeURIComponent(cloudName)}/image/upload`;
+                const formData = new FormData();
+                formData.append('file', file);
+                formData.append('api_key', sig.apiKey);
+                formData.append('timestamp', sig.timestamp);
+                formData.append('signature', sig.signature);
+                formData.append('folder', 'profiles');
 
-        return this.Mihttp.post<any>(url, formData).pipe(
-            map((res) => {
-                const uploadedUrl = res?.secure_url ?? res?.url;
-                if (typeof uploadedUrl !== 'string' || !uploadedUrl.trim().length) {
-                    throw new Error('Respuesta inesperada al subir la imagen.');
-                }
-                return uploadedUrl as string;
+                const url = `https://api.cloudinary.com/v1_1/${sig.cloudName}/image/upload`;
+
+                return this.Mihttp.post<any>(url, formData).pipe(
+                    map(res => res.secure_url)
+                );
             })
         );
     }
+
 
     updateUserPassword(currentPassword: string, newPassword: string): Observable<void> {
         const payload = {
