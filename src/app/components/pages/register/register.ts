@@ -10,7 +10,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { catchError, finalize, map, of, switchMap, timer } from 'rxjs';
+import { catchError, filter, finalize, map, of, switchMap, take, timer } from 'rxjs';
 import { UserInterface } from '../../../models/UserInterface';
 import { CoursesHttpClient } from '../../../services/courses-http-client';
 import { Boton } from '../../ui/c-boton/c-boton';
@@ -26,6 +26,9 @@ export class Register {
   submitting = false;
   submitError: string | null = null;
   submitSuccess = false;
+
+  showNewPassword = false;
+  showConfirmPassword = false;
 
   constructor(
     private fb: FormBuilder,
@@ -90,14 +93,33 @@ export class Register {
   }
 
   onSubmit(): void {
+    if (!this.formulario) {
+      return;
+    }
+
     this.submitSuccess = false;
     this.submitError = null;
+
+    this.formulario.markAllAsTouched();
 
     this.formulario.get('username')?.updateValueAndValidity();
     this.formulario.get('email')?.updateValueAndValidity();
 
     if (this.formulario.pending) {
-      this.formulario.markAllAsTouched();
+      this.formulario.statusChanges
+        .pipe(
+          filter((status) => status !== 'PENDING'),
+          take(1)
+        )
+        .subscribe(() => this.finishSubmit());
+      return;
+    }
+
+    this.finishSubmit();
+  }
+
+  private finishSubmit(): void {
+    if (this.submitting) {
       return;
     }
 
@@ -112,8 +134,7 @@ export class Register {
     const email = String(this.formulario.get('email')?.value ?? '').trim();
     const password = String(this.formulario.get('password')?.value ?? '');
 
-    const nuevoUsuario: UserInterface = {
-      id: 1,
+    const nuevoUsuario: Omit<UserInterface, 'id'> = {
       username,
       email,
       profilePictureUrl: null,
@@ -177,5 +198,13 @@ export class Register {
 
   onCancelar(): void {
     this.router.navigate(['/']);
+  }
+
+  togglePasswordVisibility(which: 'confirm' | 'new'): void {
+    if (which === 'confirm') {
+      this.showConfirmPassword = !this.showConfirmPassword;
+      return;
+    }
+    this.showNewPassword = !this.showNewPassword;
   }
 }

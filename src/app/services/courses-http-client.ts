@@ -77,8 +77,8 @@ export class CoursesHttpClient {
         );
     }
 
-    createUser(user: UserInterface) {
-        return this.Mihttp.post(this.urlUsers, user);
+    createUser(user: Omit<UserInterface, 'id'>): Observable<UserInterface> {
+        return this.Mihttp.post<UserInterface>(this.urlUsers, user);
     }
     updateUser(user: UserInterface): Observable<UserInterface> {
         return this.Mihttp.put<UserInterface>(`${this.urlUsers}/me`, user);
@@ -105,6 +105,15 @@ export class CoursesHttpClient {
                 return uploadedUrl as string;
             })
         );
+    }
+
+    updateUserPassword(currentPassword: string, newPassword: string): Observable<void> {
+        const payload = {
+            currentPassword,
+            oldPassword: currentPassword,
+            newPassword
+        };
+        return this.Mihttp.put<void>(`${this.urlUsers}/passwd`, payload);
     }
 
 }

@@ -137,22 +137,22 @@
         }
     }
 
-    &__password-wrapper {
+    &__password-wrap {
         position: relative;
         display: flex;
         align-items: center;
     }
 
-    &__password-wrapper &__input {
-
+    &__input--with-toggle {
         width: var(--p-login-passwd-input-width);
         padding-right: var(--p-login-passwd-input-padding-right);
     }
 
     &__password-toggle {
-
         position: absolute;
         right: 0.5rem;
+        top: 50%;
+        transform: translateY(-50%);
         background: transparent;
         border: none;
         padding: var(--p-login-passwd-toggle-padding);
@@ -161,26 +161,21 @@
         justify-content: center;
         cursor: pointer;
         color: #6c757d;
-        transition: color 0.15s ease-in-out;
+        transition: color 0.15s ease-in-out, background 0.15s ease-in-out;
 
         &:hover {
-
             color: var(--p-login-passwd-toggle-hover-color);
         }
 
         &:focus-visible {
-
             outline: 2px solid var(--p-login-passwd-toggle-hover-color);
             outline-offset: 2px;
             border-radius: var(--p-login-passwd-toggle-focus-border-radius);
         }
 
-        svg {
-
-            width: var(--p-login-passwd-toggle-svg-width);
-            height: var(--p-login-passwd-toggle-svg-height);
-            fill: currentColor;
-            pointer-events: none;
+        .material-icons {
+            font-size: 20px;
+            line-height: 1;
         }
     }
 
@@ -196,6 +191,5 @@
             cursor: not-allowed;
         }
     }
-
 
 }

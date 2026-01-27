@@ -3,7 +3,7 @@ import { Component, HostListener } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { catchError, finalize, of, switchMap, timeout } from 'rxjs';
+import { catchError, EMPTY, finalize, of, switchMap, timeout } from 'rxjs';
 import { UserInterface } from '../../../models/UserInterface';
 import { AuthClient } from '../../../services/auth-client';
 import { AuthService } from '../../../services/auth-service';
@@ -18,12 +18,21 @@ import { Boton } from '../../ui/c-boton/c-boton';
 })
 export class Profile {
   form!: FormGroup;
+  passwordForm!: FormGroup;
+
+  showOldPassword = false;
+  showNewPassword = false;
+  showRepeatNewPassword = false;
 
   loading = false;
   saving = false;
   loadError: string | null = null;
   saveError: string | null = null;
   saveSuccess = false;
+
+  changingPassword = false;
+  changePasswordError: string | null = null;
+  changePasswordSuccess = false;
 
   uploadingPhoto = false;
   photoUploadError: string | null = null;
@@ -36,6 +45,18 @@ export class Profile {
   private previousBodyOverflow: string | null = null;
 
   private currentUser: UserInterface | null = null;
+
+  togglePasswordVisibility(which: 'old' | 'new' | 'repeat'): void {
+    if (which === 'old') {
+      this.showOldPassword = !this.showOldPassword;
+      return;
+    }
+    if (which === 'new') {
+      this.showNewPassword = !this.showNewPassword;
+      return;
+    }
+    this.showRepeatNewPassword = !this.showRepeatNewPassword;
+  }
 
   constructor(
     private fb: FormBuilder,
@@ -53,7 +74,106 @@ export class Profile {
         profilePictureUrl: ['']
       });
 
+    this.passwordForm = this.fb.group(
+      {
+        oldPassword: ['', [Validators.required]],
+        newPassword: ['', [Validators.required]],
+        repeatNewPassword: ['', [Validators.required]],
+      },
+      {
+        validators: [this.validateNewPasswordIsNotOld(), this.validateNewPasswordsMatch()],
+      }
+    );
+
     this.loadProfile();
+  }
+
+  validateNewPasswordIsNotOld() {
+    return (group: AbstractControl) => {
+      const oldPassword = group.get('oldPassword')?.value;
+      const newPassword = group.get('newPassword')?.value;
+      if (oldPassword && newPassword && oldPassword === newPassword) {
+        group.get('newPassword')?.setErrors({ sameAsOld: true });
+      } else {
+        const errors = group.get('newPassword')?.errors;
+        if (errors) {
+          delete errors['sameAsOld'];
+          if (Object.keys(errors).length === 0) {
+            group.get('newPassword')?.setErrors(null);
+          }
+        }
+      }
+      return null;
+    };
+  }
+
+  validateNewPasswordsMatch() {
+    return (group: AbstractControl) => {
+      const newPassword = group.get('newPassword')?.value;
+      const repeatNewPassword = group.get('repeatNewPassword')?.value;
+      if (newPassword && repeatNewPassword && newPassword !== repeatNewPassword) {
+        group.get('repeatNewPassword')?.setErrors({ mismatch: true });
+      } else {
+        const errors = group.get('repeatNewPassword')?.errors;
+        if (errors) {
+          delete errors['mismatch'];
+          if (Object.keys(errors).length === 0) {
+            group.get('repeatNewPassword')?.setErrors(null);
+          }
+        }
+      }
+      return null;
+    };
+  }
+
+  dismissChangePasswordError(): void {
+    this.changePasswordError = null;
+  }
+
+  dismissChangePasswordSuccess(): void {
+    this.changePasswordSuccess = false;
+  }
+
+  onChangePassword(): void {
+    this.changePasswordSuccess = false;
+    this.changePasswordError = null;
+    this.clearPasswordFieldErrors();
+
+    if (this.passwordForm.invalid) {
+      this.passwordForm.markAllAsTouched();
+      return;
+    }
+
+    const oldPassword = String(this.passwordForm.get('oldPassword')?.value ?? '').trim();
+    const newPassword = String(this.passwordForm.get('newPassword')?.value ?? '').trim();
+
+    this.changingPassword = true;
+
+    this.coursesHttpClient
+      .updateUserPassword(oldPassword, newPassword)
+      .pipe(
+        finalize(() => {
+          this.changingPassword = false;
+        }),
+        catchError((error: unknown) => {
+          this.handleChangePasswordError(error);
+          return EMPTY;
+        })
+      )
+      .subscribe(() => {
+
+        this.changePasswordSuccess = true;
+
+        this.passwordForm.reset(
+          {
+            oldPassword: '',
+            newPassword: '',
+            repeatNewPassword: '',
+          },
+          { emitEvent: false }
+        );
+      });
+
   }
 
   ngOnDestroy(): void {
@@ -304,6 +424,43 @@ export class Profile {
     this.clearControlError('email', 'taken');
   }
 
+  private clearPasswordFieldErrors(): void {
+    const control = this.passwordForm.get('oldPassword');
+    const errors = control?.errors;
+    if (!control || !errors || !errors['incorrectOld']) {
+      return;
+    }
+
+    delete errors['incorrectOld'];
+    control.setErrors(Object.keys(errors).length ? errors : null);
+  }
+
+  private handleChangePasswordError(error: unknown): void {
+    const oldPasswordControl = this.passwordForm.get('oldPassword');
+    const newPasswordControl = this.passwordForm.get('newPassword');
+
+    if (!(error instanceof HttpErrorResponse)) {
+      this.changePasswordError = 'No se pudo cambiar la contraseña.';
+      return;
+    }
+
+    const backendMessage = this.extractBackendMessage(error);
+
+    if (backendMessage === 'Old password is incorrect') {
+      oldPasswordControl?.setErrors({ ...(oldPasswordControl.errors ?? {}), incorrectOld: true });
+      oldPasswordControl?.markAsTouched();
+      return;
+    }
+
+    if (backendMessage === 'New password must be different from the old password') {
+      newPasswordControl?.setErrors({ ...(newPasswordControl.errors ?? {}), sameAsOld: true });
+      newPasswordControl?.markAsTouched();
+      return;
+    }
+
+    this.changePasswordError = backendMessage || 'No se pudo cambiar la contraseña.';
+  }
+
   private clearControlError(controlName: 'username' | 'email', errorKey: string): void {
     const control = this.form.get(controlName);
     if (!control?.errors || !control.errors[errorKey]) {
@@ -339,21 +496,16 @@ export class Profile {
     const usernameConflict =
       fieldErrors?.username ||
       message.includes('username') ||
-      message.includes('usuario') ||
-      message.includes('nombre de usuario');
+      message.includes('already exists');
 
     const emailConflict =
       fieldErrors?.email ||
       message.includes('email') ||
-      message.includes('correo');
+      message.includes('already exists');
 
     const looksLikeDuplicate =
       error.status === 409 ||
-      message.includes('already exists') ||
-      message.includes('already taken') ||
-      message.includes('duplicate') ||
-      message.includes('ya existe') ||
-      message.includes('ya está en uso');
+      message.includes('already exists');
 
     if (looksLikeDuplicate && usernameConflict) {
       this.setTakenError('username', 'Ese nombre de usuario ya existe. Prueba con otro.');
@@ -365,7 +517,6 @@ export class Profile {
       return;
     }
 
-    // Fallback
     this.saveError = this.extractBackendMessage(error) || 'No se pudieron guardar los cambios.';
   }
 

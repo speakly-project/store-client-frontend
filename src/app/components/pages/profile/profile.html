@@ -1,8 +1,8 @@
 <div class="p-profile">
 	<div class="p-profile__card">
 		<div class="p-profile__card-header">
-			<h2 class="p-profile__title">Profile</h2>
-			<p class="p-profile__subtitle">Update your account details</p>
+			<h2 class="p-profile__title">Perfil</h2>
+			<p class="p-profile__subtitle">Actualiza los detalles de tu cuenta</p>
 		</div>
 
 		<div class="p-profile__card-body">
@@ -12,13 +12,13 @@
 
 			<form class="p-profile__form" [formGroup]="form" (ngSubmit)="onSave()">
 				<div class="p-profile__field">
-					<label class="p-profile__label" for="username">Username <span class="p-profile__asterisk">*</span></label>
+					<label class="p-profile__label" for="username">Nombre de usuario <span class="p-profile__asterisk">*</span></label>
 					<input id="username" class="p-profile__input" type="text" formControlName="username" />
 					@if (form.get('username')?.touched && form.get('username')?.invalid) {
 						<small class="p-profile__field-error">
-							@if (form.get('username')?.errors?.['required']) { Username is required }
-							@if (form.get('username')?.errors?.['minlength']) { Minimum 3 characters }
-							@if (form.get('username')?.errors?.['taken']) { Ese username ya existe }
+							@if (form.get('username')?.errors?.['required']) { El nombre de usuario es obligatorio }
+							@if (form.get('username')?.errors?.['minlength']) { Mínimo 3 caracteres }
+							@if (form.get('username')?.errors?.['taken']) { Ese nombre de usuario ya existe }
 						</small>
 					}
 				</div>
@@ -28,20 +28,20 @@
 					<input id="email" class="p-profile__input" type="email" formControlName="email" />
 					@if (form.get('email')?.touched && form.get('email')?.invalid) {
 						<small class="p-profile__field-error">
-							@if (form.get('email')?.errors?.['required']) { Email is required }
-							@if (form.get('email')?.errors?.['email']) { Invalid email format }
-							@if (form.get('email')?.errors?.['taken']) { Ese correo ya está en uso }
+							@if (form.get('email')?.errors?.['required']) { El email es obligatorio }
+							@if (form.get('email')?.errors?.['email']) { Formato de email inválido }
+							@if (form.get('email')?.errors?.['taken']) { Ese email ya está en uso }
 						</small>
 					}
 				</div>
 
 				<div class="p-profile__field">
-					<label class="p-profile__label" for="profilePictureUrl">Profile picture URL</label>
+					<label class="p-profile__label" for="profilePictureUrl">URL de la foto de perfil</label>
 					<input id="profilePictureUrl" class="p-profile__input" type="text" formControlName="profilePictureUrl" placeholder="https://..." />
 				</div>
 
 				<div class="p-profile__field">
-					<label class="p-profile__label" for="profilePictureFile">Subir foto desde tu PC</label>
+					<label class="p-profile__label" for="profilePictureFile">Sube una foto desde tu PC</label>
 					<input id="profilePictureFile" class="p-profile__input" type="file" accept="image/*" (change)="onPhotoSelected($event)" />
 
 					@if (photoPreviewUrl) {
@@ -74,7 +74,7 @@
 					}
 					@if (photoUploadSuccess) {
 						<div class="p-profile__success" role="status" aria-live="polite">
-							<span>Foto subida. Pulsa Save changes para guardarla.</span>
+							<span>Foto subida. Haz clic en Guardar cambios para aplicarla.</span>
 							<button class="p-profile__dismiss" type="button" (click)="dismissPhotoUploadSuccess()" aria-label="Cerrar aviso">
 								×
 							</button>
@@ -93,7 +93,7 @@
 				}
 				@if (saveSuccess) {
 					<div class="p-profile__success" role="status" aria-live="polite">
-						<span>Changes saved</span>
+						<span>Cambios guardados</span>
 						<button class="p-profile__dismiss" type="button" (click)="dismissSaveSuccess()" aria-label="Cerrar aviso">
 							×
 						</button>
@@ -102,11 +102,117 @@
 
 				<div class="p-profile__actions">
 					<button c-boton class="p-profile__button" type="submit" importancia="primaria" [disabled]="form.invalid || saving || loading">
-						@if (saving) { Saving... } @else { Save changes }
+						@if (saving) { Guardando... } @else { Guardar cambios }
 					</button>
 
 					<button c-boton class="p-profile__button" type="button" importancia="secundaria" (click)="onCancel()" [disabled]="saving">
-						Cancel
+						Cancelar
+					</button>
+				</div>
+			</form>
+
+			<div class="p-profile__divider" aria-hidden="true"></div>
+
+			<h3 class="p-profile__section-title">Cambiar contraseña</h3>
+			<p class="p-profile__section-subtitle">Introduce tu contraseña actual y la nueva.</p>
+
+			<form class="p-profile__form" [formGroup]="passwordForm" (ngSubmit)="onChangePassword()">
+				<div class="p-profile__field">
+					<label class="p-profile__label" for="oldPassword">Contraseña actual <span class="p-profile__asterisk">*</span></label>
+					<div class="p-profile__password-wrap">
+						<input
+							id="oldPassword"
+							class="p-profile__input p-profile__input--with-toggle"
+							[type]="showOldPassword ? 'text' : 'password'"
+							formControlName="oldPassword"
+							autocomplete="current-password"
+						/>
+						<button
+							class="p-profile__password-toggle"
+							type="button"
+							(click)="togglePasswordVisibility('old')"
+							[attr.aria-label]="showOldPassword ? 'Ocultar contraseña actual' : 'Mostrar contraseña actual'"
+							[attr.aria-pressed]="showOldPassword"
+						>
+							<span class="material-icons" aria-hidden="true">{{ showOldPassword ? 'visibility' : 'visibility_off' }}</span>
+						</button>
+					</div>
+					@if (passwordForm.get('oldPassword')?.touched && passwordForm.get('oldPassword')?.invalid) {
+						<small class="p-profile__field-error">
+							@if (passwordForm.get('oldPassword')?.errors?.['required']) { La contraseña actual es obligatoria }
+							@if (passwordForm.get('oldPassword')?.errors?.['incorrectOld']) { La contraseña actual no es correcta }
+						</small>
+					}
+				</div>
+
+				<div class="p-profile__field">
+					<label class="p-profile__label" for="newPassword">Nueva contraseña <span class="p-profile__asterisk">*</span></label>
+					<div class="p-profile__password-wrap">
+						<input
+							id="newPassword"
+							class="p-profile__input p-profile__input--with-toggle"
+							[type]="showNewPassword ? 'text' : 'password'"
+							formControlName="newPassword"
+							autocomplete="new-password"
+						/>
+						<button
+							class="p-profile__password-toggle"
+							type="button"
+							(click)="togglePasswordVisibility('new')"
+							[attr.aria-label]="showNewPassword ? 'Ocultar nueva contraseña' : 'Mostrar nueva contraseña'"
+							[attr.aria-pressed]="showNewPassword"
+						>
+							<span class="material-icons" aria-hidden="true">{{ showNewPassword ? 'visibility' : 'visibility_off' }}</span>
+						</button>
+					</div>
+					@if (passwordForm.get('newPassword')?.touched && passwordForm.get('newPassword')?.invalid) {
+						<small class="p-profile__field-error">
+							@if (passwordForm.get('newPassword')?.errors?.['required']) { La nueva contraseña es obligatoria }
+							@if (passwordForm.get('newPassword')?.errors?.['sameAsOld']) { La nueva contraseña no puede ser igual a la anterior }
+						</small>
+					}
+				</div>
+
+				<div class="p-profile__field">
+					<label class="p-profile__label" for="repeatNewPassword">Repetir nueva contraseña <span class="p-profile__asterisk">*</span></label>
+					<div class="p-profile__password-wrap">
+						<input
+							id="repeatNewPassword"
+							class="p-profile__input p-profile__input--with-toggle"
+							[type]="showRepeatNewPassword ? 'text' : 'password'"
+							formControlName="repeatNewPassword"
+							autocomplete="new-password"
+						/>
+						<button
+							class="p-profile__password-toggle"
+							type="button"
+							(click)="togglePasswordVisibility('repeat')"
+							[attr.aria-label]="showRepeatNewPassword ? 'Ocultar repetir nueva contraseña' : 'Mostrar repetir nueva contraseña'"
+							[attr.aria-pressed]="showRepeatNewPassword"
+						>
+							<span class="material-icons" aria-hidden="true">{{ showRepeatNewPassword ? 'visibility' : 'visibility_off' }}</span>
+						</button>
+					</div>
+					@if (passwordForm.get('repeatNewPassword')?.touched && passwordForm.get('repeatNewPassword')?.invalid) {
+						<small class="p-profile__field-error">
+							@if (passwordForm.get('repeatNewPassword')?.errors?.['required']) { Repetir la nueva contraseña es obligatorio }
+							@if (passwordForm.get('repeatNewPassword')?.errors?.['mismatch']) { Las nuevas contraseñas no coinciden }
+						</small>
+					}
+				</div>
+
+				@if (changePasswordSuccess) {
+					<div class="p-profile__success" role="status" aria-live="polite">
+						<span>Contraseña cambiada</span>
+						<button class="p-profile__dismiss" type="button" (click)="dismissChangePasswordSuccess()" aria-label="Cerrar aviso">
+							×
+						</button>
+					</div>
+				}
+
+				<div class="p-profile__actions">
+					<button c-boton class="p-profile__button" type="submit" importancia="primaria" [disabled]="passwordForm.invalid || changingPassword">
+						@if (changingPassword) { Guardando... } @else { Cambiar contraseña }
 					</button>
 				</div>
 			</form>

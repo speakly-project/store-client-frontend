@@ -15,9 +15,9 @@ export class Login {
   password: string = '';
   errorMessage: string = '';
   isLoading: boolean = false;
-  showPassword: boolean = false;
+  showPassword = false;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) { }
 
   onLogin() {
     if (!this.username || !this.password) {
@@ -41,7 +41,7 @@ export class Login {
     });
   }
 
-  togglePasswordVisibility() {
+  togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
   }
 

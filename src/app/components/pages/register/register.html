@@ -7,77 +7,108 @@
 
 		<div class="p-register__card-body">
 			<form class="p-register__form" [formGroup]="formulario" (ngSubmit)="onSubmit()">
-			<div class="p-register__form-group">
-				<label class="p-register__form-label" for="username">
-					Username <span class="p-register__form-label--asterisk">*</span>
-				</label>
-				<input id="username" class="p-register__form-input" type="text" formControlName="username" />
+				<div class="p-register__form-group">
+					<label class="p-register__form-label" for="username">
+						Username <span class="p-register__form-label--asterisk">*</span>
+					</label>
+					<input id="username" class="p-register__form-input" type="text" formControlName="username" />
 
-				@if (formulario.get('username')?.touched && formulario.get('username')?.invalid) {
+					@if (formulario.get('username')?.touched && formulario.get('username')?.invalid) {
 					<small class="p-register__form-error">
 						@if (formulario.get('username')?.errors?.['required']) { El username es obligatorio }
 						@if (formulario.get('username')?.errors?.['minlength']) { Mínimo 3 caracteres }
 						@if (formulario.get('username')?.errors?.['notUnique']) { Este username ya existe }
 					</small>
-				}
-			</div>
+					}
+				</div>
 
-			<div class="p-register__form-group">
-				<label class="p-register__form-label" for="email">
-					Email <span class="p-register__form-label--asterisk">*</span>
-				</label>
-				<input id="email" class="p-register__form-input" type="email" formControlName="email" />
+				<div class="p-register__form-group">
+					<label class="p-register__form-label" for="email">
+						Email <span class="p-register__form-label--asterisk">*</span>
+					</label>
+					<input id="email" class="p-register__form-input" type="email" formControlName="email" />
 
-				@if (formulario.get('email')?.touched && formulario.get('email')?.invalid) {
+					@if (formulario.get('email')?.touched && formulario.get('email')?.invalid) {
 					<small class="p-register__form-error">
 						@if (formulario.get('email')?.errors?.['required']) { El email es obligatorio }
 						@if (formulario.get('email')?.errors?.['email']) { Formato de email no válido }
 						@if (formulario.get('email')?.errors?.['notUnique']) { Este email ya existe }
 					</small>
-				}
-			</div>
+					}
+				</div>
 
-			<div class="p-register__form-group">
-				<label class="p-register__form-label" for="password">
-					Password <span class="p-register__form-label--asterisk">*</span>
-				</label>
-				<input id="password" class="p-register__form-input" type="password" formControlName="password" />
+				<div class="p-register__form-group">
+					<label class="p-register__form-label" for="password">
+						Password <span class="p-register__form-label--asterisk">*</span>
+					</label>
+					<div class="p-register__form-password-wrap">
+						<input id="password" class="p-register__form-input p-register__form-input--with-toggle"
+							[type]="showNewPassword ? 'text' : 'password'" formControlName="password"
+							autocomplete="new-password" />
+						<button class="p-register__form-password-toggle" type="button"
+							(click)="togglePasswordVisibility('new')"
+							[attr.aria-label]="showNewPassword ? 'Ocultar nueva contraseña' : 'Mostrar nueva contraseña'"
+							[attr.aria-pressed]="showNewPassword">
+							<span class="material-icons" aria-hidden="true">{{ showNewPassword ? 'visibility' : 'visibility_off' }}</span>
+						</button>
+					</div>
 
-				@if (formulario.get('password')?.touched && formulario.get('password')?.invalid) {
+					@if (formulario.get('password')?.touched && formulario.get('password')?.invalid) {
 					<small class="p-register__form-error">
 						@if (formulario.get('password')?.errors?.['required']) { La contraseña es obligatoria }
 						@if (formulario.get('password')?.errors?.['minlength']) { Mínimo 6 caracteres }
 					</small>
-				}
-			</div>
+					}
+				</div>
 
-			<div class="p-register__form-group">
-				<label class="p-register__form-label" for="confirmPassword">
-					Repite la password <span class="p-register__form-label--asterisk">*</span>
-				</label>
-				<input id="confirmPassword" class="p-register__form-input" type="password" formControlName="confirmPassword" />
+				<div class="p-register__form-group">
+					<label class="p-register__form-label" for="confirmPassword">
+						Repite la password <span class="p-register__form-label--asterisk">*</span>
+					</label>
+					<div class="p-register__form-password-wrap">
+						<input
+							id="confirmPassword"
+							class="p-register__form-input p-register__form-input--with-toggle"
+							[type]="showConfirmPassword ? 'text' : 'password'"
+							formControlName="confirmPassword"
+							autocomplete="new-password"
+						/>
+						<button
+							class="p-register__form-password-toggle"
+							type="button"
+							(click)="togglePasswordVisibility('confirm')"
+							[attr.aria-label]="showConfirmPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'"
+							[attr.aria-pressed]="showConfirmPassword"
+						>
+							<span class="material-icons" aria-hidden="true">{{ showConfirmPassword ? 'visibility' : 'visibility_off' }}</span>
+						</button>
+					</div>
 
-				@if (formulario.get('confirmPassword')?.touched && formulario.get('confirmPassword')?.hasError('required')) {
+					@if (formulario.get('confirmPassword')?.touched &&
+					formulario.get('confirmPassword')?.hasError('required')) {
 					<small class="p-register__form-error">Repite la contraseña</small>
-				}
-				@if (formulario.hasError('passwordMismatch') && (formulario.get('confirmPassword')?.touched || formulario.get('password')?.touched)) {
+					}
+					@if (formulario.hasError('passwordMismatch') && (formulario.get('confirmPassword')?.touched ||
+					formulario.get('password')?.touched)) {
 					<small class="p-register__form-error">Las contraseñas no coinciden</small>
-				}
-			</div>
+					}
+				</div>
 
-			@if (submitError) {
+				@if (submitError) {
 				<p class="p-register__form-error-general">{{ submitError }}</p>
-			}
+				}
 
-			<div class="p-register__form-actions">
-				<button c-boton class="p-register__button" type="submit" importancia="secundaria" [disabled]="formulario.invalid || submitting">
-					Registrarse
-				</button>
+				<div class="p-register__form-actions">
+					<button c-boton class="p-register__button" type="submit" importancia="secundaria"
+						[disabled]="formulario.invalid || submitting">
+						Registrarse
+					</button>
 
-				<button c-boton class="p-register__button" type="button" importancia="primaria" (click)="onCancelar()" [disabled]="submitting">
-					Volver  Inicio
-				</button>
-			</div>
+					<button c-boton class="p-register__button" type="button" importancia="primaria"
+						(click)="onCancelar()" [disabled]="submitting">
+						Volver Inicio
+					</button>
+				</div>
 			</form>
 
 			<p class="p-register__login">

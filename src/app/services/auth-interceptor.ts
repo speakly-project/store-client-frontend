@@ -16,6 +16,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
     const isCloudinaryRequest = req.url.includes('api.cloudinary.com');
     const isBackendRequest = req.url.includes('localhost:8080/api/speakly');
+    const isPasswordChangeRequest = req.url.includes('/users/passwd');
 
     const authReq = token && !isCloudinaryRequest
       ? req.clone({
@@ -25,7 +26,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
     return next.handle(authReq).pipe(
       catchError((error) => {
-        if (isBackendRequest && (error.status === 401 || error.status === 403)) {
+        if (!isPasswordChangeRequest && isBackendRequest && (error.status === 401 || error.status === 403)) {
           this.router.navigate(['/login']);
         }
         return throwError(() => error);

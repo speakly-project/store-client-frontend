@@ -39,14 +39,18 @@
 	--p-register-login-link-color: var(--mlt-sys-secondary-color-4);
 	--p-register-login-link-font-weight: var(--mlt-sys-font-weight-500);
 	--p-register-login-link-hover-color: var(--mlt-sys-secondary-color-5);
-
+	--p-register-form-password-toggle-right: var(--mlt-sys-padding-10);
+	--p-register-form-password-toggle-padding: var(--mlt-sys-padding-4);
+	--p-register-form-password-toggle-border-radius: var(--mlt-sys-border-radius-8);
+	--p-register-form-password-toggle-icon-font-size: var(--mlt-sys-font-size-20);
+	
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	min-height: calc(100vh - 80px);
 	padding: var(--p-register-padding);
 	background-color: var(--p-register-bg-color);
-
+	
 	&__card {
 		background: var(--p-register-card-bg);
 		border: 1px solid rgba(0, 0, 0, 0.125);
@@ -170,4 +174,43 @@
 		}
 	}
 
+	&__form-password-wrap {
+		position: relative;
+		display: grid;
+	}
+
+	&__form-input--with-toggle {
+		padding-right: calc(var(--mlt-sys-padding-12) + var(--mlt-sys-width-38));
+	}
+
+	&__form-password-toggle {
+		position: absolute;
+		top: 50%;
+		right: var(--p-register-form-password-toggle-right);
+		transform: translateY(-50%);
+		border: 0;
+		background: transparent;
+		padding: var(--p-register-form-password-toggle-padding);
+		cursor: pointer;
+		color: rgba(0, 0, 0, 0.6);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: var(--p-register-form-password-toggle-border-radius);
+	}
+
+	&__form-password-toggle:hover {
+		color: rgba(0, 0, 0, 0.8);
+		background: rgba(0, 0, 0, 0.04);
+	}
+
+	&__form-password-toggle:focus-visible {
+		outline: 2px solid rgba(31, 111, 235, 0.35);
+		outline-offset: 2px;
+	}
+
+	&__form-password-toggle .material-icons {
+		font-size: var(--p-register-form-password-toggle-icon-font-size);
+		line-height: 1;
+	}
 }

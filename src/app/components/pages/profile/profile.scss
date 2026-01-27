@@ -49,6 +49,10 @@
 	--p-profile-actions-gap: var(--mlt-sys-gap-10);
 	--p-profile-actions-margin-top: var(--mlt-sys-margin-6);
 	--p-profile-button-width: var(--mlt-sys-width-100p);
+	--p-profile-form-password-toggle-right: var(--mlt-sys-padding-10);
+	--p-profile-form-password-toggle-padding: var(--mlt-sys-padding-4);
+	--p-profile-form-password-toggle-border-radius: var(--mlt-sys-border-radius-8);
+	--p-profile-form-password-toggle-icon-font-size: var(--mlt-sys-font-size-20);
 
 	display: block;
 	min-height: calc(100vh - 80px);
@@ -99,6 +103,11 @@
 		gap: var(--p-profile-field-gap);
 	}
 
+	&__password-wrap {
+		position: relative;
+		display: inherit;
+	}
+
 	&__label {
 		font-size: var(--p-profile-label-font-size);
 		font-weight: var(--p-profile-label-font-weight);
@@ -116,6 +125,42 @@
 		outline: none;
 		font-size: var(--p-profile-input-font-size);
 		transition: border-color 120ms ease, box-shadow 120ms ease;
+	}
+
+	&__input--with-toggle {
+		--p-profile-input-with-toggle-padding-right: calc(var(--mlt-sys-padding-12) + var(--mlt-sys-width-38));
+		padding-right: var(--p-profile-input-with-toggle-padding-right);
+	}
+
+	&__password-toggle {
+		position: absolute;
+		top: 50%;
+		right: var(--p-profile-form-password-toggle-right);
+		transform: translateY(-50%);
+		border: 0;
+		background: transparent;
+		padding: var(--p-profile-form-password-toggle-padding);
+		cursor: pointer;
+		color: rgba(0, 0, 0, 0.6);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: var(--p-profile-form-password-toggle-border-radius);
+	}
+
+	&__password-toggle:hover {
+		color: rgba(0, 0, 0, 0.8);
+		background: rgba(0, 0, 0, 0.04);
+	}
+
+	&__password-toggle:focus-visible {
+		outline: 2px solid rgba(31, 111, 235, 0.35);
+		outline-offset: 2px;
+	}
+
+	&__password-toggle .material-icons {
+		font-size: var(--p-profile-form-password-toggle-icon-font-size);
+		line-height: 1;
 	}
 
 	&__input:focus {
@@ -226,6 +271,25 @@
 	&__button {
 		width: var(--p-profile-button-width);
 
+	}
+
+	&__divider {
+		height: 1px;
+		background: rgba(0, 0, 0, 0.08);
+		margin: var(--mlt-sys-margin-16) 0;
+	}
+
+	&__section-title {
+		margin: var(--mlt-sys-margin-0);
+		font-size: var(--mlt-sys-font-size-16);
+		font-weight: var(--mlt-sys-font-weight-700);
+		color: #172b4d;
+	}
+
+	&__section-subtitle {
+		margin: var(--mlt-sys-margin-6) 0 var(--mlt-sys-margin-12);
+		font-size: var(--mlt-sys-font-size-13);
+		opacity: 0.9;
 	}
 }
 
