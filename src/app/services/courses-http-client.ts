@@ -22,18 +22,49 @@ export class CoursesHttpClient {
     urlUsers = "http://localhost:8080/api/speakly/users";
 
 
-    getAllCourses() {
-        return this.Mihttp.get<{ data: CourseInterface[] }>(this.urlCourses + `?pageSize=100`).pipe(
-            map(response => response.data)
+    getCourses(params?: { 
+        language?: string; 
+        level?: string; 
+        minPrice?: number; 
+        maxPrice?: number; 
+        sortBy?: string; 
+        pageNumber?: number; 
+        pageSize?: number 
+    }): Observable<{ data: CourseInterface[]; totalElements?: number; totalPages?: number; pageNumber?: number; pageSize?: number; }> {
+        const queryParams = new URLSearchParams();
+        
+        if (params?.language) queryParams.append('language', params.language);
+        if (params?.level) queryParams.append('level', params.level);
+        if (params?.minPrice !== undefined) queryParams.append('minPrice', params.minPrice.toString());
+        if (params?.maxPrice !== undefined) queryParams.append('maxPrice', params.maxPrice.toString());
+        if (params?.sortBy) queryParams.append('sortBy', params.sortBy);
+        queryParams.append('pageNumber', (params?.pageNumber ?? 1).toString());
+        queryParams.append('pageSize', (params?.pageSize ?? 15).toString());
+        
+        const url = `${this.urlCourses}?${queryParams.toString()}`;
+        return this.Mihttp.get<{ data: CourseInterface[]; totalElements?: number; totalPages?: number; pageNumber?: number; pageSize?: number; }>(url).pipe(
+            map(response => ({
+                data: response?.data ?? [],
+                totalElements: response?.totalElements ?? undefined,
+                totalPages: response?.totalPages ?? undefined,
+                pageNumber: response?.pageNumber ?? undefined,
+                pageSize: response?.pageSize ?? undefined,
+            }))
         );
     }
-    getAllCoursesWithTeachers() {
-        return this.Mihttp.get<{ data: CourseInterface[] }>(this.urlCoursesWithTeachers + `?pageSize=100`).pipe(
-            map(response => response.data)
+
+    getAllCourses(): Observable<CourseInterface[]> {
+        return this.getCourses({ pageSize: 100 }).pipe(map(res => res.data));
+    }
+
+    getAllCoursesWithTeachers(): Observable<CourseInterface[]> {
+        return this.Mihttp.get<{ data: CourseInterface[] }>(`${this.urlCoursesWithTeachers}?pageSize=100`).pipe(
+            map(response => response.data || [])
         );
     }
-    getCourseById(id: number) {
-        return this.Mihttp.get(this.urlCourses + '/' + id);
+
+    getCourseById(id: number): Observable<CourseInterface> {
+        return this.Mihttp.get<CourseInterface>(`${this.urlCourses}/${id}`);
     }
     // deleteCourse(id: number) {
     //     return this.Mihttp.delete(this.urlCourses + '/' + id);
@@ -44,14 +75,15 @@ export class CoursesHttpClient {
     // createCourse(course: any) {
     //     return this.Mihttp.post(this.urlCourses, course);
     // }
-    getAllLanguages() {
-        return this.Mihttp.get<{ data: LanguageInterface[] }>(this.urlLanguages + `?pageSize=100`).pipe(
-            map(response => response.data)
+    getAllLanguages(): Observable<LanguageInterface[]> {
+        return this.Mihttp.get<{ data: LanguageInterface[] }>(`${this.urlLanguages}?pageSize=100`).pipe(
+            map(response => response.data || [])
         );
     }
-    getAllLevels() {
-        return this.Mihttp.get<{ data: LevelInterface[] }>(this.urlLevels + `?pageSize=100`).pipe(
-            map(response => response.data)
+
+    getAllLevels(): Observable<LevelInterface[]> {
+        return this.Mihttp.get<{ data: LevelInterface[] }>(`${this.urlLevels}?pageSize=100`).pipe(
+            map(response => response.data || [])
         );
     }
     getAllTeachers() {

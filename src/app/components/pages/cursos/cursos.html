@@ -5,54 +5,75 @@
         </div>
     </div>
 
-    <div class="filters-row">
-        <div class="filters">
-            <select>
-                <option>Language</option>
-                <option>English</option>
-            </select>
-            <select>
-                <option>Level</option>
-                <option>A1</option>
-                <option>A2</option>
-                <option>B1</option>
-                
-            </select>
-            <select>
-                <option>Price Range</option>
-            </select>
-            <select>
-                <option>Rating</option>
-            </select>
+    <div class="p-cursos__filters-row">
+        <div class="c-filters">
+            <div class="c-filters__group">
+                <label class="c-filters__label">Language</label>
+                <select class="c-filters__select" #language (change)="fetchCourses(language.value, level.value, minPrice.toString(), maxPrice.toString(), sortBy.value)">
+                    <option value="">Select</option>
+                    @for (lang of languages; track lang.code) {
+                    <option [value]="lang.name">{{ lang.name }}</option>
+                    }
+                </select>
+            </div>
+            <div class="c-filters__group">
+                <label class="c-filters__label">Level</label>
+                <select class="c-filters__select" #level (change)="fetchCourses(language.value, level.value, minPrice.toString(), maxPrice.toString(), sortBy.value)">
+                    <option value="">Select</option>
+                    @for (lvl of levels; track lvl.name) {
+                    <option [value]="lvl.name">{{ lvl.name }}</option>
+                    }
+                </select>
+            </div>
+            <div class="c-filters__group c-filters__group--price">
+                <label class="c-filters__label">Price Range</label>
+                <div class="c-filters__price-wrapper">
+                    <div class="c-filters__price-inputs">
+                        <input class="c-filters__price-input" type="number" [(ngModel)]="minPrice" (blur)="updateMinPrice(minPrice)" [min]="priceRange.min" [max]="priceRange.max" />
+                        <span class="c-filters__price-separator">-</span>
+                        <input class="c-filters__price-input" type="number" [(ngModel)]="maxPrice" (blur)="updateMaxPrice(maxPrice)" [min]="priceRange.min" [max]="priceRange.max" />
+                    </div>
+                    <div class="c-filters__slider">
+                        <mat-slider [min]="priceRange.min" [max]="priceRange.max" [step]="1">
+                            <input matSliderStartThumb [(ngModel)]="minPrice" (ngModelChange)="updateMinPrice($any($event))" />
+                            <input matSliderEndThumb [(ngModel)]="maxPrice" (ngModelChange)="updateMaxPrice($any($event))" />
+                        </mat-slider>
+                    </div>
+                </div>
+            </div>
+            <div class="c-filters__group">
+                <label class="c-filters__label">Order by</label>
+                <select class="c-filters__select" #sortBy (change)="fetchCourses(language.value, level.value, minPrice.toString(), maxPrice.toString(), sortBy.value)">
+                    <option value="">Select</option>
+                    <option value="ascPrice">Ascending price</option>
+                    <option value="descPrice">Descending price</option>
+                </select>
+            </div>
+            <button class="c-filters__button" (click)="fetchCourses(language.value, level.value, minPrice.toString(), maxPrice.toString(), sortBy.value)">Search</button>
         </div>
     </div>
 
-    <div class="results-row">
-        <div class="results-count">1,248 courses found</div>
-
-        <div class="sort-by">
-            Sort by:
-            <select>
-                <option>Best Selling</option>
-                <option>Ascending price</option>
-                <option>Descending price</option>
-            </select>
-        </div>
+    <div class="p-cursos__results">
+        <div class="p-cursos__results-count">{{ totalElements || courses.length }} courses found</div>
     </div>
 
 
 
-    <div class="cursos-grid">
+    <div class="p-cursos__grid">
         @for (c of courses; track $index) {
         <c-curso [course]="c"></c-curso>
         }
     </div>
 
-    <div class="pagination">
-        <button>&lt;</button>
-        <button class="active">1</button>
-        <button>2</button>
-        <button>3</button>
-        <button>&gt;</button>
+    @if (totalPages > 1) {
+    <div class="p-cursos__pagination">
+        <button class="p-cursos__pagination-button" (click)="goToPage(1)" [disabled]="currentPage === 1">&lt;&lt;</button>
+        <button class="p-cursos__pagination-button" (click)="prevPage()" [disabled]="currentPage === 1">&lt;</button>
+        @for (p of pages; track p) {
+        <button class="p-cursos__pagination-button" [class.p-cursos__pagination-button--active]="currentPage === p" (click)="goToPage(p)">{{ p }}</button>
+        }
+        <button class="p-cursos__pagination-button" (click)="nextPage()" [disabled]="currentPage === totalPages">&gt;</button>
+        <button class="p-cursos__pagination-button" (click)="goToPage(totalPages)" [disabled]="currentPage === totalPages">&gt;&gt;</button>
     </div>
+    }
 </section>

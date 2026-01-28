@@ -1,14 +1,11 @@
 <div class="curso-card">
     <div class="curso-card__media">
-        <img [src]="course.image || 'assets/default-course.jpg'" alt="{{course.title}}">
+        <img [src]="course.image || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLPK9PCyWnpPHFqAyv4i2vGIq2gR5w2A5yuA&s'" alt="{{course.title}}">
     </div>
     <div class="curso-card__body">
-        <div class="curso-card__teacher">{{course.teacher}}</div>
+        <div class="curso-card__teacher">{{course.teacher.username}}</div>
         <h3 class="curso-card__title">{{course.title}}</h3>
-        <div class="curso-card__desc">{{ truncate(course.description, 100) }}</div>
-        <div class="curso-card__meta">
-            <span class="stars">⭐ {{course.rating || '4.9'}}</span>
-        </div>
+        <div class="curso-card__desc">{{ truncate(course.description, 130) }}</div>
         <div class="curso-card__info">
             <span c-tag="precio">{{ course.language }}</span>
             <span c-tag="nivel">{{ course.level }}</span>
