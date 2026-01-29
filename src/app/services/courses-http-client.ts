@@ -65,7 +65,9 @@ export class CoursesHttpClient {
     }
 
     getCourseById(id: number): Observable<CourseInterface> {
-        return this.Mihttp.get<CourseInterface>(`${this.urlCourses}/${id}`);
+        return this.Mihttp
+            .get<CourseInterface | { data: CourseInterface }>(`${this.urlCourses}/${id}`)
+            .pipe(map((res: any) => (res && typeof res === 'object' && 'data' in res ? res.data : res)));
     }
     // deleteCourse(id: number) {
     //     return this.Mihttp.delete(this.urlCourses + '/' + id);

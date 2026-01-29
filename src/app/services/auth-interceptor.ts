@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, Observable, throwError } from 'rxjs';
 import { AuthService } from './auth-service';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -10,12 +11,13 @@ import { AuthService } from './auth-service';
 export class AuthInterceptor implements HttpInterceptor {
   router = inject(Router);
   authService = inject(AuthService);
+  apiUrl = `${environment.apiUrl}api/speakly`;
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = this.authService.getToken();
 
     const isCloudinaryRequest = req.url.includes('api.cloudinary.com');
-    const isBackendRequest = req.url.includes('localhost:8080/api/speakly');
+    const isBackendRequest = req.url.includes(this.apiUrl);
     const isPasswordChangeRequest = req.url.includes('/users/passwd');
 
     const authReq = token && !isCloudinaryRequest

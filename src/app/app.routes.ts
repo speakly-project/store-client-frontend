@@ -9,7 +9,7 @@ import { Curso } from './components/pages/curso/curso';
 
 export const routes: Routes = [
     { path: '', component: Cursos },
-    { path: 'course', component: Curso },
+    { path: 'course/:id', component: Curso },
     { path: 'register', component: Register },
     { path: 'login', component: Login },
     { path: 'profile', component: Profile },

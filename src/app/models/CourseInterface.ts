@@ -1,4 +1,5 @@
 import { TeacherInterface } from './TeacherInterface';
+import { UserInterface } from './UserInterface';
 
 export interface CourseInterface {
     id: number;
@@ -7,7 +8,7 @@ export interface CourseInterface {
     price: number;
     language: string;
     level: string;
-    teacher: TeacherInterface;
+    teacher: UserInterface;
     duration: number;
     createdAt: string;
 }

@@ -10,7 +10,7 @@
             <div class="c-filters__group">
                 <label class="c-filters__label">Language</label>
                 <select class="c-filters__select" #language (change)="fetchCourses(language.value, level.value, minPrice.toString(), maxPrice.toString(), sortBy.value)">
-                    <option value="">Select</option>
+                    <option value="">All</option>
                     @for (lang of languages; track lang.code) {
                     <option [value]="lang.name">{{ lang.name }}</option>
                     }
@@ -19,7 +19,7 @@
             <div class="c-filters__group">
                 <label class="c-filters__label">Level</label>
                 <select class="c-filters__select" #level (change)="fetchCourses(language.value, level.value, minPrice.toString(), maxPrice.toString(), sortBy.value)">
-                    <option value="">Select</option>
+                    <option value="">All</option>
                     @for (lvl of levels; track lvl.name) {
                     <option [value]="lvl.name">{{ lvl.name }}</option>
                     }
@@ -44,7 +44,7 @@
             <div class="c-filters__group">
                 <label class="c-filters__label">Order by</label>
                 <select class="c-filters__select" #sortBy (change)="fetchCourses(language.value, level.value, minPrice.toString(), maxPrice.toString(), sortBy.value)">
-                    <option value="">Select</option>
+                    <option value="">All</option>
                     <option value="ascPrice">Ascending price</option>
                     <option value="descPrice">Descending price</option>
                 </select>
