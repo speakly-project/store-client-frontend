@@ -35,3 +35,20 @@
     line-height: 1;
     vertical-align: baseline;
 }
+
+[c-tag="lang"] {
+    --c-tag-letter-color: var(--mlt-sys-primary-color-9);
+    --c-tag-bg-color: var(--mlt-sys-secondary-color-5);
+
+    display: inline-block;
+    padding: var(--c-tag-padding);
+    font-size: var(--c-tag-font-size);
+    font-weight: var(--c-tag-font-weight);
+    border-radius: var(--c-tag-border-radius);
+    background-color: var(--c-tag-bg-color);
+    color: var(--c-tag-letter-color);
+    text-transform: uppercase;
+    white-space: nowrap;
+    line-height: 1;
+    vertical-align: baseline;
+}
