@@ -22,7 +22,7 @@ export class AuthService {
 
       this.httpClient.getUserByUsername(username).subscribe({
         next: (user) => {
-          if (user.role !== 'USER') {
+          if (user.role !== 'USER' && user.role !== 'ADMIN') {
             observer.error('Acceso denegado: no es un usuario registrado.');
             return;
           }
@@ -86,7 +86,7 @@ export class AuthService {
     }
 
     return this.httpClient.getCurrentUserFromToken().pipe(
-      map(user => user.role === 'USER'),
+      map(user => user.role === 'USER' || user.role === 'ADMIN'),
       catchError(() => of(false))
     );
   }

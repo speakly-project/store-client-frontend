@@ -114,7 +114,7 @@ export class CoursesHttpClient {
     }
 
     getUploadSignature() {
-        return this.Mihttp.get<any>('http://localhost:8080/speakly/upload/signature');
+        return this.Mihttp.get<any>(`${this.apiUrl}/upload/signature`);
     }
 
     uploadProfilePicture(file: File): Observable<string> {
