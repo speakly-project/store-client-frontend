@@ -1,0 +1,259 @@
+<div class="p-curso">
+    <div class="p-curso__summary">
+        <div class="p-curso__summary-container">
+            <div class="p-curso__summary-grid">
+                <div class="p-curso__container-left">
+                    <div class="p-curso__tag">
+                        <span c-tag="precio" data-slot="badge" class="">ITALIAN</span>
+                    </div>
+                    <h1 class="p-curso__curso-title">Master Conversational Italian</h1>
+                    <p class="p-curso__description">Domina este idioma con lecciones interactivas, práctica de
+                        conversación y ejercicios de gramática diseñados por expertos.</p>
+                    <div class="p-curso__time-language">
+                        <div class="p-curso__time">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="p-curso__svg">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                            <span>10 hrs</span>
+                        </div>
+                        <div class="p-curso__language">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="p-curso__svg">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path>
+                                <path d="M2 12h20"></path>
+                            </svg>
+                            <span>Español</span>
+                        </div>
+                    </div>
+                    <p class="p-curso__created-by">Creado por <span class="p-curso__creator-name">María Pérez</span></p>
+                </div>
+
+                <div class="p-curso__summary-right">
+                    <div class="p-curso__container-right-inner">
+                        <div class="p-curso__img-container">
+                            <img src="https://images.unsplash.com/photo-1759884248009-92c5e957708e?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxvbmxpbmUlMjBjb3Vyc2UlMjBsZWFybmluZyUyMHN0dWRlbnQlMjBsYXB0b3B8ZW58MXx8fHwxNzY5NTg5MDg1fDA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080&amp;utm_source=figma&amp;utm_medium=referral"
+                                alt="Course preview" class="p-curso__img-content">
+                        </div>
+                        <div class="p-curso__container-right-content">
+                            <div class="p-curso__price">
+                                <span class="p-curso__price-amount">24€</span>
+                            </div>
+                            <button data-slot="button" class="p-curso__buy">Comprar ahora</button>
+                            <button data-slot="button" class="p-curso__add-to-cart">Agregar al carrito</button>
+                            <div class="p-curso__includes">
+                                <h4 class="p-curso__includes-title">Este curso incluye:</h4>
+                                <ul class="p-curso__includes-list">
+                                    <li class="p-curso__includes-item"><span>✓</span><span>Acceso de por vida</span></li>
+                                    <li class="p-curso__includes-item"><span>✓</span><span>Certificado de finalización</span>
+                                    </li>
+                                    <li class="p-curso__includes-item"><span>✓</span><span>Recursos descargables</span></li>
+                                    <li class="p-curso__includes-item"><span>✓</span><span>Acceso en móvil y TV</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="p-curso__desc">
+        <div class="p-curso__grid">
+            <div class="p-curso__desc-container">
+                <div dir="ltr" data-orientation="horizontal" data-slot="tabs" class="p-curso__botons-desc">
+                    <div role="tablist" aria-orientation="horizontal" data-slot="tabs-list"
+                        class="p-curso__botons" tabindex="0" data-orientation="horizontal" style="outline: none;">
+                        <button type="button" role="tab" (click)="setTab('overview')"
+                            [attr.aria-selected]="activeTab === 'overview'"
+                            [attr.data-state]="activeTab === 'overview' ? 'active' : 'inactive'"
+                            [attr.tabindex]="activeTab === 'overview' ? 0 : -1"
+                            aria-controls="radix-:r0:-content-overview" id="radix-:r0:-trigger-overview"
+                            data-slot="tabs-trigger"
+                            class="p-curso__boton-desc" data-radix-collection-item="">Descripción</button>
+                        <button type="button" role="tab" (click)="setTab('instructor')"
+                            [attr.aria-selected]="activeTab === 'instructor'"
+                            [attr.data-state]="activeTab === 'instructor' ? 'active' : 'inactive'"
+                            [attr.tabindex]="activeTab === 'instructor' ? 0 : -1"
+                            aria-controls="radix-:r0:-content-instructor" id="radix-:r0:-trigger-instructor"
+                            data-slot="tabs-trigger"
+                            class="p-curso__boton-teacher" data-radix-collection-item="">Instructor</button>
+                    </div>
+                    <div [attr.data-state]="activeTab === 'overview' ? 'active' : 'inactive'"
+                        data-orientation="horizontal" role="tabpanel" aria-labelledby="radix-:r0:-trigger-overview"
+                        id="radix-:r0:-content-overview" tabindex="0" data-slot="tabs-content"
+                        class="p-curso__container-desc-course-teacher"
+                        [hidden]="activeTab !== 'overview'">
+                        <div data-slot="card" class="p-curso__container-desc">
+                            <h2 class="p-curso__desc-title">Descripción del curso</h2>
+                            <div class="p-curso__desc-body">
+                                <p>
+                                    Este curso completo te llevará desde un nivel básico hasta poder mantener
+                                    conversaciones
+                                    fluidas en el idioma. Aprenderás con una metodología probada que combina teoría,
+                                    práctica y ejercicios interactivos.
+                                </p>
+                                <p>
+                                    Nuestro enfoque se centra en situaciones reales de comunicación, para que puedas
+                                    aplicar
+                                    lo aprendido inmediatamente en tu vida cotidiana, viajes o entorno profesional.
+                                </p>
+
+                                <h3>¿Qué aprenderás?</h3>
+                                <ul>
+                                    <li>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <circle cx="12" cy="12" r="10"></circle>
+                                            <path d="m9 12 2 2 4-4"></path>
+                                        </svg>
+                                        <span>Comprensión y producción oral desde nivel básico a intermedio</span>
+                                    </li>
+                                    <li>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <circle cx="12" cy="12" r="10"></circle>
+                                            <path d="m9 12 2 2 4-4"></path>
+                                        </svg>
+                                        <span>Gramática esencial explicada de manera clara y práctica</span>
+                                    </li>
+                                    <li>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <circle cx="12" cy="12" r="10"></circle>
+                                            <path d="m9 12 2 2 4-4"></path>
+                                        </svg>
+                                        <span>Vocabulario útil para situaciones cotidianas y profesionales</span>
+                                    </li>
+                                    <li>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <circle cx="12" cy="12" r="10"></circle>
+                                            <path d="m9 12 2 2 4-4"></path>
+                                        </svg>
+                                        <span>Pronunciación correcta con ejercicios de audio</span>
+                                    </li>
+                                    <li>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <circle cx="12" cy="12" r="10"></circle>
+                                            <path d="m9 12 2 2 4-4"></path>
+                                        </svg>
+                                        <span>Técnicas de aprendizaje efectivo para continuar mejorando</span>
+                                    </li>
+                                </ul>
+
+                                <h3>¿Para quién es este curso?</h3>
+                                <ul>
+                                    <li><span>•</span><span>Principiantes que quieren
+                                            aprender desde cero</span></li>
+                                    <li><span>•</span><span>Estudiantes que necesitan
+                                            reforzar sus bases</span></li>
+                                    <li><span>•</span><span>Profesionales que requieren
+                                            el idioma para su trabajo</span></li>
+                                    <li><span>•</span><span>Viajeros que quieren
+                                            comunicarse en el extranjero</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div [attr.data-state]="activeTab === 'instructor' ? 'active' : 'inactive'"
+                        data-orientation="horizontal" role="tabpanel" aria-labelledby="radix-:r0:-trigger-instructor"
+                        id="radix-:r0:-content-instructor" tabindex="0" data-slot="tabs-content"
+                        class="p-curso__container-desc-course-teacher"
+                        [hidden]="activeTab !== 'instructor'">
+                        <div data-slot="card" class="p-curso__container-teacher">
+                            <div class="p-curso__teacher-name">
+                                <div class="p-curso__teacher-name-icon">
+                                    MP</div>
+                                <div>
+                                    <h2 class="p-curso__teacher">
+                                        María Pérez</h2>
+                                    <p class="p-curso__teacher-title">
+                                        Profesora certificada de idiomas</p>
+                                    <div class="p-curso__teacher-rating">
+                                        <div class="p-curso__teacher-rating-item">
+                                            <span class="p-curso__teacher-rating-star">★</span>
+                                            <span class="p-curso__teacher-rating-value">4.8</span>
+                                            <span>Valoración</span>
+                                        </div><span>•</span><span>12,450
+                                            estudiantes</span><span>•</span><span>8
+                                            cursos</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-curso__teacher-desc">
+                                <p>
+                                    Soy María Pérez, profesora certificada con más de 10 años de experiencia enseñando
+                                    idiomas a estudiantes de todo el mundo. He ayudado a miles de personas a alcanzar
+                                    sus objetivos lingüísticos, desde principiantes absolutos hasta estudiantes
+                                    avanzados.</p>
+                                <p>
+                                    Mi pasión es hacer que el aprendizaje de idiomas sea accesible, divertido y
+                                    efectivo. Creo firmemente que cualquier persona puede aprender un nuevo idioma con
+                                    el método adecuado y la práctica constante.</p>
+                                <p>
+                                    He diseñado este curso basándome en técnicas pedagógicas probadas y mi experiencia
+                                    trabajando con miles de estudiantes. Cada lección está cuidadosamente estructurada
+                                    para maximizar tu aprendizaje y mantener tu motivación.</p>
+                                <h3 class="p-curso__teacher-experience">
+                                    Experiencia y certificaciones</h3>
+                                <ul class="p-curso__teacher-experience-list">
+                                    <li class="p-curso__teacher-experience-item">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="p-curso__teacher-experience-icon">
+                                            <circle cx="12" cy="12" r="10"></circle>
+                                            <path d="m9 12 2 2 4-4"></path>
+                                        </svg><span>Certificado
+                                            en Enseñanza de Idiomas (CELTA)</span>
+                                    </li>
+                                    <li class="p-curso__teacher-experience-item">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="p-curso__teacher-experience-icon">
+                                            <circle cx="12" cy="12" r="10"></circle>
+                                            <path d="m9 12 2 2 4-4"></path>
+                                        </svg><span>Máster
+                                            en Lingüística Aplicada</span>
+                                    </li>
+                                    <li class="p-curso__teacher-experience-item">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="p-curso__teacher-experience-icon">
+                                            <circle cx="12" cy="12" r="10"></circle>
+                                            <path d="m9 12 2 2 4-4"></path>
+                                        </svg><span>10+
+                                            años de experiencia en enseñanza online</span>
+                                    </li>
+                                    <li class="p-curso__teacher-experience-item">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="p-curso__teacher-experience-icon">
+                                            <circle cx="12" cy="12" r="10"></circle>
+                                            <path d="m9 12 2 2 4-4"></path>
+                                        </svg><span>Hablante
+                                            nativa con experiencia internacional</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

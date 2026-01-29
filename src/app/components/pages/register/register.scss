@@ -1,5 +1,4 @@
 .p-register {
-	display: block;
 	--p-register-padding: var(--mlt-sys-padding-32);
 	--p-register-bg-color: var(--mlt-sys-primary-color-9);
 	--p-register-card-bg: var(--mlt-sys-primary-color-9);
@@ -43,14 +42,20 @@
 	--p-register-form-password-toggle-padding: var(--mlt-sys-padding-4);
 	--p-register-form-password-toggle-border-radius: var(--mlt-sys-border-radius-8);
 	--p-register-form-password-toggle-icon-font-size: var(--mlt-sys-font-size-20);
+	--p-register-gap: var(--mlt-sys-gap-150);
 	
 	display: flex;
+	gap: var(--p-register-gap);
 	justify-content: center;
 	align-items: center;
 	min-height: calc(100vh - 80px);
-	padding: var(--p-register-padding);
-	background-color: var(--p-register-bg-color);
-	
+	//padding: var(--p-register-padding);
+	//background-color: var(--p-register-bg-color);
+
+	&__img-content {
+		max-width: 600px;	
+	}
+		
 	&__card {
 		background: var(--p-register-card-bg);
 		border: 1px solid rgba(0, 0, 0, 0.125);
