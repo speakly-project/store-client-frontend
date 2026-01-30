@@ -2,7 +2,7 @@
 <a class="curso-card curso-card--clickable" routerLink="/course/{{id}}"
     [attr.aria-label]="'Ver curso: ' + (course?.title ?? '')">
     <div class="curso-card__media">
-        <img [src]="course.image || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLPK9PCyWnpPHFqAyv4i2vGIq2gR5w2A5yuA&s'" alt="{{course.title}}">
+        <img [src]="getLanguageImage()" alt="{{course.title}}">
     </div>
     <div class="curso-card__body">
         <div class="curso-card__teacher">{{course.teacher.username}}</div>
@@ -21,7 +21,7 @@
 } @else {
 <div class="curso-card">
     <div class="curso-card__media">
-        <img [src]="course.image || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLPK9PCyWnpPHFqAyv4i2vGIq2gR5w2A5yuA&s'" alt="{{course.title}}">
+        <img [src]="getLanguageImage()" alt="{{course.title}}">
     </div>
     <div class="curso-card__body">
         <div class="curso-card__teacher">{{course.teacher.username}}</div>
