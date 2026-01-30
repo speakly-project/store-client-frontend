@@ -6,7 +6,7 @@ import { LanguageInterface } from '../models/LanguageInterface';
 import { LevelInterface } from '../models/LevelInterface';
 import { UserInterface } from '../models/UserInterface';
 import { TeacherInterface } from '../models/TeacherInterface';
-import { environment } from '../../environments/environment.development';
+import { environment } from '../../environments/environment';
 
 
 @Injectable({
