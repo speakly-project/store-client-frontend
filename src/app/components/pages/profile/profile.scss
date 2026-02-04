@@ -45,6 +45,7 @@
 	--p-profile-success-font-weight: var(--mlt-sys-font-weight-600);
 	--p-profile-success-gap: var(--mlt-sys-gap-12);
 	--p-profile-dismiss-font-size: var(--mlt-sys-font-size-18);
+	--p-profile-dismiss-padding: var(--mlt-sys-padding-0) var(--mlt-sys-padding-4);
 	--p-profile-dismiss-focus-border-radius: var(--mlt-sys-border-radius-6);
 	--p-profile-actions-gap: var(--mlt-sys-gap-10);
 	--p-profile-actions-margin-top: var(--mlt-sys-margin-6);
@@ -242,7 +243,7 @@
 		color: inherit;
 		font-size: var(--p-profile-dismiss-font-size);
 		line-height: 1;
-		padding: 0 4px;
+		padding: var(--p-profile-dismiss-padding);
 		cursor: pointer;
 		opacity: 0.9;
 	}
