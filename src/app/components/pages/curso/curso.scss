@@ -130,7 +130,7 @@
     --p-curso-teacher-experience-icon-size: var(--mlt-sys-width-20);
 
     &__summary {
-        padding-block: var(--p-curso-summary-padding);
+        padding-top: var(--p-curso-summary-padding);
         background: linear-gradient(to bottom, #f9fafb, #ffffff);
 
         &-container {
@@ -154,6 +154,7 @@
     @media (min-width: 1024px) {
         &__summary-grid {
             grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 48px;
         }
 
         &__container-left {
@@ -348,10 +349,12 @@
     }
 
     &__desc {
+        position: relative;
+        top: -275px;
         max-width: var(--p-curso-desc-max-width);
         margin-inline: auto;
         padding-inline: var(--p-curso-desc-padding-inline);
-        padding-block: var(--p-curso-desc-padding-block);
+        //padding-block: var(--p-curso-desc-padding-block);
 
         .p-curso__grid {
             display: grid;
@@ -362,6 +365,7 @@
         @media (min-width: 1024px) {
             .p-curso__grid {
                 grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 48px;
             }
 
             .p-curso__desc-container {
