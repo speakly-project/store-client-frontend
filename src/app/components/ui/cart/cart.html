@@ -1,0 +1,60 @@
+<div class="c-cart__backdrop" [class.c-cart__backdrop--open]="cartService.isOpen()" (click)="cartService.close()"></div>
+
+<div class="c-cart" [class.c-cart--open]="cartService.isOpen()">
+    <div class="c-cart__header">
+        <h2 class="c-cart__title">Carrito de compras</h2>
+        <button class="c-cart__close" type="button" aria-label="Cerrar carrito" (click)="cartService.close()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="lucide lucide-x c-cart__icon c-cart__icon--close">
+                <path d="M18 6 6 18"></path>
+                <path d="m6 6 12 12"></path>
+            </svg>
+        </button>
+    </div>
+
+    <div class="c-cart__body">
+        <div class="c-cart__items">
+            @if (cartService.items().length === 0) {
+            <div class="c-cart__empty">Tu carrito está vacío.</div>
+            } @else {
+            @for (item of cartService.items(); track item.course.id) {
+            <div class="c-cart__item">
+                <div class="c-cart__item-header">
+                    <h3 class="c-cart__item-title">{{ item.course.title }}</h3>
+                    <button class="c-cart__remove" type="button" aria-label="Quitar del carrito"
+                        (click)="remove(item.course.id)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-x c-cart__icon c-cart__icon--remove">
+                            <path d="M18 6 6 18"></path>
+                            <path d="m6 6 12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="c-cart__item-footer">
+                    <span class="c-cart__qty">x{{ item.quantity }}</span>
+                    <p class="c-cart__price">{{ formatMoney(item.course.price * item.quantity) }}</p>
+                </div>
+            </div>
+            }
+            }
+        </div>
+    </div>
+
+    <div class="c-cart__footer">
+        <div class="c-cart__row">
+            <span class="c-cart__label">Subtotal</span>
+            <span class="c-cart__value">{{ formatMoney(cartService.subtotal()) }}</span>
+        </div>
+        <div class="c-cart__row c-cart__row--spaced">
+            <span class="c-cart__label">IVA (21%)</span>
+            <span class="c-cart__value">{{ formatMoney(cartService.vat()) }}</span>
+        </div>
+        <div class="c-cart__row c-cart__row--total">
+            <span class="c-cart__total-label">Total</span>
+            <span class="c-cart__total-value">{{ formatMoney(cartService.total()) }}</span>
+        </div>
+        <button class="c-cart__checkout" type="button" (click)="goToPayment()" [disabled]="cartService.items().length === 0">Proceder al pago</button>
+    </div>
+</div>

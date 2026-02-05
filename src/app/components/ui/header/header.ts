@@ -2,6 +2,7 @@ import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Boton } from "../c-boton/c-boton";
 import { AuthService } from '../../../services/auth-service';
+import { CartService } from '../../../services/cart-service';
 
 @Component({
   selector: 'c-header',
@@ -15,7 +16,10 @@ export class Header {
   isMenuOpen = false;
   @ViewChild('menuRoot', { static: false }) menuRoot?: ElementRef<HTMLElement>;
 
-  constructor(public authService: AuthService) {}
+  constructor(
+    public authService: AuthService,
+    public cartService: CartService,
+  ) {}
 
   ngOnInit(): void {
     if (this.authService.isAuthenticated()) {

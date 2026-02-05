@@ -4,6 +4,7 @@ import { CTag } from '../../ui/c-tag/c-tag';
 import { CoursesHttpClient } from '../../../services/courses-http-client';
 import { CourseInterface } from '../../../models/CourseInterface';
 import { UserInterface } from '../../../models/UserInterface';
+import { CartService } from '../../../services/cart-service';
 
 const LANGUAGE_IMAGES: Record<string, string> = {
   'english': 'https://res.cloudinary.com/dnywbqedv/image/upload/v1769739688/profiles/rq1r3bq80erivuaarzwm.png',
@@ -34,6 +35,7 @@ export class Curso {
   constructor(
     private route: ActivatedRoute,
     private readonly coursesHttp: CoursesHttpClient,
+    private readonly cartService: CartService,
   ) { }
 
   activeTab: CursoTab = 'overview';
@@ -51,9 +53,10 @@ export class Curso {
   }
 
   ngOnInit() {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
+    const id = this.route.snapshot.paramMap.get('id');
+    if (!id) return;
 
-    this.coursesHttp.getCourseById(id).subscribe(course => {
+    this.coursesHttp.getCourseById(Number(id)).subscribe(course => {
       this.course = course;
 
         if (!course.teacher.username) {
@@ -64,6 +67,12 @@ export class Curso {
     });
 
 
+  }
+
+  addToCart(): void {
+    if (!this.course) return;
+    this.cartService.addCourse(this.course, 1);
+    this.cartService.open();
   }
 
   teacherInitials(): string {

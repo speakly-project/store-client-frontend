@@ -6,6 +6,7 @@ import { Cursos } from './components/pages/cursos/cursos';
 import { Register } from './components/pages/register/register';
 import { Profile } from './components/pages/profile/profile';
 import { Curso } from './components/pages/curso/curso';
+import { Payment } from './components/pages/payment/payment';
 
 export const routes: Routes = [
     { path: '', component: Cursos },
@@ -13,6 +14,7 @@ export const routes: Routes = [
     { path: 'register', component: Register },
     { path: 'login', component: Login },
     { path: 'profile', component: Profile },
+    { path: 'payment', component: Payment},
     { path: 'logout', component: Logout },
     { path: '**', redirectTo: '' },
 ];

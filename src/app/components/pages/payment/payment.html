@@ -1,0 +1,158 @@
+<div class="p-payment">
+    <header class="p-payment__topbar">
+        <div class="p-payment__topbar-inner">
+            <a class="p-payment__back" routerLink="/" aria-label="Volver a la tienda">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="p-payment__back-icon">
+                    <path d="m12 19-7-7 7-7"></path>
+                    <path d="M19 12H5"></path>
+                </svg>
+                <span>Volver a la tienda</span>
+            </a>
+        </div>
+    </header>
+
+    <div class="p-payment__container">
+        <h1 class="p-payment__title">Finalizar compra</h1>
+
+        <div class="p-payment__layout">
+            <section class="p-payment__left">
+                <form class="p-payment__form" autocomplete="on">
+                    <div class="p-payment__card">
+                        <h2 class="p-payment__card-title">Información personal</h2>
+
+                        <div class="p-payment__fields">
+                            <div class="p-payment__field">
+                                <label class="p-payment__label" for="fullName">Nombre completo</label>
+                                <input class="p-payment__input" id="fullName" type="text" name="fullName" required
+                                    placeholder="Juan Pérez" />
+                            </div>
+
+                            <div class="p-payment__field">
+                                <label class="p-payment__label" for="email">Email</label>
+                                <input class="p-payment__input" id="email" type="email" name="email" required
+                                    placeholder="juan@ejemplo.com" />
+                            </div>
+
+                            <div class="p-payment__field">
+                                <label class="p-payment__label" for="country">País</label>
+                                <select class="p-payment__input" id="country" name="country" required>
+                                    <option value="">Selecciona un país</option>
+                                    <option value="ES">España</option>
+                                    <option value="MX">México</option>
+                                    <option value="AR">Argentina</option>
+                                    <option value="CO">Colombia</option>
+                                    <option value="CL">Chile</option>
+                                    <option value="PE">Perú</option>
+                                    <option value="VE">Venezuela</option>
+                                    <option value="EC">Ecuador</option>
+                                    <option value="GT">Guatemala</option>
+                                    <option value="CU">Cuba</option>
+                                    <option value="BO">Bolivia</option>
+                                    <option value="DO">República Dominicana</option>
+                                    <option value="HN">Honduras</option>
+                                    <option value="PY">Paraguay</option>
+                                    <option value="SV">El Salvador</option>
+                                    <option value="NI">Nicaragua</option>
+                                    <option value="CR">Costa Rica</option>
+                                    <option value="PA">Panamá</option>
+                                    <option value="UY">Uruguay</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-payment__card">
+                        <div class="p-payment__card-titleRow">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="p-payment__icon">
+                                <rect width="20" height="14" x="2" y="5" rx="2"></rect>
+                                <line x1="2" x2="22" y1="10" y2="10"></line>
+                            </svg>
+                            <h2 class="p-payment__card-title">Información de pago</h2>
+                        </div>
+
+                        <div class="p-payment__fields">
+                            <div class="p-payment__field">
+                                <label class="p-payment__label" for="cardNumber">Número de tarjeta</label>
+                                <input class="p-payment__input" id="cardNumber" type="text" name="cardNumber" required
+                                    maxlength="19" placeholder="1234 5678 9012 3456" />
+                            </div>
+
+                            <div class="p-payment__row">
+                                <div class="p-payment__field">
+                                    <label class="p-payment__label" for="expiryDate">Fecha de expiración</label>
+                                    <input class="p-payment__input" id="expiryDate" type="text" name="expiryDate"
+                                        required maxlength="5" placeholder="MM/AA" />
+                                </div>
+                                <div class="p-payment__field">
+                                    <label class="p-payment__label" for="cvv">CVV</label>
+                                    <input class="p-payment__input" id="cvv" type="text" name="cvv" required
+                                        maxlength="3" placeholder="123" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-payment__secure">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="p-payment__secureIcon">
+                                <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
+                            <span>Tu información está protegida con encriptación SSL</span>
+                        </div>
+                    </div>
+
+                    <button class="p-payment__submit" type="submit">Completar pago</button>
+                </form>
+            </section>
+
+            <aside class="p-payment__right">
+                <div class="p-payment__card p-payment__summary">
+                    <h2 class="p-payment__card-title">Resumen del pedido</h2>
+
+                    <div class="p-payment__summaryItems">
+                        @if (cartService.items().length === 0) {
+                        <div class="p-payment__empty">No hay cursos en el carrito.</div>
+                        } @else {
+                        @for (item of cartService.items(); track item.course.id) {
+                        <div class="p-payment__summaryItem">
+                            <div class="p-payment__summaryItemLeft">
+                                <p class="p-payment__summaryName">{{ item.course.title }}</p>
+                                <p class="p-payment__summaryQty">x{{ item.quantity }}</p>
+                            </div>
+                            <p class="p-payment__summaryPrice">{{ formatMoney(item.course.price * item.quantity) }}</p>
+                        </div>
+                        }
+                        }
+                    </div>
+
+                    <div class="p-payment__totals">
+                        <div class="p-payment__totalRow">
+                            <span class="p-payment__totalLabel">Subtotal</span>
+                            <span class="p-payment__totalValue">{{ formatMoney(cartService.subtotal()) }}</span>
+                        </div>
+                        <div class="p-payment__totalRow p-payment__totalRow--iva">
+                            <span class="p-payment__totalLabel">IVA (21%)</span>
+                            <span class="p-payment__totalValue">{{ formatMoney(cartService.vat()) }}</span>
+                        </div>
+                        <div class="p-payment__totalRow p-payment__totalRow--grand">
+                            <span class="p-payment__grandLabel">Total</span>
+                            <span class="p-payment__grandValue">{{ formatMoney(cartService.total()) }}</span>
+                        </div>
+                    </div>
+
+                    <div class="p-payment__guarantee">
+                        <p>
+                            <strong>Garantía de 30 días:</strong>
+                            Si no estás satisfecho, te devolvemos tu dinero.
+                        </p>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+</div>
