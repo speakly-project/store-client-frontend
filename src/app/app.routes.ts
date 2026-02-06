@@ -13,8 +13,8 @@ export const routes: Routes = [
     { path: 'course/:id', component: Curso },
     { path: 'register', component: Register },
     { path: 'login', component: Login },
-    { path: 'profile', component: Profile },
-    { path: 'payment', component: Payment},
-    { path: 'logout', component: Logout },
+    { path: 'profile', component: Profile, canActivate: [loginGuard] },
+    { path: 'payment', component: Payment, canActivate: [loginGuard] },
+    { path: 'logout', component: Logout, canActivate: [loginGuard] },
     { path: '**', redirectTo: '' },
 ];
