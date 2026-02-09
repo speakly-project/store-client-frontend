@@ -29,7 +29,7 @@ jobs:
         run: sudo openvpn --config vpn-pve.conf --daemon --log openvpn.log 
  
       - name: Wait for VPN to establish
-        run: sleep 20
+        run: sleep 10
  
       - name: Test Connection
         working-directory: .github/workflows
