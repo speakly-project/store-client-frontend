@@ -53,7 +53,7 @@ jobs:
             ssh -i ./id_rsa -o StrictHostKeyChecking=no -t ${{ secrets.SERVER_USERNAME }}@192.168.59.104 'cd /speakly/deployment-project ; git fetch --all ; git checkout -B feat/actions origin/feat/actions'
             ssh -i ./id_rsa -o StrictHostKeyChecking=no ${{ secrets.SERVER_USERNAME }}@192.168.59.104 'bash -c "cat >> /speakly/deployment-project/environments/.env.prod << EOF
 
-            # añadidooo por actions
+            # añadido por actions
             MYSQL_ROOT_PASSWORD_BANK=${{ secrets.DB_BANK_PWD }}
             MYSQL_ROOT_PASSWORD_STORE=${{ secrets.DB_STORE_PWD }}
             CLOUDINARY_CLOUD_NAME=${{ secrets.CLOUDINARY_CLOUD_NAME }}
