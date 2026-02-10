@@ -1,4 +1,4 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import localeEs from '@angular/common/locales/es';
@@ -6,6 +6,8 @@ import { registerLocaleData } from '@angular/common';
 import { LOCALE_ID,DEFAULT_CURRENCY_CODE } from '@angular/core';
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { AuthInterceptor } from './services/auth-interceptor';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
  
 registerLocaleData(localeEs);
 export const appConfig: ApplicationConfig = {
@@ -14,6 +16,8 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideHttpClient(withInterceptorsFromDi()),
+    provideAnimations(),
+    importProvidersFrom(MatSnackBarModule),
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     {provide: LOCALE_ID, useValue: 'es-ES' },
     {provide: DEFAULT_CURRENCY_CODE, useValue: 'EUR' }

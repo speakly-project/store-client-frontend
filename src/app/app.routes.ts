@@ -15,6 +15,6 @@ export const routes: Routes = [
     { path: 'login', component: Login },
     { path: 'profile', component: Profile, canActivate: [loginGuard] },
     { path: 'payment', component: Payment, canActivate: [loginGuard] },
-    { path: 'logout', component: Logout, canActivate: [loginGuard] },
+    { path: 'logout', component: Logout},
     { path: '**', redirectTo: '' },
 ];

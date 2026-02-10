@@ -1,4 +1,10 @@
+@if (!isPaymentRoute()) {
 <c-header></c-header>
 <c-cart></c-cart>
+}
+
 <router-outlet />
+
+@if (!isPaymentRoute()) {
 <c-footer></c-footer>
+}

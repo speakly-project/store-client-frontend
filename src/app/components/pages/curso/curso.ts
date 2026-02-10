@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { CTag } from '../../ui/c-tag/c-tag';
 import { CoursesHttpClient } from '../../../services/courses-http-client';
 import { CourseInterface } from '../../../models/CourseInterface';
@@ -34,6 +35,7 @@ export class Curso {
 
   constructor(
     private route: ActivatedRoute,
+    private readonly router: Router,
     private readonly coursesHttp: CoursesHttpClient,
     private readonly cartService: CartService,
   ) { }
@@ -73,6 +75,13 @@ export class Curso {
     if (!this.course) return;
     this.cartService.addCourse(this.course, 1);
     this.cartService.open();
+  }
+
+  buyNow(): void {
+    if (!this.course) return;
+    this.router.navigate(['/payment'], {
+      queryParams: { courseId: this.course.id },
+    });
   }
 
   teacherInitials(): string {

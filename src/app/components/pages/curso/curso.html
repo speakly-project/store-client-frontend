@@ -43,7 +43,7 @@
                             <div class="p-curso__price">
                                 <span class="p-curso__price-amount">{{ course?.price }}€</span>
                             </div>
-                            <button data-slot="button" class="p-curso__buy">Comprar ahora</button>
+                            <button data-slot="button" class="p-curso__buy" type="button" (click)="buyNow()">Comprar ahora</button>
                             <button data-slot="button" class="p-curso__add-to-cart" type="button" (click)="addToCart()">Agregar al carrito</button>
                             <div class="p-curso__includes">
                                 <h4 class="p-curso__includes-title">Este curso incluye:</h4>

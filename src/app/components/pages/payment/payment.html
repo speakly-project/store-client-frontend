@@ -115,10 +115,10 @@
                     <h2 class="p-payment__card-title">Resumen del pedido</h2>
 
                     <div class="p-payment__summaryItems">
-                        @if (cartService.items().length === 0) {
+                        @if (items().length === 0) {
                         <div class="p-payment__empty">No hay cursos en el carrito.</div>
                         } @else {
-                        @for (item of cartService.items(); track item.course.id) {
+                        @for (item of items(); track (item.course?.id ?? $index)) {
                         <div class="p-payment__summaryItem">
                             <div class="p-payment__summaryItemLeft">
                                 <p class="p-payment__summaryName">{{ item.course.title }}</p>
@@ -133,15 +133,15 @@
                     <div class="p-payment__totals">
                         <div class="p-payment__totalRow">
                             <span class="p-payment__totalLabel">Subtotal</span>
-                            <span class="p-payment__totalValue">{{ formatMoney(cartService.subtotal()) }}</span>
+                            <span class="p-payment__totalValue">{{ formatMoney(subtotal()) }}</span>
                         </div>
                         <div class="p-payment__totalRow p-payment__totalRow--iva">
                             <span class="p-payment__totalLabel">IVA (21%)</span>
-                            <span class="p-payment__totalValue">{{ formatMoney(cartService.vat()) }}</span>
+                            <span class="p-payment__totalValue">{{ formatMoney(vat()) }}</span>
                         </div>
                         <div class="p-payment__totalRow p-payment__totalRow--grand">
                             <span class="p-payment__grandLabel">Total</span>
-                            <span class="p-payment__grandValue">{{ formatMoney(cartService.total()) }}</span>
+                            <span class="p-payment__grandValue">{{ formatMoney(total()) }}</span>
                         </div>
                     </div>
 
