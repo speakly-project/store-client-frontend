@@ -10,6 +10,7 @@ import { LanguageInterface } from '../../../models/LanguageInterface';
 import { LevelInterface } from '../../../models/LevelInterface';
 import { MatSliderModule } from '@angular/material/slider';
 import { FormsModule } from '@angular/forms';
+import { CartService } from '../../../services/cart-service';
 
 
 @Component({
@@ -20,7 +21,6 @@ import { FormsModule } from '@angular/forms';
 })
 export class Cursos {
   private landbotLoaded = false;
-  //subject para debounce en filtro de precio
   private priceSubject = new Subject<{ min: number; max: number }>();
   languages: LanguageInterface[] = [];
   levels: LevelInterface[] = [];
@@ -37,7 +37,8 @@ export class Cursos {
 
   constructor(
     @Inject(DOCUMENT) private readonly document: Document,
-    private coursesService: CoursesHttpClient
+    private coursesService: CoursesHttpClient,
+    private cartService: CartService
   ) {
     this.coursesService.getAllLanguages().subscribe(langs => {
       this.languages = langs;
@@ -45,7 +46,6 @@ export class Cursos {
     this.coursesService.getAllLevels().subscribe(lvls => {
       this.levels = lvls;
     });
-    //debounce pone un retardo antes de ejecutar la busqueda
     this.priceSubject.pipe(debounceTime(250)).subscribe(prices => {
       this.fetchCourses(
         this.currentFilters.language,
@@ -56,6 +56,7 @@ export class Cursos {
       );
     });
     this.fetchCourses();
+    this.cartService.loadCart();
   }
 
   ngAfterViewInit(): void {
@@ -83,7 +84,6 @@ export class Cursos {
   }
 
   fetchCourses(language?: string, level?: string, minPriceStr?: string, maxPriceStr?: string, sortBy?: string, pageNumber?: number): void {
-    //filtros actuales
     this.currentFilters = {
       language: language,
       level: level,
@@ -91,11 +91,11 @@ export class Cursos {
       maxPrice: maxPriceStr,
       sortBy: sortBy
     };
-    
+
     const minPrice = minPriceStr ? Math.round(Number(minPriceStr)) : undefined;
     const maxPrice = maxPriceStr ? Math.round(Number(maxPriceStr)) : undefined;
     const targetPage = pageNumber ? pageNumber : 1;
-    
+
     this.coursesService.getCourses({
       language: language,
       level: level,

@@ -1,28 +1,24 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, computed, signal } from '@angular/core';
-import { catchError, forkJoin, map, Observable, of, retry, switchMap, tap, throwError, timer } from 'rxjs';
+import { catchError, map, Observable, of, switchMap, tap } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { environment } from '../../environments/environment';
 import { CartItemInterface } from '../models/CartItemInterface';
 import { CourseInterface } from '../models/CourseInterface';
 import { AuthService } from './auth-service';
-import { CoursesHttpClient } from './courses-http-client';
 import { CartItem } from '../models/CartItem';
 import { OrderInterface } from '../models/OrderInterface';
 
 
 @Injectable({ providedIn: 'root' })
 export class CartService {
-  private static readonly GUEST_CART_KEY = 'guestCartCourseIds';
-  private guestSyncInFlight = false;
-
   readonly isOpen = signal(false);
   readonly items = signal<CartItem[]>([]);
 
   readonly count = computed(() => this.items().reduce((sum, item) => sum + item.quantity, 0));
-  readonly subtotal = computed(() => this.items().reduce((sum, item) => sum + item.course.price * item.quantity, 0));
-  readonly vat = computed(() => this.subtotal() * 0.21);
-  readonly total = computed(() => this.subtotal() + this.vat());
+  readonly total = computed(() => this.items().reduce((sum, item) => sum + item.course.price * item.quantity, 0));
+  readonly totalWithOutIva = computed(() => this.total() / 1.21);
+  readonly vat = computed(() => this.total() - this.totalWithOutIva());
 
   private readonly backendCart = signal<any | null>(null);
 
@@ -32,17 +28,15 @@ export class CartService {
   constructor(
     private readonly http: HttpClient,
     private readonly authService: AuthService,
-    private readonly coursesHttp: CoursesHttpClient,
     private readonly snackBar: MatSnackBar,
   ) {
     this.authService.currentUser$.subscribe((user) => {
       if (!user) {
         this.backendCart.set(null);
-        this.loadGuestCartFromStorage();
+        this.items.set([]);
         return;
       }
-
-      this.syncGuestCartToBackend(user.id);
+      this.refreshFromBackend(user.id);
     });
   }
 
@@ -60,13 +54,6 @@ export class CartService {
 
   clear(): void {
     this.items.set([]);
-
-    const user = this.authService.getCurrentUser();
-    if (!user) {
-      this.saveGuestCartToStorage([]);
-      return;
-    }
-
     this.persistToBackend();
   }
 
@@ -89,12 +76,6 @@ export class CartService {
 
     this.items.update((prev) => [...prev, { course, quantity }]);
 
-    const user = this.authService.getCurrentUser();
-    if (!user) {
-      this.saveGuestCartToStorage(Array.from(this.getUniqueCourseIds()));
-      return;
-    }
-
     this.persistToBackend();
   }
 
@@ -102,13 +83,6 @@ export class CartService {
     this.items.update((prev) =>
       prev.filter((i) => i.course.id !== courseId),
     );
-
-    const user = this.authService.getCurrentUser();
-    if (!user) {
-      this.saveGuestCartToStorage(Array.from(this.getUniqueCourseIds()));
-      return;
-    }
-
     this.persistToBackend();
   }
 
@@ -117,23 +91,7 @@ export class CartService {
   }
 
   updateCart(cartItem: CartItemInterface): Observable<void> {
-    return this.http.put<void>(`${this.urlCart}`, cartItem).pipe(
-      retry({
-        count: 4,
-        delay: (err, retryCount) =>
-          this.shouldRetryLockError(err) ? timer(200 * retryCount) : throwError(() => err),
-      }),
-    );
-  }
-
-  private shouldRetryLockError(err: unknown): boolean {
-    const anyErr = err as any;
-    const code = anyErr?.error?.error;
-    const message = anyErr?.error?.message ?? anyErr?.message;
-
-    if (code === 'CannotAcquireLockException') return true;
-    if (typeof message === 'string' && message.includes('CannotAcquireLockException')) return true;
-    return false;
+    return this.http.put<void>(`${this.urlCart}`, cartItem);
   }
 
   private refreshFromBackend(userId: number): void {
@@ -167,61 +125,6 @@ export class CartService {
         }),
       )
       .subscribe();
-  }
-
-  private syncGuestCartToBackend(userId: number): void {
-    if (this.guestSyncInFlight) return;
-    const guestIds = this.loadGuestCourseIdsFromStorage();
-    if (guestIds.length === 0) {
-      this.refreshFromBackend(userId);
-      return;
-    }
-
-    this.guestSyncInFlight = true;
-
-    this.getCart(userId)
-      .pipe(
-        switchMap((cart) => {
-          this.backendCart.set(cart);
-
-          const mergedIds = new Set<number>();
-          const orderItems = Array.isArray(cart?.orderItems) ? cart.orderItems : [];
-          for (const it of orderItems) {
-            const courseId = it?.course?.id;
-            if (!isFinite(courseId)) continue;
-            mergedIds.add(courseId);
-          }
-
-          for (const id of guestIds) mergedIds.add(id);
-
-          const payload: CartItemInterface = {
-            id: cart?.id,
-            userId,
-            courseIds: Array.from(mergedIds.values()),
-            status: cart?.orderStatus ?? 'PENDING',
-          };
-
-          if (!payload.id || payload.id <= 0) {
-            return of(null);
-          }
-
-          return this.updateCart(payload).pipe(map(() => cart));
-        }),
-        tap(() => this.saveGuestCartToStorage([])),
-        catchError((err) => {
-          console.error('Error sincronizando carrito invitado', err);
-          return of(null);
-        }),
-      )
-      .subscribe({
-        next: () => this.refreshFromBackend(userId),
-        complete: () => {
-          this.guestSyncInFlight = false;
-        },
-        error: () => {
-          this.guestSyncInFlight = false;
-        },
-      });
   }
 
   private persistToBackend(): void {
@@ -267,86 +170,25 @@ export class CartService {
   }
 
   private buildBackendCartPayload(userId: number, base: any): CartItemInterface {
-    return {
-      id: base?.id,
-      userId,
-      courseIds: Array.from(this.getUniqueCourseIds().values()),
-      status: base?.orderStatus ?? base?.status ?? 'PENDING',
-    };
-  }
-
-  private getUniqueCourseIds(): Set<number> {
     const uniqueCourseIds = new Set<number>();
     for (const item of this.items()) {
       const courseId = item.course?.id;
       if (!isFinite(courseId)) continue;
       uniqueCourseIds.add(courseId);
     }
-    return uniqueCourseIds;
+
+    return {
+      id: base?.id,
+      userId,
+      courseIds: Array.from(uniqueCourseIds.values()),
+      status: base?.orderStatus ?? base?.status ?? 'PENDING',
+    };
   }
 
-  private loadGuestCourseIdsFromStorage(): number[] {
-    try {
-      const raw = localStorage.getItem(CartService.GUEST_CART_KEY);
-      if (!raw) return [];
-      const parsed = JSON.parse(raw);
-      if (!Array.isArray(parsed)) return [];
-      const unique = new Set<number>();
-      for (const v of parsed) {
-        const id = Number(v);
-        if (!isFinite(id)) continue;
-        unique.add(id);
-      }
-      return Array.from(unique.values());
-    } catch {
-      return [];
-    }
+  loadCart(): void {
+    const user = this.authService.getCurrentUser();
+    if (!user) return;
+    this.getCart(user.id);
   }
-
-  private saveGuestCartToStorage(courseIds: number[]): void {
-    try {
-      const unique = new Set<number>();
-      for (const v of courseIds) {
-        const id = Number(v);
-        if (!isFinite(id)) continue;
-        unique.add(id);
-      }
-      localStorage.setItem(CartService.GUEST_CART_KEY, JSON.stringify(Array.from(unique.values())));
-    } catch {
-      // ignore
-    }
-  }
-
-  private loadGuestCartFromStorage(): void {
-    const ids = this.loadGuestCourseIdsFromStorage();
-    if (ids.length === 0) {
-      this.items.set([]);
-      return;
-    }
-
-    forkJoin(
-      ids.map((id) =>
-        this.coursesHttp.getCourseById(id).pipe(
-          catchError(() => of(null as unknown as CourseInterface)),
-        ),
-      ),
-    )
-      .pipe(
-        map((courses) =>
-          courses
-            .filter((c): c is CourseInterface => !!c && isFinite((c as any).id))
-            .map((course) => ({ course, quantity: 1 } as CartItem)),
-        ),
-        tap((items) => this.items.set(items)),
-        catchError((err) => {
-          console.error('Error cargando carrito invitado', err);
-          this.items.set([]);
-          return of([] as CartItem[]);
-        }),
-      )
-      .subscribe();
-  }
-
-
 
 }

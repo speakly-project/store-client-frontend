@@ -79,9 +79,8 @@ export class Curso {
 
   buyNow(): void {
     if (!this.course) return;
-    this.router.navigate(['/payment'], {
-      queryParams: { courseId: this.course.id },
-    });
+    this.cartService.addCourse(this.course, 1);
+    this.router.navigate(['/payment']);
   }
 
   teacherInitials(): string {

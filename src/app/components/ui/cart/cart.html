@@ -45,7 +45,7 @@
     <div class="c-cart__footer">
         <div class="c-cart__row">
             <span class="c-cart__label">Subtotal</span>
-            <span class="c-cart__value">{{ formatMoney(cartService.subtotal()) }}</span>
+            <span class="c-cart__value">{{ formatMoney(cartService.totalWithOutIva()) }}</span>
         </div>
         <div class="c-cart__row c-cart__row--spaced">
             <span class="c-cart__label">IVA (21%)</span>

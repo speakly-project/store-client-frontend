@@ -14,15 +14,13 @@ export class Payment {
   private readonly buyNowItems = signal<CartItem[] | null>(null);
 
   readonly items = computed(() => this.buyNowItems() ?? this.cartService.items());
-  readonly subtotal = computed(() => this.items().reduce((sum, item) => sum + item.course.price * item.quantity, 0));
-  readonly vat = computed(() => this.subtotal() * 0.21);
-  readonly total = computed(() => this.subtotal() + this.vat());
 
   constructor(
     public cartService: CartService,
     private readonly route: ActivatedRoute,
     private readonly coursesHttp: CoursesHttpClient,
   ) {
+    this.cartService.loadCart();
     this.route.queryParamMap.subscribe((params) => {
       const raw = params.get('courseId');
       const courseId = raw ? Number(raw) : NaN;
@@ -35,6 +33,18 @@ export class Payment {
         this.buyNowItems.set([{ course, quantity: 1 }]);
       });
     });
+  }
+
+  total(): number {
+    return this.cartService.total();
+  }
+
+  totalWithOutIva(): number {
+    return this.cartService.totalWithOutIva();
+  }
+
+  vat(): number {
+    return this.cartService.vat();
   }
 
   formatMoney(value: number): string {
