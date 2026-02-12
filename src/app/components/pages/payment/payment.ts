@@ -54,14 +54,21 @@ export class Payment {
     return this.total() - this.totalWithOutIva();
   }
 
+  formatCardNumber(): void {
+    let digits = this.cardNumber.replace(/\D/g, '');
+    digits = digits.slice(0, 16);
+    this.cardNumber = digits.replace(/(\d{4})(?=\d)/g, '$1 ');
+  }
+
   payCart(): void {
+    const cleanCardNumber = this.cardNumber.replace(/\s/g, '');
     console.log('payCart llamado con:', {
-      cardNumber: this.cardNumber,
+      cardNumber: cleanCardNumber,
       expiryDate: this.expiryDate,
       cvv: this.cvv,
       fullName: this.fullName,
     });
-    this.cartService.payCart(this.cardNumber, this.expiryDate, this.cvv, this.fullName).subscribe({
+    this.cartService.payCart(cleanCardNumber, this.expiryDate, this.cvv, this.fullName).subscribe({
       next: () => {
         this.router.navigate(['/']);
       },

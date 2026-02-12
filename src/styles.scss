@@ -46,3 +46,45 @@ body {
   // Reset the user agent margin.
   margin: 0;
 }
+
+/* Snackbars (Angular Material) */
+.mat-mdc-snack-bar-container.snackbar-success .mdc-snackbar__surface {
+  background: var(--mlt-sys-color-alternative);
+  color: var(--mat-sys-on-primary);
+}
+
+.mat-mdc-snack-bar-container.snackbar-warning .mdc-snackbar__surface {
+  background: var(--mlt-sys-secondary-color-4);
+  color: var(--mat-sys-on-primary);
+}
+
+.mat-mdc-snack-bar-container.snackbar-error .mdc-snackbar__surface {
+  background: var(--mlt-sys-danger-color-5);
+  color: var(--mat-sys-on-primary);
+}
+
+.mat-mdc-snack-bar-container.snackbar-success .mat-mdc-snack-bar-action,
+.mat-mdc-snack-bar-container.snackbar-warning .mat-mdc-snack-bar-action,
+.mat-mdc-snack-bar-container.snackbar-error .mat-mdc-snack-bar-action,
+.mat-mdc-snack-bar-container.snackbar-success .mat-mdc-snack-bar-action .mdc-button__label,
+.mat-mdc-snack-bar-container.snackbar-warning .mat-mdc-snack-bar-action .mdc-button__label,
+.mat-mdc-snack-bar-container.snackbar-error .mat-mdc-snack-bar-action .mdc-button__label {
+  color: var(--mat-sys-on-primary) !important;
+}
+
+/* En snackbars verde/naranja, al seleccionar la X -> rojo */
+.mat-mdc-snack-bar-container.snackbar-success .mat-mdc-snack-bar-action:hover,
+.mat-mdc-snack-bar-container.snackbar-success .mat-mdc-snack-bar-action:focus-visible,
+.mat-mdc-snack-bar-container.snackbar-success .mat-mdc-snack-bar-action:active,
+.mat-mdc-snack-bar-container.snackbar-warning .mat-mdc-snack-bar-action:hover,
+.mat-mdc-snack-bar-container.snackbar-warning .mat-mdc-snack-bar-action:focus-visible,
+.mat-mdc-snack-bar-container.snackbar-warning .mat-mdc-snack-bar-action:active,
+.mat-mdc-snack-bar-container.snackbar-success .mat-mdc-snack-bar-action:hover .mdc-button__label,
+.mat-mdc-snack-bar-container.snackbar-success .mat-mdc-snack-bar-action:focus-visible .mdc-button__label,
+.mat-mdc-snack-bar-container.snackbar-success .mat-mdc-snack-bar-action:active .mdc-button__label,
+.mat-mdc-snack-bar-container.snackbar-warning .mat-mdc-snack-bar-action:hover .mdc-button__label,
+.mat-mdc-snack-bar-container.snackbar-warning .mat-mdc-snack-bar-action:focus-visible .mdc-button__label,
+.mat-mdc-snack-bar-container.snackbar-warning .mat-mdc-snack-bar-action:active .mdc-button__label {
+  color: var(--mlt-sys-danger-color-5) !important;
+}
+

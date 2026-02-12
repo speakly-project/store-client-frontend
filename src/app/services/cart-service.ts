@@ -66,10 +66,11 @@ export class CartService {
       (i) => i.course.id === courseId,
     );
     if (alreadyInCart) {
-      this.snackBar.open('Este curso ya está en tu carrito. No puedes añadirlo dos veces.', 'Cerrar', {
-        duration: 2500,
+      this.snackBar.open('Este curso ya está en tu carrito. No puedes añadirlo dos veces.', 'X', {
+        duration: 5000000000000000000,
         horizontalPosition: 'center',
         verticalPosition: 'top',
+        panelClass: ['snackbar-warning'],
       });
       return;
     }
@@ -157,10 +158,11 @@ export class CartService {
         }),
         catchError((err) => {
           console.error('Error guardando el carrito', err);
-          this.snackBar.open('No se pudo actualizar el carrito. Inténtalo de nuevo.', 'Cerrar', {
-            duration: 2500,
+          this.snackBar.open('No se pudo actualizar el carrito. Inténtalo de nuevo.', 'X', {
+            duration: 5000,
             horizontalPosition: 'center',
             verticalPosition: 'top',
+            panelClass: ['snackbar-error'],
           });
           this.refreshFromBackend(user.id);
           return of(null);
@@ -202,19 +204,21 @@ export class CartService {
       fullName,
     }).pipe(
       tap(() => {
-        this.snackBar.open('Pago realizado con éxito. ¡Gracias por tu compra!', 'Cerrar', {
-          duration: 2500,
+        this.snackBar.open('Pago realizado con éxito. ¡Gracias por tu compra!', 'X', {
+          duration: 5000,
           horizontalPosition: 'center',
           verticalPosition: 'top',
+          panelClass: ['snackbar-success'],
         });
         this.clear();
       }),
       catchError((err) => {
         console.error('Error al pagar el carrito', err);
-        this.snackBar.open('Ha habido un error en tu pago. Inténtalo de nuevo.', 'Cerrar', {
+        this.snackBar.open('Ha habido un error en tu pago. Inténtalo de nuevo.', 'X', {
           duration: 5000,
           horizontalPosition: 'center',
           verticalPosition: 'top',
+          panelClass: ['snackbar-error'],
         });
         throw err;
       }),

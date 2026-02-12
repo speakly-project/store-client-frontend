@@ -72,7 +72,7 @@
                             <div class="p-payment__field">
                                 <label class="p-payment__label" for="cardNumber">Número de tarjeta</label>
                                 <input class="p-payment__input" id="cardNumber" type="text" name="cardNumber" required
-                                    maxlength="19" placeholder="1234 5678 9012 3456" [(ngModel)]="cardNumber" />
+                                    maxlength="19" placeholder="1234 5678 9012 3456" [(ngModel)]="cardNumber" (input)="formatCardNumber()" />
                             </div>
 
                             <div class="p-payment__row">
