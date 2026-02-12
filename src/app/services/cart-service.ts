@@ -191,4 +191,33 @@ export class CartService {
     this.getCart(user.id);
   }
 
+  payCart(cardNumber: string, expiryDate: string, cvv: string, fullName: string): Observable<void> {
+    const user = this.authService.getCurrentUser();
+    if (!user) return of(undefined);
+    return this.http.post<void>(`${this.urlCart}/pay`, {
+      userId: user.id,
+      cardNumber,
+      expiryDate,
+      cvv,
+      fullName,
+    }).pipe(
+      tap(() => {
+        this.snackBar.open('Pago realizado con éxito. ¡Gracias por tu compra!', 'Cerrar', {
+          duration: 2500,
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+        });
+        this.clear();
+      }),
+      catchError((err) => {
+        console.error('Error al pagar el carrito', err);
+        this.snackBar.open('Ha habido un error en tu pago. Inténtalo de nuevo.', 'Cerrar', {
+          duration: 5000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+        });
+        throw err;
+      }),
+    );
+  }
 }

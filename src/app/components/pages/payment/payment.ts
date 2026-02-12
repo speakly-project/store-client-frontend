@@ -1,12 +1,13 @@
 import { Component, computed, signal } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { CartService } from '../../../services/cart-service';
 import { CoursesHttpClient } from '../../../services/courses-http-client';
 import { CartItem } from '../../../models/CartItem';
 
 @Component({
   selector: 'p-payment',
-  imports: [RouterLink],
+  imports: [RouterLink, FormsModule],
   templateUrl: './payment.html',
   styleUrl: './payment.scss'
 })
@@ -15,10 +16,16 @@ export class Payment {
 
   readonly items = computed(() => this.buyNowItems() ?? this.cartService.items());
 
+  fullName = '';
+  cardNumber = '';
+  expiryDate = '';
+  cvv = '';
+
   constructor(
     public cartService: CartService,
     private readonly route: ActivatedRoute,
     private readonly coursesHttp: CoursesHttpClient,
+    private readonly router: Router,
   ) {
     this.cartService.loadCart();
     this.route.queryParamMap.subscribe((params) => {
@@ -36,15 +43,32 @@ export class Payment {
   }
 
   total(): number {
-    return this.cartService.total();
+    return this.items().reduce((sum, item) => sum + item.course.price * item.quantity, 0);
   }
 
   totalWithOutIva(): number {
-    return this.cartService.totalWithOutIva();
+    return this.total() / 1.21;
   }
 
   vat(): number {
-    return this.cartService.vat();
+    return this.total() - this.totalWithOutIva();
+  }
+
+  payCart(): void {
+    console.log('payCart llamado con:', {
+      cardNumber: this.cardNumber,
+      expiryDate: this.expiryDate,
+      cvv: this.cvv,
+      fullName: this.fullName,
+    });
+    this.cartService.payCart(this.cardNumber, this.expiryDate, this.cvv, this.fullName).subscribe({
+      next: () => {
+        this.router.navigate(['/']);
+      },
+      error: (err) => {
+        console.error('Error en payCart:', err);
+      },
+    });
   }
 
   formatMoney(value: number): string {

@@ -18,7 +18,7 @@
 
         <div class="p-payment__layout">
             <section class="p-payment__left">
-                <form class="p-payment__form" autocomplete="on">
+                <form class="p-payment__form" autocomplete="on" (ngSubmit)="payCart()" #paymentForm="ngForm">
                     <div class="p-payment__card">
                         <h2 class="p-payment__card-title">Información personal</h2>
 
@@ -26,13 +26,7 @@
                             <div class="p-payment__field">
                                 <label class="p-payment__label" for="fullName">Nombre completo</label>
                                 <input class="p-payment__input" id="fullName" type="text" name="fullName" required
-                                    placeholder="Juan Pérez" />
-                            </div>
-
-                            <div class="p-payment__field">
-                                <label class="p-payment__label" for="email">Email</label>
-                                <input class="p-payment__input" id="email" type="email" name="email" required
-                                    placeholder="juan@ejemplo.com" />
+                                    placeholder="Juan Pérez" [(ngModel)]="fullName" />
                             </div>
 
                             <div class="p-payment__field">
@@ -78,19 +72,19 @@
                             <div class="p-payment__field">
                                 <label class="p-payment__label" for="cardNumber">Número de tarjeta</label>
                                 <input class="p-payment__input" id="cardNumber" type="text" name="cardNumber" required
-                                    maxlength="19" placeholder="1234 5678 9012 3456" />
+                                    maxlength="19" placeholder="1234 5678 9012 3456" [(ngModel)]="cardNumber" />
                             </div>
 
                             <div class="p-payment__row">
                                 <div class="p-payment__field">
                                     <label class="p-payment__label" for="expiryDate">Fecha de expiración</label>
                                     <input class="p-payment__input" id="expiryDate" type="text" name="expiryDate"
-                                        required maxlength="5" placeholder="MM/AA" />
+                                        required maxlength="7" placeholder="2029-03" [(ngModel)]="expiryDate" />
                                 </div>
                                 <div class="p-payment__field">
                                     <label class="p-payment__label" for="cvv">CVV</label>
                                     <input class="p-payment__input" id="cvv" type="text" name="cvv" required
-                                        maxlength="3" placeholder="123" />
+                                        maxlength="3" placeholder="123" [(ngModel)]="cvv" />
                                 </div>
                             </div>
                         </div>
