@@ -175,6 +175,11 @@
 
     &__tag {
         margin-bottom: var(--p-curso-tag-margin-bottom);
+
+        &-language{
+            background-color: var(--mlt-sys-secondary-color-4);
+            padding: var(--mlt-sys-padding-6) var(--mlt-sys-padding-10);
+        }
     }
 
     &__curso-title {
@@ -222,7 +227,7 @@
 
     &__creator-name {
         font-weight: var(--p-curso-creator-font-weight);
-        color: #4EB5D5;
+        color: var(--mlt-sys-primary-color-5);
     }
 
     &__container-right-inner {
@@ -262,14 +267,14 @@
 
     &__buy {
         display: inline-flex;
-        color: #fff;
+        color: var(--mlt-sys-primary-color-9);
         white-space: nowrap;
         font-weight: var(--p-curso-buy-font-weight);
         font-size: var(--p-curso-buy-font-size);
         line-height: 1.42857;
         padding-block: var(--p-curso-buy-padding-block);
         padding-inline: var(--p-curso-buy-padding-inline);
-        background-color: #4EB5D5;
+        background-color: var(--mlt-sys-primary-color-5);
         border-radius: var(--p-curso-buy-radius);
         gap: var(--p-curso-buy-gap);
         justify-content: center;
@@ -285,7 +290,7 @@
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 
         &:hover {
-            background-color: #3aa6cc;
+            background-color: var(--mlt-sys-primary-color-4);
         }
     }
 
@@ -493,7 +498,7 @@
                 height: var(--p-curso-richtext-icon-size);
                 flex-shrink: 0;
                 margin-top: 2px;
-                color: #00c951;
+                color: var(--mlt-sys-color-alternative);
             }
         }
     }
@@ -509,7 +514,7 @@
         width: var(--p-curso-teacher-avatar-size);
         height: var(--p-curso-teacher-avatar-size);
         border-radius: var(--p-curso-teacher-avatar-radius);
-        background-color: #4EB5D5;
+        background-color: var(--mlt-sys-primary-color-5);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -582,7 +587,7 @@
         height: var(--p-curso-teacher-experience-icon-size);
         margin-top: 2px;
         flex-shrink: 0;
-        color: #4EB5D5;
+        color: var(--mlt-sys-primary-color-5);
     }
 
 

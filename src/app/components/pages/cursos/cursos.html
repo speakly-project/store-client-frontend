@@ -1,39 +1,39 @@
 <section class="p-cursos">
     <div class="p-cursos__header">
-        <div class="header-top">
+        <div class="p-cursos__header-top">
             <h1>Explore Language Courses</h1>
         </div>
     </div>
 
     <div class="p-cursos__filters-row">
-        <div class="c-filters">
-            <div class="c-filters__group">
-                <label class="c-filters__label">Language</label>
-                <select class="c-filters__select" #language (change)="fetchCourses(language.value, level.value, minPrice.toString(), maxPrice.toString(), sortBy.value)">
+        <div class="p-cursos__filters">
+            <div class="p-cursos__filters-group">
+                <label class="p-cursos__filters-label">Language</label>
+                <select class="p-cursos__filters-select" #language (change)="fetchCourses(language.value, level.value, minPrice.toString(), maxPrice.toString(), sortBy.value)">
                     <option value="">All</option>
                     @for (lang of languages; track lang.code) {
                     <option [value]="lang.name">{{ lang.name }}</option>
                     }
                 </select>
             </div>
-            <div class="c-filters__group">
-                <label class="c-filters__label">Level</label>
-                <select class="c-filters__select" #level (change)="fetchCourses(language.value, level.value, minPrice.toString(), maxPrice.toString(), sortBy.value)">
+            <div class="p-cursos__filters-group">
+                <label class="p-cursos__filters-label">Level</label>
+                <select class="p-cursos__filters-select" #level (change)="fetchCourses(language.value, level.value, minPrice.toString(), maxPrice.toString(), sortBy.value)">
                     <option value="">All</option>
                     @for (lvl of levels; track lvl.name) {
                     <option [value]="lvl.name">{{ lvl.name }}</option>
                     }
                 </select>
             </div>
-            <div class="c-filters__group c-filters__group--price">
-                <label class="c-filters__label">Price Range</label>
-                <div class="c-filters__price-wrapper">
-                    <div class="c-filters__price-inputs">
-                        <input class="c-filters__price-input" type="number" [(ngModel)]="minPrice" (blur)="updateMinPrice(minPrice)" [min]="priceRange.min" [max]="priceRange.max" />
-                        <span class="c-filters__price-separator">-</span>
-                        <input class="c-filters__price-input" type="number" [(ngModel)]="maxPrice" (blur)="updateMaxPrice(maxPrice)" [min]="priceRange.min" [max]="priceRange.max" />
+            <div class="p-cursos__filters-group p-cursos__filters-group--price">
+                <label class="p-cursos__filters-label">Price Range</label>
+                <div class="p-cursos__filters-price-wrapper">
+                    <div class="p-cursos__filters-price-inputs">
+                        <input class="p-cursos__filters-price-input" type="number" [(ngModel)]="minPrice" (blur)="updateMinPrice(minPrice)" [min]="priceRange.min" [max]="priceRange.max" />
+                        <span class="p-cursos__filters-price-separator">-</span>
+                        <input class="p-cursos__filters-price-input" type="number" [(ngModel)]="maxPrice" (blur)="updateMaxPrice(maxPrice)" [min]="priceRange.min" [max]="priceRange.max" />
                     </div>
-                    <div class="c-filters__slider">
+                    <div class="p-cursos__filters-slider">
                         <mat-slider [min]="priceRange.min" [max]="priceRange.max" [step]="1">
                             <input matSliderStartThumb [(ngModel)]="minPrice" (ngModelChange)="updateMinPrice($any($event))" />
                             <input matSliderEndThumb [(ngModel)]="maxPrice" (ngModelChange)="updateMaxPrice($any($event))" />
@@ -41,15 +41,15 @@
                     </div>
                 </div>
             </div>
-            <div class="c-filters__group">
-                <label class="c-filters__label">Order by</label>
-                <select class="c-filters__select" #sortBy (change)="fetchCourses(language.value, level.value, minPrice.toString(), maxPrice.toString(), sortBy.value)">
+            <div class="p-cursos__filters-group">
+                <label class="p-cursos__filters-label">Order by</label>
+                <select class="p-cursos__filters-select" #sortBy (change)="fetchCourses(language.value, level.value, minPrice.toString(), maxPrice.toString(), sortBy.value)">
                     <option value="">All</option>
                     <option value="ascPrice">Ascending price</option>
                     <option value="descPrice">Descending price</option>
                 </select>
             </div>
-            <button class="c-filters__button" (click)="fetchCourses(language.value, level.value, minPrice.toString(), maxPrice.toString(), sortBy.value)">Search</button>
+            <button class="p-cursos__filters-button" (click)="fetchCourses(language.value, level.value, minPrice.toString(), maxPrice.toString(), sortBy.value)">Search</button>
         </div>
     </div>
 

@@ -32,6 +32,17 @@
     --c-header-avatar-bg-color: rgba(255, 255, 255, 0.18);
     --c-header-avatar-border-color: rgba(255, 255, 255, 0.35);
     --c-header-username-width: var(--mlt-sys-width-160);
+    --c-header-avatar-border-width: var(--mlt-sys-border-width-1);
+    --c-header-cart-btn-color: var(--mlt-sys-primary-color-9);
+    --c-header-cart-btn-padding: var(--mlt-sys-padding-8);
+    --c-header-cart-icon-size: var(--mlt-sys-width-24);
+    --c-header-badge-size: var(--mlt-sys-width-20);
+    --c-header-badge-offset: -4px;
+    --c-header-badge-radius: var(--mlt-sys-border-radius-999);
+    --c-header-badge-bg: #9ca3af;
+    --c-header-badge-color: var(--mlt-sys-primary-color-9);
+    --c-header-badge-font-size: var(--mlt-sys-font-size-12);
+    --c-header-badge-font-weight: var(--mlt-sys-font-weight-700);
     
     
     
@@ -102,7 +113,7 @@
         align-items: center;
         justify-content: center;
         background: var(--c-header-avatar-bg-color);
-        border: 1px solid var(--c-header-avatar-border-color);
+        border: var(--c-header-avatar-border-width) solid var(--c-header-avatar-border-color);
         color: var(--c-header-avatar-color);
         font-weight: var(--c-header-avatar-font-weight);
         font-size: var(--c-header-avatar-font-size);
@@ -158,8 +169,8 @@
         background-color: transparent;
         border: none;
         position: relative;
-        color: #fff;
-        padding: 0.5rem;
+        color: var(--c-header-cart-btn-color);
+        padding: var(--c-header-cart-btn-padding);
         transition: color 0.15s ease-in-out;
 
         &:hover {
@@ -167,26 +178,26 @@
         }
 
         .lucide {
-            width: 1.5rem;
-            height: 1.5rem;
+            width: var(--c-header-cart-icon-size);
+            height: var(--c-header-cart-icon-size);
             display: block;
         }
     }
 
     &__cart-badge {
         position: absolute;
-        top: -0.25rem;
-        right: -0.25rem;
+        top: var(--c-header-badge-offset);
+        right: var(--c-header-badge-offset);
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 1.25rem;
-        height: 1.25rem;
-        border-radius: 9999px;
-        background-color: #9ca3af;
-        color: #fff;
-        font-size: 0.75rem;
-        font-weight: 700;
+        width: var(--c-header-badge-size);
+        height: var(--c-header-badge-size);
+        border-radius: var(--c-header-badge-radius);
+        background-color: var(--c-header-badge-bg);
+        color: var(--c-header-badge-color);
+        font-size: var(--c-header-badge-font-size);
+        font-weight: var(--c-header-badge-font-weight);
         transition: all 0.15s ease-in-out;
 
         &--has-items {
